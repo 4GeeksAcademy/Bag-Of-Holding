@@ -36,3 +36,13 @@ body {
   border-width: 5px;
   border-radius: 15px 50px;
 }
+.stat-block-box{
+  background-color: #bfb699;
+  border-style: solid;
+  border-color: #008080;
+  border-width: 5px;
+}
+.stat-block-info{
+  background-color: #d9d9d9;
+  color:#008080
+}
