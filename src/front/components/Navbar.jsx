@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
 
 	return (
-		<nav className="header-secondary">
+		<nav className="navbar header-secondary">
 			<Link to="/">
-				<span className="accent navbar-brand mb-0 h1">BAG OF HOLDING</span>
+				<span className="navbar-brand mb-0 h1 accent">BAG OF HOLDING</span>
 			</Link>
 			<div className="ml-auto">
 				<Link to="">
