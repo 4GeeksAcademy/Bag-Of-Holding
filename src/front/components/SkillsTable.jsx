@@ -11,17 +11,21 @@ export const SkillsTable = (props) => {
                     {rows.map((pair, index) => (
                         <tr key={index}>
                             <td>
-                                <p className="float-start">
+                                <p>
                                     <strong>{pair[0].name}</strong>
                                 </p>
+                            </td>
+                            <td>
                                 <p className="float-end mx-2">
                                     ({pair[0].ability})
                                 </p>
                             </td>
                             <td>
-                                <p className="float-start">
+                                <p>
                                     <strong>{pair[1].name}</strong>
                                 </p>
+                            </td>
+                            <td>
                                 <p className="float-end mx-2">
                                     ({pair[1].ability})
                                 </p>

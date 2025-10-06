@@ -2,10 +2,15 @@ import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { StatBlock } from "../components/StatBlock.jsx";
 import { SkillsTable } from "../components/SkillsTable.jsx";
+import { ConsumablesTable } from "../components/ConsumablesTable.jsx";
 
 export const Character = () => {
     const characterInfo = {
-        stats : [
+        name:"MALEKITH THE WICKED",
+        race:"HIGH ELF",
+        class:"WIZARD",
+        subclass:"RUNECRAFTER",
+        stats: [
             {
                 name: "STR",
                 value: 12,
@@ -160,10 +165,28 @@ export const Character = () => {
                 expert: false
             }
         ],
-        speed:30,
-        initiative:2,
-        proficiency:3,
-        passiveWIS:30
+        speed: 30,
+        initiative: 2,
+        proficiency: 3,
+        passiveWIS: 30,
+        consumables:[
+            {
+                name:"Bardic Inspiration",
+                ammount:3
+            },
+            {
+                name:"Second Wind",
+                ammount:1
+            },
+            {
+                name:"Luck Points",
+                ammount:3
+            },
+            {
+                name:"Auto Crit",
+                ammount:1
+            },
+        ]
 
     }
     const { store, dispatch } = useGlobalReducer()
@@ -182,22 +205,22 @@ export const Character = () => {
 
                 {/* CHARACTER NAME */}
                 <div className="character-info-box m-3">
-                    <h5>MALEKITH THE WICKED</h5>
+                    <h5>{characterInfo.name}</h5>
                 </div>
 
                 {/* CHARACTER RACE */}
                 <div className="character-info-box m-3">
-                    <h5>HIGH ELF</h5>
+                    <h5>{characterInfo.race}</h5>
                 </div>
 
                 {/* CHARACTER CLASS */}
                 <div className="character-info-box m-3">
-                    <h5>WIZARD</h5>
+                    <h5>{characterInfo.class}</h5>
                 </div>
 
                 {/* CHARACTER SUBCLASS */}
                 <div className="character-info-box m-3">
-                    <h5>RUNECRAFTER</h5>
+                    <h5>{characterInfo.subclass}</h5>
                 </div>
             </div>
             <div className="col-6">
@@ -245,7 +268,7 @@ export const Character = () => {
                         }
                     </div>
                     <div className="col-5 info-box rounded">
-                        <h3>CONSUMABLES</h3>
+                        <ConsumablesTable consumables={characterInfo.consumables} ></ConsumablesTable>
                     </div>
                 </div>
             </div>
