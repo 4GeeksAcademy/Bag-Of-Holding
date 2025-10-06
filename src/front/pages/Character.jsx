@@ -4,161 +4,168 @@ import { StatBlock } from "../components/StatBlock.jsx";
 import { SkillsTable } from "../components/SkillsTable.jsx";
 
 export const Character = () => {
-    const stats = [
-        {
-            name: "STR",
-            value: 12,
-            check: 1,
-            saving: 4,
-            proficient: true
-        },
-        {
-            name: "DEX",
-            value: 14,
-            check: 2,
-            saving: 2,
-            proficient: false
-        },
-        {
-            name: "CON",
-            value: 18,
-            check: 4,
-            saving: 7,
-            proficient: false
-        },
-        {
-            name: "INT",
-            value: 10,
-            check: 0,
-            saving: 3,
-            proficient: false
-        },
-        {
-            name: "WIS",
-            value: 18,
-            check: 1,
-            saving: 7,
-            proficient: false
-        },
-        {
-            name: "CHA",
-            value: 10,
-            check: 0,
-            saving: 0,
-            proficient: false
-        }
+    const characterInfo = {
+        stats : [
+            {
+                name: "STR",
+                value: 12,
+                check: 1,
+                saving: 4,
+                proficient: true
+            },
+            {
+                name: "DEX",
+                value: 14,
+                check: 2,
+                saving: 2,
+                proficient: false
+            },
+            {
+                name: "CON",
+                value: 18,
+                check: 4,
+                saving: 7,
+                proficient: false
+            },
+            {
+                name: "INT",
+                value: 10,
+                check: 0,
+                saving: 3,
+                proficient: false
+            },
+            {
+                name: "WIS",
+                value: 18,
+                check: 1,
+                saving: 7,
+                proficient: false
+            },
+            {
+                name: "CHA",
+                value: 10,
+                check: 0,
+                saving: 0,
+                proficient: false
+            }
 
-    ]
-    const skills = [
-        {
-            name: "ATHLETICS",
-            ability: "STR",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "ACROBATICS",
-            ability: "DEX",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "SLEIGHT OF HAND",
-            ability: "DEX",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "STEALTH",
-            ability: "DEX",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "ARCANA",
-            ability: "INT",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "HISTORY",
-            ability: "INT",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "INVESTIGATION",
-            ability: "INT",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "NATURE",
-            ability: "INT",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "RELIGION",
-            ability: "INT",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "ANIMAL HANDLING",
-            ability: "WIS",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "INSIGHT",
-            ability: "WIS",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "MEDICINE",
-            ability: "WIS",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "PERCEPTION",
-            ability: "WIS",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "SURVIVAL",
-            ability: "WIS",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "DECEPTION",
-            ability: "CHA",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "INTIMIDATION",
-            ability: "CHA",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "PERFORMANCE",
-            ability: "CHA",
-            proficient: false,
-            expert: false
-        },
-        {
-            name: "PERSUASION",
-            ability: "CHA",
-            proficient: false,
-            expert: false
-        }
-    ]
+        ],
+        skills: [
+            {
+                name: "ATHLETICS",
+                ability: "STR",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "ACROBATICS",
+                ability: "DEX",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "SLEIGHT OF HAND",
+                ability: "DEX",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "STEALTH",
+                ability: "DEX",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "ARCANA",
+                ability: "INT",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "HISTORY",
+                ability: "INT",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "INVESTIGATION",
+                ability: "INT",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "NATURE",
+                ability: "INT",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "RELIGION",
+                ability: "INT",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "ANIMAL HANDLING",
+                ability: "WIS",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "INSIGHT",
+                ability: "WIS",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "MEDICINE",
+                ability: "WIS",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "PERCEPTION",
+                ability: "WIS",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "SURVIVAL",
+                ability: "WIS",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "DECEPTION",
+                ability: "CHA",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "INTIMIDATION",
+                ability: "CHA",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "PERFORMANCE",
+                ability: "CHA",
+                proficient: false,
+                expert: false
+            },
+            {
+                name: "PERSUASION",
+                ability: "CHA",
+                proficient: false,
+                expert: false
+            }
+        ],
+        speed:30,
+        initiative:2,
+        proficiency:3,
+        passiveWIS:30
+
+    }
     const { store, dispatch } = useGlobalReducer()
 
     useEffect(() => {
@@ -198,8 +205,8 @@ export const Character = () => {
                     {/* MAP OF A LIST CONTAINING THE INFORMATION ON ALL STATS*/}
                     <div className="row m-auto">
                         {
-                            stats
-                                ? stats.map((stat, index) => {
+                            characterInfo.stats
+                                ? characterInfo.stats.map((stat, index) => {
                                     return (
                                         <div className="col-2" key={index}>
                                             <StatBlock name={stat.name} value={stat.value} check={stat.check} saving={stat.saving} />
@@ -212,19 +219,19 @@ export const Character = () => {
                     <div className="d-flex mt-3">
                         <div className="stat-block-box w-25 m-1">
                             <h4 className="stat-block-info m-1">SPEED</h4>
-                            <h4 className="stat-block-info m-1">30</h4>
+                            <h4 className="stat-block-info m-1">{characterInfo.speed}</h4>
                         </div>
                         <div className="stat-block-box w-25 m-1">
                             <h4 className="stat-block-info m-1">INITIATIVE</h4>
-                            <h4 className="stat-block-info m-1">+2</h4>
+                            <h4 className="stat-block-info m-1">{characterInfo.initiative}</h4>
                         </div>
                         <div className=" stat-block-box w-25 m-1">
                             <h4 className="stat-block-info m-1">PROFICIENCY</h4>
-                            <h4 className="stat-block-info m-1">+3</h4>
+                            <h4 className="stat-block-info m-1">{characterInfo.proficiency}</h4>
                         </div>
                         <div className=" stat-block-box w-25 m-1">
                             <h4 className="stat-block-info m-1">PASSIVE WIS</h4>
-                            <h4 className="stat-block-info m-1">20</h4>
+                            <h4 className="stat-block-info m-1">{characterInfo.passiveWIS}</h4>
                         </div>
                     </div>
                 </div>
@@ -232,8 +239,8 @@ export const Character = () => {
                     <div className="info-box rounded me-4">
                         <h3>CHARACTER SKILLS</h3>
                         {
-                            skills
-                                ? <SkillsTable skillList={skills}></SkillsTable>
+                            characterInfo.skills
+                                ? <SkillsTable skillList={characterInfo.skills}></SkillsTable>
                                 : ""
                         }
                     </div>
