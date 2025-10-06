@@ -1,6 +1,6 @@
 export const ConsumablesTable = (props) => {
     return (
-        <table className="mx-5 mt-3">
+        <table className="m-2">
             <tbody>
                 {
                     props.consumables

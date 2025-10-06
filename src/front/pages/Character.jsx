@@ -3,13 +3,13 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { StatBlock } from "../components/StatBlock.jsx";
 import { SkillsTable } from "../components/SkillsTable.jsx";
 import { ConsumablesTable } from "../components/ConsumablesTable.jsx";
-
+import { DiceBar } from "../components/DiceBar.jsx";
 export const Character = () => {
     const characterInfo = {
-        name:"MALEKITH THE WICKED",
-        race:"HIGH ELF",
-        class:"WIZARD",
-        subclass:"RUNECRAFTER",
+        name: "MALEKITH THE WICKED",
+        race: "HIGH ELF",
+        class: "WIZARD",
+        subclass: "RUNECRAFTER",
         stats: [
             {
                 name: "STR",
@@ -165,29 +165,28 @@ export const Character = () => {
                 expert: false
             }
         ],
-        speed: 30,
+        speed: 34,
         initiative: 2,
         proficiency: 3,
         passiveWIS: 30,
-        consumables:[
+        consumables: [
             {
-                name:"Bardic Inspiration",
-                ammount:3
+                name: "Bardic Inspiration",
+                ammount: 3
             },
             {
-                name:"Second Wind",
-                ammount:1
+                name: "Second Wind",
+                ammount: 1
             },
             {
-                name:"Luck Points",
-                ammount:3
+                name: "Luck Points",
+                ammount: 3
             },
             {
-                name:"Auto Crit",
-                ammount:1
+                name: "Auto Crit",
+                ammount: 1
             },
         ]
-
     }
     const { store, dispatch } = useGlobalReducer()
 
@@ -272,8 +271,8 @@ export const Character = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-2 info-box rounded m-4">
-                DICE BAR
+            <div className="col-2 info-box rounded m-4 justify-content-center">
+                <DiceBar></DiceBar>
             </div>
         </div>
     );

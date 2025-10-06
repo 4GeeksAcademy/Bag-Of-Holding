@@ -50,6 +50,21 @@ body {
   background-color: whitesmoke;
   color: #008080;
 }
-table{
+/* DICE BAR SPECIFIC */
+.dice-block {
+  background-color: #bfb699;
+  border-style: solid;
+  border-color: #008080;
+  color: #008080;
+  border-width: 5px;
+  aspect-ratio: 1 / 1;
+  width: 75%;
+  margin: 5px;
+}
+.dice-box{
+  margin: auto;
+  width: 50%;
+}
+table {
   text-align: left;
 }
