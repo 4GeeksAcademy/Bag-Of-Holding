@@ -16,7 +16,7 @@ export const CharacterInfoBlock = (props) => {
                 <h5>{details.race}</h5>
             </div>
 
-            {/* CHARACTER CLASS */}
+            {/* CHARACTER LEVEL AND CLASS */}
             <div className="character-info-box m-3">
                 <h5>LVL {details.level} - {details.class}</h5>
             </div>

@@ -3,6 +3,7 @@ export const ConsumablesTable = (props) => {
         <table className="m-2">
             <tbody>
                 {
+                    // Simply maps through an array of Consumables and lists the name and ammount left
                     props.consumables
                         ? props.consumables.map((consumable, index) => (
                             <tr key={index}>

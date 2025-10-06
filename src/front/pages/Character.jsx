@@ -1,260 +1,51 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { CharacterInfoBlock } from "../components/CharacterInfoBlock.jsx";
-import { StatBlock } from "../components/StatBlock.jsx";
+import { CharacterStatsBlock } from "../components/CharacterStatsBlock.jsx";
 import { SkillsTable } from "../components/SkillsTable.jsx";
 import { ConsumablesTable } from "../components/ConsumablesTable.jsx";
 import { DiceBar } from "../components/DiceBar.jsx";
 export const Character = () => {
-    const characterInfo = {
-        details: {
-            name: "MALEKITH THE WICKED",
-            race: "HIGH ELF",
-            class: "WIZARD",
-            subclass: "RUNECRAFTER",
-            level: 7,
-            hp: 73,
-            ac: 12,
-            hitDice: "3-D18",
-            img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg"
-        },
-        stats: [
-            {
-                name: "STR",
-                value: 12,
-                check: 1,
-                saving: 4,
-                proficient: true
-            },
-            {
-                name: "DEX",
-                value: 14,
-                check: 2,
-                saving: 2,
-                proficient: false
-            },
-            {
-                name: "CON",
-                value: 18,
-                check: 4,
-                saving: 7,
-                proficient: false
-            },
-            {
-                name: "INT",
-                value: 10,
-                check: 0,
-                saving: 3,
-                proficient: false
-            },
-            {
-                name: "WIS",
-                value: 18,
-                check: 1,
-                saving: 7,
-                proficient: false
-            },
-            {
-                name: "CHA",
-                value: 10,
-                check: 0,
-                saving: 0,
-                proficient: false
-            }
-
-        ],
-        skills: [
-            {
-                name: "ATHLETICS",
-                ability: "STR",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "ACROBATICS",
-                ability: "DEX",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "SLEIGHT OF HAND",
-                ability: "DEX",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "STEALTH",
-                ability: "DEX",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "ARCANA",
-                ability: "INT",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "HISTORY",
-                ability: "INT",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "INVESTIGATION",
-                ability: "INT",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "NATURE",
-                ability: "INT",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "RELIGION",
-                ability: "INT",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "ANIMAL HANDLING",
-                ability: "WIS",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "INSIGHT",
-                ability: "WIS",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "MEDICINE",
-                ability: "WIS",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "PERCEPTION",
-                ability: "WIS",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "SURVIVAL",
-                ability: "WIS",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "DECEPTION",
-                ability: "CHA",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "INTIMIDATION",
-                ability: "CHA",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "PERFORMANCE",
-                ability: "CHA",
-                proficient: false,
-                expert: false
-            },
-            {
-                name: "PERSUASION",
-                ability: "CHA",
-                proficient: false,
-                expert: false
-            }
-        ],
-        speed: 34,
-        initiative: 2,
-        proficiency: 3,
-        passiveWIS: 30,
-        consumables: [
-            {
-                name: "Bardic Inspiration",
-                ammount: 3
-            },
-            {
-                name: "Second Wind",
-                ammount: 1
-            },
-            {
-                name: "Luck Points",
-                ammount: 3
-            },
-            {
-                name: "Auto Crit",
-                ammount: 1
-            },
-        ]
-    }
     const { store, dispatch } = useGlobalReducer()
-
+    let characterInfo = store.characterInfo
     useEffect(() => {
     }, [])
 
     return (
         <div className="text-white my-5 row">
+            {/* BLOCK CONTAINING ALL CHARACTER DETAILS */}
             <div className="col-3 info-box rounded m-4">
                 <CharacterInfoBlock details={characterInfo.details}></CharacterInfoBlock>
             </div>
             <div className="col-6">
+                {/* BLOCK CONTAINING ALL CHARACTER STATS */}
                 <div className="row info-box rounded py-3 mb-4">
-                    {/* MAP OF A LIST CONTAINING THE INFORMATION ON ALL STATS*/}
-                    <div className="row m-auto">
-                        {
-                            characterInfo.stats
-                                ? characterInfo.stats.map((stat, index) => {
-                                    return (
-                                        <div className="col-2" key={index}>
-                                            <StatBlock name={stat.name} value={stat.value} check={stat.check} saving={stat.saving} />
-                                        </div>
-                                    )
-                                })
-                                : ""
-                        }
-                    </div>
-                    <div className="d-flex mt-3">
-                        <div className="stat-block-box w-25 m-1">
-                            <h4 className="stat-block-info m-1">SPEED</h4>
-                            <h4 className="stat-block-info m-1">{characterInfo.speed}</h4>
-                        </div>
-                        <div className="stat-block-box w-25 m-1">
-                            <h4 className="stat-block-info m-1">INITIATIVE</h4>
-                            <h4 className="stat-block-info m-1">{characterInfo.initiative}</h4>
-                        </div>
-                        <div className=" stat-block-box w-25 m-1">
-                            <h4 className="stat-block-info m-1">PROFICIENCY</h4>
-                            <h4 className="stat-block-info m-1">{characterInfo.proficiency}</h4>
-                        </div>
-                        <div className=" stat-block-box w-25 m-1">
-                            <h4 className="stat-block-info m-1">PASSIVE WIS</h4>
-                            <h4 className="stat-block-info m-1">{characterInfo.passiveWIS}</h4>
-                        </div>
-                    </div>
+                    <CharacterStatsBlock
+                        stats={characterInfo.stats}
+                        speed={characterInfo.speed}
+                        initiative={characterInfo.initiative}
+                        proficiency={characterInfo.proficiency}
+                        passiveWIS={characterInfo.passiveWIS}
+                    >
+                    </CharacterStatsBlock>
                 </div>
                 <div className="d-flex">
+                    {/* BLOCK CONTAINING ALL CHARACTER SKILLS */}
                     <div className="info-box rounded me-4">
-                        <h3>CHARACTER SKILLS</h3>
+                        <h3>SKILLS</h3>
                         {
                             characterInfo.skills
                                 ? <SkillsTable skillList={characterInfo.skills}></SkillsTable>
                                 : ""
                         }
                     </div>
+                    {/* BLOCK CONTAINING ALL CONSUMABLES */}
                     <div className="col-5 info-box rounded">
                         <ConsumablesTable consumables={characterInfo.consumables} ></ConsumablesTable>
                     </div>
                 </div>
             </div>
+            {/* BLOCK CONTAINING ALL DICE */}
             <div className="col-2 info-box rounded m-4 justify-content-center">
                 <DiceBar></DiceBar>
             </div>
