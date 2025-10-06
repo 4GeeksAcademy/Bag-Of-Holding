@@ -1,15 +1,23 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { CharacterInfoBlock } from "../components/CharacterInfoBlock.jsx";
 import { StatBlock } from "../components/StatBlock.jsx";
 import { SkillsTable } from "../components/SkillsTable.jsx";
 import { ConsumablesTable } from "../components/ConsumablesTable.jsx";
 import { DiceBar } from "../components/DiceBar.jsx";
 export const Character = () => {
     const characterInfo = {
-        name: "MALEKITH THE WICKED",
-        race: "HIGH ELF",
-        class: "WIZARD",
-        subclass: "RUNECRAFTER",
+        details: {
+            name: "MALEKITH THE WICKED",
+            race: "HIGH ELF",
+            class: "WIZARD",
+            subclass: "RUNECRAFTER",
+            level: 7,
+            hp: 73,
+            ac: 12,
+            hitDice: "3-D18",
+            img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg"
+        },
         stats: [
             {
                 name: "STR",
@@ -196,31 +204,7 @@ export const Character = () => {
     return (
         <div className="text-white my-5 row">
             <div className="col-3 info-box rounded m-4">
-
-                {/* ALL THIS INFORMATION IS SUPPOSED TO BE SELECTED USING THE DND API WITH ALL CHARACTER OPTIONS */}
-
-                {/* CHARACTER PICTURE */}
-                <img src="https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg" className="character-picture m-3"></img>
-
-                {/* CHARACTER NAME */}
-                <div className="character-info-box m-3">
-                    <h5>{characterInfo.name}</h5>
-                </div>
-
-                {/* CHARACTER RACE */}
-                <div className="character-info-box m-3">
-                    <h5>{characterInfo.race}</h5>
-                </div>
-
-                {/* CHARACTER CLASS */}
-                <div className="character-info-box m-3">
-                    <h5>{characterInfo.class}</h5>
-                </div>
-
-                {/* CHARACTER SUBCLASS */}
-                <div className="character-info-box m-3">
-                    <h5>{characterInfo.subclass}</h5>
-                </div>
+                <CharacterInfoBlock details={characterInfo.details}></CharacterInfoBlock>
             </div>
             <div className="col-6">
                 <div className="row info-box rounded py-3 mb-4">
