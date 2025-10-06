@@ -1,3 +1,4 @@
+/* GENERAL SITE */
 body {
   background-color: #40202c;
 }
@@ -10,40 +11,45 @@ body {
 .accent {
   color: #008080;
 }
-.col{
+.col {
   text-align: center;
   justify-content: center;
 }
-.row{
+.row {
   text-align: center;
   justify-content: center;
 }
-.info-box{
+.info-box {
   background-color: #8c373e;
   border-style: solid;
   border-color: #bfb699;
   border-width: 15px;
 }
-.character-info-box{
+/* CHARACTER INFO PAGE SPECIFIC */
+.character-info-box {
   background-color: whitesmoke;
-  color:#008080;
+  color: #008080;
   border-style: solid;
   border-color: #bfb699;
   border-width: 5px;
 }
-.character-picture{
+.character-picture {
   border-style: solid;
   border-color: #bfb699;
   border-width: 5px;
   border-radius: 15px 50px;
 }
-.stat-block-box{
+/* STAT SPECIFIC */
+.stat-block-box {
   background-color: #bfb699;
   border-style: solid;
   border-color: #008080;
   border-width: 5px;
 }
-.stat-block-info{
-  background-color:whitesmoke;
-  color:#008080
+.stat-block-info {
+  background-color: whitesmoke;
+  color: #008080;
+}
+table{
+  text-align: left;
 }

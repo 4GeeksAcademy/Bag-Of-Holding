@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { StatBlock } from "../components/StatBlock.jsx";
+import { SkillsTable } from "../components/SkillsTable.jsx";
 
 export const Character = () => {
     const stats = [
@@ -48,13 +49,123 @@ export const Character = () => {
         }
 
     ]
+    const skills = [
+        {
+            name: "ATHLETICS",
+            ability: "STR",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "ACROBATICS",
+            ability: "DEX",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "SLEIGHT OF HAND",
+            ability: "DEX",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "STEALTH",
+            ability: "DEX",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "ARCANA",
+            ability: "INT",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "HISTORY",
+            ability: "INT",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "INVESTIGATION",
+            ability: "INT",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "NATURE",
+            ability: "INT",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "RELIGION",
+            ability: "INT",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "ANIMAL HANDLING",
+            ability: "WIS",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "INSIGHT",
+            ability: "WIS",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "MEDICINE",
+            ability: "WIS",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "PERCEPTION",
+            ability: "WIS",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "SURVIVAL",
+            ability: "WIS",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "DECEPTION",
+            ability: "CHA",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "INTIMIDATION",
+            ability: "CHA",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "PERFORMANCE",
+            ability: "CHA",
+            proficient: false,
+            expert: false
+        },
+        {
+            name: "PERSUASION",
+            ability: "CHA",
+            proficient: false,
+            expert: false
+        }
+    ]
     const { store, dispatch } = useGlobalReducer()
 
     useEffect(() => {
     }, [])
 
     return (
-        <div className="text-white mt-5 row">
+        <div className="text-white my-5 row">
             <div className="col-3 info-box rounded m-4">
 
                 {/* ALL THIS INFORMATION IS SUPPOSED TO BE SELECTED USING THE DND API WITH ALL CHARACTER OPTIONS */}
@@ -83,8 +194,8 @@ export const Character = () => {
                 </div>
             </div>
             <div className="col-6">
-                <div className="row info-box rounded h-50 mb-4">
-                    {/* THIS WILL BE A MAP OF A LIST CONTAINING THE INFORMATION ON ALL STATS*/}
+                <div className="row info-box rounded py-3 mb-4">
+                    {/* MAP OF A LIST CONTAINING THE INFORMATION ON ALL STATS*/}
                     <div className="row m-auto">
                         {
                             stats
@@ -98,10 +209,33 @@ export const Character = () => {
                                 : ""
                         }
                     </div>
+                    <div className="d-flex mt-3">
+                        <div className="stat-block-box w-25 m-1">
+                            <h4 className="stat-block-info m-1">SPEED</h4>
+                            <h4 className="stat-block-info m-1">30</h4>
+                        </div>
+                        <div className="stat-block-box w-25 m-1">
+                            <h4 className="stat-block-info m-1">INITIATIVE</h4>
+                            <h4 className="stat-block-info m-1">+2</h4>
+                        </div>
+                        <div className=" stat-block-box w-25 m-1">
+                            <h4 className="stat-block-info m-1">PROFICIENCY</h4>
+                            <h4 className="stat-block-info m-1">+3</h4>
+                        </div>
+                        <div className=" stat-block-box w-25 m-1">
+                            <h4 className="stat-block-info m-1">PASSIVE WIS</h4>
+                            <h4 className="stat-block-info m-1">20</h4>
+                        </div>
+                    </div>
                 </div>
-                <div className="row h-50">
-                    <div className="col-6 info-box rounded me-4">
+                <div className="d-flex">
+                    <div className="info-box rounded me-4">
                         <h3>CHARACTER SKILLS</h3>
+                        {
+                            skills
+                                ? <SkillsTable skillList={skills}></SkillsTable>
+                                : ""
+                        }
                     </div>
                     <div className="col-5 info-box rounded">
                         <h3>CONSUMABLES</h3>
