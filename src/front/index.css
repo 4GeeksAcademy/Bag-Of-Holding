@@ -25,7 +25,8 @@ body {
   border-width: 15px;
 }
 .character-info-box{
-  background-color: #8c373e;
+  background-color: whitesmoke;
+  color:#008080;
   border-style: solid;
   border-color: #bfb699;
   border-width: 5px;
@@ -43,6 +44,6 @@ body {
   border-width: 5px;
 }
 .stat-block-info{
-  background-color: #d9d9d9;
+  background-color:whitesmoke;
   color:#008080
 }
