@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-
+const { store, dispatch } = useGlobalReducer()
+	const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 
 export default function InputForm() {
@@ -13,7 +14,7 @@ export default function InputForm() {
     const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isLogin ? "/api/login" : "/api/signup"; //will need to actually link to the API later once we start getting that set up, need to inquire
+    const endpoint = isLogin ? "/api/login" : "/api/signup"; 
     const response = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
