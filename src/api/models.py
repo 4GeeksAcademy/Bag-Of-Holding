@@ -19,3 +19,10 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
     
+class Character(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(25), nullable=False)
+    race: Mapped[str] = mapped_column(nullable=False)
+    charClass: Mapped[str] = mapped_column(nullable=False)
+    subclass: Mapped[str] = mapped_column(nullable=True)
+
