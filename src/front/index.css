@@ -68,3 +68,12 @@ body {
 table {
   text-align: left;
 }
+
+/* CHARACTER CREATOR PAGE SPECIFIC */
+.input-selector{
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-wid
+}
