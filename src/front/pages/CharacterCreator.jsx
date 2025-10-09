@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react"
+import { useState } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link } from "react-router-dom";
+import { NameSelector } from "../components/NameSelector.jsx";
+import { RaceSelector } from "../components/RaceSelector.jsx";
+import { ClassSelector } from "../components/ClassSelector.jsx";
+import { SubclassSelector } from "../components/SubclassSelector.jsx";
 
 export const CharacterCreator = () => {
     const { store, dispatch } = useGlobalReducer()
@@ -25,69 +29,22 @@ export const CharacterCreator = () => {
             //A basic input for NAME
             case "NAME":
                 return (
-                    <div>
-                        <label className="input-selector mt-5" htmlFor="name">ENTER CHARACTER NAME</label>
-                        <br></br>
-                        <input className="input-field m-5 accent" type="text" id="name" name="name" onChange={e => setCharacterName(e.target.value)} value={characterName} />
-                    </div>
+                    <NameSelector setCharacterName={setCharacterName} characterName={characterName} />
                 )
             //A Map of all available races
             case "RACE":
                 return (
-                    <div>
-                        <label className="input-selector mt-3" htmlFor="name">SELECT A RACE</label>
-                        <div className="race-selector-input mt-3">
-                            {
-                                store.races
-                                    ? store.races.map((race, index) => {
-                                        return (
-                                            <div key={index} >
-                                                <button className="input-selection" onClick={() => setCharacterRace(race.name)}>{race.name}</button>
-                                            </div>
-                                        )
-                                    })
-                                    : ""
-                            }
-                        </div>
-                    </div>
+                    <RaceSelector setCharacterRace={setCharacterRace} />
                 )
             //A Map of all available classes
             case "CLASS":
                 return (
-                    <div>
-                        <label className="input-selector mt-3" htmlFor="name">SELECT A RACE</label>
-                        <div className="race-selector-input mt-3">
-                            {
-                                store.classes
-                                    ? store.classes.map((characterClass, index) => {
-                                        return (
-                                            <div key={index}>
-                                                <button className="input-selection" onClick={() => setCharacterClass(characterClass.name)}>{characterClass.name}</button>
-                                            </div>
-                                        )
-                                    })
-                                    : ""
-                            }
-                        </div>
-                    </div>
+                    <ClassSelector setCharacterClass={setCharacterClass} />
                 )
             //A Map of all available subclasses
             case "SUBCLASS":
                 return (
-                    <div>
-                        <label className="input-selector mt-3" htmlFor="name">SELECT A RACE</label>
-                        <div className="race-selector-input mt-3">
-                            {
-                                store.subclasses.map((subClass, index) => {
-                                    return (
-                                        <div key={index}>
-                                            <button className="input-selection" onClick={() => setCharacterSubClass(subClass.name)}>{subClass.name}</button>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
+                    <SubclassSelector setCharacterSubClass={setCharacterSubClass} />
                 )
             default:
                 return ""
