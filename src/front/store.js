@@ -189,25 +189,31 @@ export const initialStore = () => {
         },
       ],
     },
+    races: [],
+    classes: [],
+    subclasses: [],
+    apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
 
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
-    case "set_hello":
+    case "set_races":
       return {
         ...store,
-        message: action.payload,
+        races: action.payload,
       };
 
-    case "add_task":
-      const { id, color } = action.payload;
-
+    case "set_classes":
       return {
         ...store,
-        todos: store.todos.map((todo) =>
-          todo.id === id ? { ...todo, background: color } : todo
-        ),
+        classes: action.payload,
+      };
+
+    case "set_subclasses":
+      return {
+        ...store,
+        subclasses: action.payload,
       };
     default:
       throw Error("Unknown action.");
