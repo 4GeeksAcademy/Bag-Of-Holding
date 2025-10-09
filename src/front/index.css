@@ -68,3 +68,11 @@ body {
 table {
   text-align: left;
 }
+
+/* Login/Signup specific */
+.form-container{
+  background-color: #8c373e;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}
