@@ -60,11 +60,29 @@ export const Layout = () => {
                 }
             )
     }
+    // Fecth all Subclasses and save them to store.js
+    const getSpells = (url) => {
+        fetch(url)
+            .then(
+                (allSpells) => {
+                    return allSpells.json()
+                }
+            )
+            .then(
+                (data) => {
+                    dispatch({
+                        type: "set_spells",
+                        payload: data.results
+                    });
+                }
+            )
+    }
     // Call all Fetch functions upon mount
     useEffect(() => {
         getRaces(store.apiURL + "/races");
         getClasses(store.apiURL + "/classes");
         getSubClasses(store.apiURL + "/subclasses");
+        getSpells(store.apiURL + "/spells");
     }, [])
     return (
         <ScrollToTop>

@@ -192,6 +192,7 @@ export const initialStore = () => {
     races: [],
     classes: [],
     subclasses: [],
+    spells: [],
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
@@ -215,6 +216,13 @@ export default function storeReducer(store, action = {}) {
         ...store,
         subclasses: action.payload,
       };
+
+    case "set_spells":
+      return {
+        ...store,
+        spells: action.payload,
+      };
+
     default:
       throw Error("Unknown action.");
   }
