@@ -4,6 +4,8 @@ import { Navbar } from "../components/Navbar"
 import { Footer } from "../components/Footer"
 
 // Base component that maintains the navbar and footer throughout the page and the scroll to top functionality.
+//FETCH REQUEST FOR CLASS AND RUN THROUGH A USEEFFECT UPON MOUNT
+
 export const Layout = () => {
     return (
         <ScrollToTop>

@@ -8,6 +8,7 @@ import {
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Character } from "./pages/Character";
+import { CharacterCreator } from "./pages/CharacterCreator";
 
 
 export const router = createBrowserRouter(
@@ -24,6 +25,7 @@ export const router = createBrowserRouter(
       {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
       <Route path="/" element={<Home />} />
       <Route path="/character" element={<Character />} />
+      <Route path="/charactercreator" element={<CharacterCreator />} />
     </Route>
   )
 );

@@ -18,7 +18,7 @@ export const CharacterInfoBlock = (props) => {
 
             {/* CHARACTER LEVEL AND CLASS */}
             <div className="character-info-box m-3">
-                <h5>LVL {details.level} - {details.class}</h5>
+                <h5>LVL {details.level} - {details.characterClass}</h5>
             </div>
 
             {/* CHARACTER SUBCLASS */}
