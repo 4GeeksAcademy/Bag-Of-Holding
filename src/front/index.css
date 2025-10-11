@@ -61,10 +61,32 @@ body {
   width: 75%;
   margin: 5px;
 }
-.dice-box{
+.dice-box {
   margin: auto;
   width: 50%;
 }
 table {
   text-align: left;
+}
+/* SPELL LIST SPECIFIC */
+.spells-box {
+  width: 20%;
+}
+.spells-options {
+  aspect-ratio: 1 / 1;
+  overflow: scroll;
+}
+.spell-information-box {
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+  overflow: scroll;
+}
+.spell-description {
+  aspect-ratio: 2 / 1;
+}
+.spell-bonus-info {
+  aspect-ratio: 3 / 1;
 }
