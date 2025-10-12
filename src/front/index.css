@@ -82,6 +82,37 @@ table {
   overflow: scroll;
 }
 .spell-information-box {
+
+/* Login/Signup specific */
+.form-container{
+  background-color: #8c373e;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+/* CHARACTER CREATOR PAGE SPECIFIC */
+.input-selector {
+  width: 15%;
+  margin-inline: 5px;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+}
+.input-field {
+  width: 25%;
+  margin-inline: 5px;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #40202c;
+  border-width: 5px;
+}
+.race-selector-input {
+  column-count: 3;
+}
+.input-selection {
+  width: 100%;
   background-color: whitesmoke;
   color: #008080;
   border-style: solid;

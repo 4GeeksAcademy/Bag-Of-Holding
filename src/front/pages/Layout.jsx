@@ -6,6 +6,8 @@ import { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 // Base component that maintains the navbar and footer throughout the page and the scroll to top functionality.
+//FETCH REQUEST FOR CLASS AND RUN THROUGH A USEEFFECT UPON MOUNT
+
 export const Layout = () => {
     const { store, dispatch } = useGlobalReducer();
 

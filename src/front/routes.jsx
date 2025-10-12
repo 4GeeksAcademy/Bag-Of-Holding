@@ -9,6 +9,9 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Character } from "./pages/Character";
 import { SpellList } from "./pages/SpellList";
+import InputForm from "./components/SignUpLogInInterface.jsx";
+import { CharacterCreator } from "./pages/CharacterCreator";
+
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +28,8 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/character" element={<Character />} />
       <Route path="/spells" element={<SpellList />} />
+      <Route path="/login" element={<InputForm />} /> 
+      <Route path="/charactercreator" element={<CharacterCreator />} />
     </Route>
   )
 );
