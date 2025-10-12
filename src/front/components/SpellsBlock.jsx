@@ -3,18 +3,11 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 export const SpellsBlock = (props) => {
     const { store, dispatch } = useGlobalReducer()
 
+    // Gets list of all spells of the level passed as prop
     const getSpellsByLevel = () => {
         return store.spells.filter(spell => spell.level == props.lvl);
     }
 
-    const setTitle = () => {
-        switch (props.lvl) {
-            case 0:
-                return "CANTRIPS";
-            default:
-                return "LEVEL " + props.lvl;
-        }
-    }
     // Fetch Selected Spell Information
     const getSpellInfo = (url) => {
         fetch(url)
@@ -25,6 +18,7 @@ export const SpellsBlock = (props) => {
             )
             .then(
                 (data) => {
+                    // Pass information to SpellList.jsx through UseState
                     props.setSpellSelected(data);
                 }
             )
@@ -32,7 +26,7 @@ export const SpellsBlock = (props) => {
 
     return (
         <div className="info-box spells-box m-3">
-            <h2 className="stat-block-info">{setTitle()}</h2>
+            <h2 className="stat-block-info">{props.lvl == 0 ? "CANTRIPS" : "LEVEL " + props.lvl}</h2>
             <div className="spells-options">
                 {
                     store.spells
