@@ -40,7 +40,7 @@ export const SpellsBlock = (props) => {
                             return (
                                 <div key={index} >
                                     <h4
-                                        className="input-selection"
+                                        className="border-bottom"
                                         onClick={() => getSpellInfo(store.apiURL + "/spells/" + spell.index)}
                                     >{spell.name}</h4>
                                 </div>

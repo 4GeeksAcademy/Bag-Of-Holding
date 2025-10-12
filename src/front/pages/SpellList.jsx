@@ -1,27 +1,14 @@
 import { SpellsBlock } from "../components/SpellsBlock.jsx";
 import { useState } from "react";
+import { SpellBasicInfo } from "../components/SpellBasicInfo.jsx";
+import { SpellBonusInfo } from "../components/SpellBonusInfo.jsx";
 
 export const SpellList = () => {
     const [spellSelected, setSpellSelected] = useState({})
     const levelsTop = [0, 1, 2, 3, 4]
     const levelsBottom = [5, 6, 7, 8, 9]
-    const showInfo = (spell) => {
-        if (spell) {
-            return (
-                <p>
-                    -Level:{spell.level}
-                    - Range:{spell.range}
-                    - Components:{spell.components}
-                    - Material:{spell.material}
-                    - Ritual:{spell.ritual ? "YES" : "NO"}
-                    - Duration:{spell.duration}
-                    - Concentration:{spell.concentration ? "YES" : "NO"}
-                    - Casting Time:{spell.casting_time}
-                    - Attack Type:{spell.attack_type}
-
-                </p>
-            )
-        }
+    const deselect = () => {
+        setSpellSelected({});
     }
 
     return (
@@ -56,36 +43,22 @@ export const SpellList = () => {
                         }
                     </h2>
                 </div>
-                <div>
-                    <p className="spell-information-box spell-bonus-info m-2">
-                        {
-                            spellSelected
-                                ? showInfo
-                                : ""
-                        }
-                    </p>
-                </div>
-                <div>
-                    <h5>Description:</h5>
-                    <p className="spell-information-box spell-description m-2">
-                        {
-                            spellSelected.desc
-                                ? spellSelected.desc
-                                : ""
-                        }
-                    </p>
-                </div>
+                <SpellBasicInfo spell={spellSelected} />
                 {
-                    spellSelected.higher_level
-                        ? <div>
-                            <h5>Higher level:</h5>
-                            <p className="spell-information-box spell-bonus-info m-2">
-                                {spellSelected.higher_level}
-                            </p>
-                        </div>
+                    spellSelected.desc
+                        ? <SpellBonusInfo info={spellSelected.desc} type="Description" />
                         : ""
                 }
-
+                {
+                    spellSelected.higher_level
+                        ? <SpellBonusInfo info={spellSelected.higher_level} type="Higher Level" />
+                        : ""
+                }
+                {
+                    spellSelected.desc
+                        ? <button className="spell-information-box m-3" onClick={deselect}>Close</button>
+                        : ""
+                }
             </div>
 
         </div>

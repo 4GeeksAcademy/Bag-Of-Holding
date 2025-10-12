@@ -83,10 +83,10 @@ table {
   border-color: #bfb699;
   border-width: 5px;
   overflow: scroll;
-}
-.spell-description {
   aspect-ratio: 2 / 1;
 }
-.spell-bonus-info {
-  aspect-ratio: 3 / 1;
+.spell-info-table table,
+td,
+tr {
+  border: 1px solid;
 }
