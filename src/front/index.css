@@ -61,13 +61,27 @@ body {
   width: 75%;
   margin: 5px;
 }
-.dice-box{
+.dice-box {
   margin: auto;
   width: 50%;
 }
 table {
   text-align: left;
 }
+/* SPELL LIST SPECIFIC */
+.spell-name {
+  border-bottom: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}
+.spells-box {
+  width: 20%;
+}
+.spells-options {
+  aspect-ratio: 1 / 1;
+  overflow: scroll;
+}
+.spell-information-box {
 
 /* Login/Signup specific */
 .form-container{
@@ -75,4 +89,40 @@ table {
   border-style: solid;
   border-color: #bfb699;
   border-width: 15px;
+/* CHARACTER CREATOR PAGE SPECIFIC */
+.input-selector {
+  width: 15%;
+  margin-inline: 5px;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+}
+.input-field {
+  width: 25%;
+  margin-inline: 5px;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #40202c;
+  border-width: 5px;
+}
+.race-selector-input {
+  column-count: 3;
+}
+.input-selection {
+  width: 100%;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+  overflow: scroll;
+  aspect-ratio: 2 / 1;
+}
+.spell-info-table table,
+td,
+tr {
+  border: 1px solid;
 }
