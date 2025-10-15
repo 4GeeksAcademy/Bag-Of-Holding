@@ -68,6 +68,20 @@ body {
 table {
   text-align: left;
 }
+/* SPELL LIST SPECIFIC */
+.spell-name {
+  border-bottom: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}
+.spells-box {
+  width: 20%;
+}
+.spells-options {
+  aspect-ratio: 1 / 1;
+  overflow: scroll;
+}
+.spell-information-box {
 
 /* Login/Signup specific */
 .form-container{
@@ -104,4 +118,11 @@ table {
   border-style: solid;
   border-color: #bfb699;
   border-width: 5px;
+  overflow: scroll;
+  aspect-ratio: 2 / 1;
+}
+.spell-info-table table,
+td,
+tr {
+  border: 1px solid;
 }
