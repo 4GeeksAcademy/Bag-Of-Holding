@@ -1,4 +1,4 @@
-export const initialState = {
+export const initialStore = {
   user: null,
   inventoryList: [],
   bagItems: [],
