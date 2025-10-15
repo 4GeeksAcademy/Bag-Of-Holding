@@ -9,14 +9,16 @@ export const ItemBlock = ({item}) => {
                 <h3>{item.name}</h3>
             </div>
             <div>
-                <ul>
-                    {Object.entries(item.stats).map(([key, value]) => (
-                        <li key={key}>
-                            <span>{key}: </span>
-                            {Array.isArray(value) ? value.join(", ") : value}
-                        </li>
-                    ))}  
-                </ul>
+                {item.stats &&(
+                    <ul>
+                        {Object.entries(item.stats).map(([key, value]) => (
+                            <li key={key}>
+                                <span>{key}: </span>
+                                {Array.isArray(value) ? value.join(", ") : value}
+                            </li>
+                        ))}  
+                    </ul>
+                )}
             </div>
         </div>
     )

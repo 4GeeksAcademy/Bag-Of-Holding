@@ -1,3 +1,4 @@
+import React from "react"
 import ItemBlock from "./components/ItemBlock.jsx"
 
 export const EquipmentDisplay = (props) => {
