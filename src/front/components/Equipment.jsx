@@ -1,5 +1,5 @@
 import React from "react"
-import ItemBlock from "./components/ItemBlock.jsx"
+import ItemBlock from "./ItemBlock.jsx"
 
 export const EquipmentDisplay = (props) => {
     let details = props.details

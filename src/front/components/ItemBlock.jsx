@@ -1,8 +1,10 @@
-export const ItemBlock = ({item}) => {
+import React from "react"
+
+export default ItemBlock = ({item}) => {
     return(
         <div>
             <div>
-                <img /> 
+                {/* <img />  */}
                  {/*an icon for each item will be imported (possibly from the API) for the images*/}
             </div>
             <div>
