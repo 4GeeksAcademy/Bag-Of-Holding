@@ -3,9 +3,11 @@ export const initialStore = {
   inventoryList: [],
   bagItems: [],
   selectedCharacter: null,
+  characters: [],
   loading: false,
   error: null,
 };
+
 
 export function reducer(state, action) {
   switch (action.type) {
