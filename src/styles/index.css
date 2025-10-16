@@ -40,3 +40,10 @@ body {
   color: #008080;
   font-weight: bold;
 }
+
+.navbar-button:hover {
+  background-color: #008080;
+  border-color: #8c373e;
+}
+
+/* Another color we might use: #D9D9D9 (gray background on color pallette slide on Figma design) */
