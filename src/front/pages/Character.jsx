@@ -1,10 +1,11 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { CharacterInfoBlock } from "../components/CharacterInfoBlock.jsx";
-import { CharacterStatsBlock } from "../components/CharacterStatsBlock.jsx";
-import { SkillsTable } from "../components/SkillsTable.jsx";
-import { ConsumablesTable } from "../components/ConsumablesTable.jsx";
-import { DiceBar } from "../components/DiceBar.jsx";
+import { CharacterInfoBlock } from "../components/characterSite/CharacterInfoBlock.jsx";
+import { CharacterStatsBlock } from "../components/characterSite/CharacterStatsBlock.jsx";
+import { SkillsTable } from "../components/characterSite/SkillsTable.jsx";
+import { ConsumablesTable } from "../components/characterSite/ConsumablesTable.jsx";
+import { DiceBar } from "../components/characterSite/DiceBar.jsx";
+import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
     let characterInfo = store.characterInfo

@@ -1,7 +1,8 @@
-import { SpellsBlock } from "../components/SpellsBlock.jsx";
 import { useState } from "react";
-import { SpellBasicInfo } from "../components/SpellBasicInfo.jsx";
-import { SpellBonusInfo } from "../components/SpellBonusInfo.jsx";
+import { SpellsBlock } from "../components/spellSite/SpellsBlock.jsx";
+import { SpellBasicInfo } from "../components/spellSite/SpellBasicInfo.jsx";
+import { SpellBonusInfo } from "../components/spellSite/SpellBonusInfo.jsx";
+import "../../styles/spellList.css";
 
 export const SpellList = () => {
     const [spellSelected, setSpellSelected] = useState({})
@@ -65,7 +66,7 @@ export const SpellList = () => {
                 {/* IF SHOWING A SPELL SHOWS A BUTTON TO "CLOSE" SPELL WHICH SIMPLY RESETS spellSelected to {} */}
                 {
                     spellSelected.name
-                        ? <button className="spell-information-box m-3" onClick={deselect}>Close</button>
+                        ? <button className="close-button m-3" onClick={deselect}>Close</button>
                         : ""
                 }
             </div>

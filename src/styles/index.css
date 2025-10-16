@@ -1,0 +1,34 @@
+/* GENERAL SITE */
+body {
+  background-color: #40202c;
+}
+.header-primary {
+  background-color: #8c373e;
+}
+.header-secondary {
+  background-color: #bfb699;
+}
+.accent {
+  color: #008080;
+}
+.col {
+  text-align: center;
+  justify-content: center;
+}
+.row {
+  text-align: center;
+  justify-content: center;
+}
+.info-box {
+  background-color: #8c373e;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}
+/* Login/Signup specific */
+.form-container {
+  background-color: #8c373e;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}

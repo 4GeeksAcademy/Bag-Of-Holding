@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import InputForm from "../components/SignUpLogInInterface.jsx";
+import InputForm from "../components/signUpLogIn/SignUpLogInInterface.jsx";
 
 export const Home = () => {
 

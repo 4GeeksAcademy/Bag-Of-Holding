@@ -2,10 +2,10 @@ export const initialStore = () => {
   return {
     characterInfo: {
       details: {
-        name: "MALEKITH THE WICKED",
-        race: "HIGH ELF",
-        characterClass: "WIZARD",
-        subclass: "RUNECRAFTER",
+        name: "Name",
+        race: "Race",
+        characterClass: "Class",
+        subclass: "Subclass",
         level: 7,
         hp: 73,
         ac: 12,
@@ -194,177 +194,6 @@ export const initialStore = () => {
     subclasses: [],
     spells: [],
     apiURL: "https://www.dnd5eapi.co/api/2014",
-    races: [
-      {
-        index: "dragonborn",
-        name: "Dragonborn",
-        url: "/api/2014/races/dragonborn",
-      },
-      {
-        index: "dwarf",
-        name: "Dwarf",
-        url: "/api/2014/races/dwarf",
-      },
-      {
-        index: "elf",
-        name: "Elf",
-        url: "/api/2014/races/elf",
-      },
-      {
-        index: "gnome",
-        name: "Gnome",
-        url: "/api/2014/races/gnome",
-      },
-      {
-        index: "half-elf",
-        name: "Half-Elf",
-        url: "/api/2014/races/half-elf",
-      },
-      {
-        index: "half-orc",
-        name: "Half-Orc",
-        url: "/api/2014/races/half-orc",
-      },
-      {
-        index: "halfling",
-        name: "Halfling",
-        url: "/api/2014/races/halfling",
-      },
-      {
-        index: "human",
-        name: "Human",
-        url: "/api/2014/races/human",
-      },
-      {
-        index: "tiefling",
-        name: "Tiefling",
-        url: "/api/2014/races/tiefling",
-      },
-    ],
-    classes: [
-      {
-        index: "barbarian",
-        name: "Barbarian",
-        url: "/api/2014/classes/barbarian",
-      },
-      {
-        index: "bard",
-        name: "Bard",
-        url: "/api/2014/classes/bard",
-      },
-      {
-        index: "cleric",
-        name: "Cleric",
-        url: "/api/2014/classes/cleric",
-      },
-      {
-        index: "druid",
-        name: "Druid",
-        url: "/api/2014/classes/druid",
-      },
-      {
-        index: "fighter",
-        name: "Fighter",
-        url: "/api/2014/classes/fighter",
-      },
-      {
-        index: "monk",
-        name: "Monk",
-        url: "/api/2014/classes/monk",
-      },
-      {
-        index: "paladin",
-        name: "Paladin",
-        url: "/api/2014/classes/paladin",
-      },
-      {
-        index: "ranger",
-        name: "Ranger",
-        url: "/api/2014/classes/ranger",
-      },
-      {
-        index: "rogue",
-        name: "Rogue",
-        url: "/api/2014/classes/rogue",
-      },
-      {
-        index: "sorcerer",
-        name: "Sorcerer",
-        url: "/api/2014/classes/sorcerer",
-      },
-      {
-        index: "warlock",
-        name: "Warlock",
-        url: "/api/2014/classes/warlock",
-      },
-      {
-        index: "wizard",
-        name: "Wizard",
-        url: "/api/2014/classes/wizard",
-      },
-    ],
-    subclasses: [
-      {
-        index: "berserker",
-        name: "Berserker",
-        url: "/api/2014/subclasses/berserker",
-      },
-      {
-        index: "champion",
-        name: "Champion",
-        url: "/api/2014/subclasses/champion",
-      },
-      {
-        index: "devotion",
-        name: "Devotion",
-        url: "/api/2014/subclasses/devotion",
-      },
-      {
-        index: "draconic",
-        name: "Draconic",
-        url: "/api/2014/subclasses/draconic",
-      },
-      {
-        index: "evocation",
-        name: "Evocation",
-        url: "/api/2014/subclasses/evocation",
-      },
-      {
-        index: "fiend",
-        name: "Fiend",
-        url: "/api/2014/subclasses/fiend",
-      },
-      {
-        index: "hunter",
-        name: "Hunter",
-        url: "/api/2014/subclasses/hunter",
-      },
-      {
-        index: "land",
-        name: "Land",
-        url: "/api/2014/subclasses/land",
-      },
-      {
-        index: "life",
-        name: "Life",
-        url: "/api/2014/subclasses/life",
-      },
-      {
-        index: "lore",
-        name: "Lore",
-        url: "/api/2014/subclasses/lore",
-      },
-      {
-        index: "open-hand",
-        name: "Open Hand",
-        url: "/api/2014/subclasses/open-hand",
-      },
-      {
-        index: "thief",
-        name: "Thief",
-        url: "/api/2014/subclasses/thief",
-      },
-    ],
   };
 };
 
@@ -392,6 +221,7 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         spells: action.payload,
+      };
     case "save_character":
       const { name, race, characterClass, subclass } = action.payload;
       return {
@@ -406,7 +236,6 @@ export default function storeReducer(store, action = {}) {
           },
         },
       };
-
     default:
       throw Error("Unknown action.");
   }

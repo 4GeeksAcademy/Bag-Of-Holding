@@ -1,11 +1,11 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
 
 export const RaceSelector = ({ setCharacterRace }) => {
     const { store, dispatch } = useGlobalReducer()
     return (
         <div>
             <label className="input-selector mt-3" htmlFor="name">SELECT A RACE</label>
-            <div className="race-selector-input mt-3">
+            <div className="grid-selector-input mt-3">
                 {
                     store.races
                         ? store.races.map((race, index) => {
