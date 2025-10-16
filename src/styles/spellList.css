@@ -1,0 +1,30 @@
+.spell-name {
+  border-bottom: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}
+.spells-box {
+  width: 20%;
+}
+.spells-options {
+  aspect-ratio: 1 / 1;
+  overflow: scroll;
+}
+.spell-information-box {
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+  aspect-ratio: 2 / 1;
+  overflow: scroll;
+  font-size: large;
+}
+.close-button {
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+  font-size: larger;
+}

@@ -1,4 +1,4 @@
-import { StatBlock } from "../components/StatBlock.jsx";
+import { StatBlock } from "./StatBlock";
 export const CharacterStatsBlock = (props) => {
     return (
         <div>

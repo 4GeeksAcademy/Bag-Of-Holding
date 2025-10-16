@@ -1,0 +1,40 @@
+.input-selector {
+  width: 15%;
+  margin-inline: 5px;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+}
+.input-field {
+  width: 25%;
+  margin-inline: 5px;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #40202c;
+  border-width: 5px;
+}
+.grid-selector-input {
+  column-count: 3;
+  width: 75%;
+  margin: auto;
+}
+.input-selection {
+  width: 50%;
+  background-color: whitesmoke;
+  color: #008080;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 5px;
+  overflow: scroll;
+  aspect-ratio: 2 / 1;
+  margin: 10px;
+  font-size: x-large;
+}
+.spell-info-table table,
+td,
+tr {
+  border: 1px solid;
+}
