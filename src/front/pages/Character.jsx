@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { CharacterInfoBlock } from "../components/characterSite/CharacterInfoBlock.jsx";
 import { CharacterStatsBlock } from "../components/characterSite/CharacterStatsBlock.jsx";
@@ -10,7 +10,24 @@ export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
     let characterInfo = store.characterInfo
     useEffect(() => {
+        getCharacters();
     }, [])
+
+    const getCharacters = () => {
+
+        const [characters, setCharacters] = useState([{name: "Example Character"}])
+
+        fetch(store.apiURL + "/monsters")
+            .then(
+                (resp) => {
+                    console.log("get all characters - response:", resp.json());
+                    return resp.json();
+                }
+            )
+            .then((data) => {
+                console.log("Get all characters - data:", resp);
+            });
+    };
 
     return (
         <div className="text-white my-5 row">
