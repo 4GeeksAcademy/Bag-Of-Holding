@@ -16,9 +16,10 @@ export const Character = () => {
 
     const [characters, setCharacters] = useState([{
         "index": "acolyte",
-        "name": "Acolyte",
+        "name": "Loading...",
         "url": "/api/2014/monsters/acolyte"
-    }]);
+    },
+    ]);
 
     const getCharacters = async () => {
         const resp = await fetch(store.apiURL + "/monsters");
@@ -34,9 +35,6 @@ export const Character = () => {
 
     return (
         <div className="text-white my-5 row">
-            <p>{characters[5].name}</p>
-            <p>{characters[6].name}</p>
-            <p>{characters[7].name}</p>
             {/* BLOCK CONTAINING ALL CHARACTER DETAILS */}
             <div className="col-3 info-box rounded m-4">
                 <CharacterInfoBlock details={characterInfo.details}></CharacterInfoBlock>
@@ -73,6 +71,13 @@ export const Character = () => {
             <div className="col-2 info-box rounded m-4 justify-content-center">
                 <DiceBar></DiceBar>
             </div>
+            {/* Testing that the list of characters were fetched successfully and can interact with the frontend: */}
+            <h2>Testing mapping through characters:</h2>
+            {characters.map((character, index) => {
+                return (
+                    <p key={index + "character"}>{character.name}</p>
+                )
+            })}
         </div>
     );
 }; 
