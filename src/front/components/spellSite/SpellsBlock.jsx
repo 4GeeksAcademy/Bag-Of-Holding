@@ -1,4 +1,4 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
 
 export const SpellsBlock = (props) => {
     const { store, dispatch } = useGlobalReducer()

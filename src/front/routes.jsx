@@ -9,7 +9,7 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Character } from "./pages/Character";
 import { SpellList } from "./pages/SpellList";
-import InputForm from "./components/SignUpLogInInterface.jsx";
+import InputForm from "./components/signUpLogIn/SignUpLogInInterface.jsx";
 import { CharacterCreator } from "./pages/CharacterCreator";
 import { EquipmentDisplay } from "./components/Equipment.jsx";
 

@@ -1,11 +1,11 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
 
 export const SubclassSelector = ({ setCharacterSubClass }) => {
     const { store, dispatch } = useGlobalReducer()
     return (
         <div>
             <label className="input-selector mt-3" htmlFor="name">SELECT A SUBCLASS</label>
-            <div className="race-selector-input mt-3">
+            <div className="grid-selector-input mt-3">
                 {
                     store.subclasses.map((subClass, index) => {
                         return (

@@ -1,10 +1,11 @@
 import { useState } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { Link } from "react-router-dom";
-import { NameSelector } from "../components/NameSelector.jsx";
-import { RaceSelector } from "../components/RaceSelector.jsx";
-import { ClassSelector } from "../components/ClassSelector.jsx";
-import { SubclassSelector } from "../components/SubclassSelector.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import { NameSelector } from "../components/characterCreation/NameSelector.jsx";
+import { RaceSelector } from "../components/characterCreation/RaceSelector.jsx";
+import { ClassSelector } from "../components/characterCreation/ClassSelector.jsx";
+import { SubclassSelector } from "../components/characterCreation/SubclassSelector.jsx";
+import "../../styles/characterCreator.css";
 
 export const CharacterCreator = () => {
     const { store, dispatch } = useGlobalReducer()
@@ -13,14 +14,21 @@ export const CharacterCreator = () => {
     const [characterRace, setCharacterRace] = useState("")
     const [characterClass, setCharacterClass] = useState("")
     const [characterSubClass, setCharacterSubClass] = useState("")
+    const navigate = useNavigate();
+    const [showAlert, setsShowAlert] = useState(false)
 
     // Save all character information to store after hitting submit
     function saveCharacter() {
         if (characterName && characterRace && characterClass && characterSubClass) {
+            console.log(characterName, characterRace, characterClass, characterSubClass)
             dispatch({
                 type: "save_character",
                 payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
             });
+            navigate("/character");
+        }
+        else {
+            setsShowAlert(true);
         }
     }
     //Toggles between sections for character creation
@@ -54,6 +62,13 @@ export const CharacterCreator = () => {
     return (
         <div className="text-center mt-5">
             <div className="info-box m-5">
+                {
+                    showAlert
+                        ? <div className="alert alert-danger" role="alert">
+                            PLEASE ENTER ALL INFORMATION
+                        </div>
+                        : ""
+                }
                 <div className="m-2">
                     {/* Buttons that toggle between character input sections */}
                     <button className="input-selector" onClick={() => setSelectedInput("NAME")}>{characterName ? characterName : "NAME"}</button>
@@ -61,9 +76,7 @@ export const CharacterCreator = () => {
                     <button className="input-selector" onClick={() => setSelectedInput("CLASS")}>{characterClass ? characterClass : "CLASS"}</button>
                     <button className="input-selector" onClick={() => setSelectedInput("SUBCLASS")}>{characterSubClass ? characterSubClass : "SUBCLASS"}</button>
                     {/* Submit button automatically sends you to the character site for now */}
-                    <Link to="/character">
-                        <button className="input-selector" onClick={saveCharacter}>SUBMIT</button>
-                    </Link>
+                    <button className="input-selector" onClick={saveCharacter}>SUBMIT</button>
                 </div>
                 <div className="my-3">
                     {inputSelection()}
