@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean, JSON, ForeignKey, Table
+from sqlalchemy import String, Boolean, JSON, ForeignKey, Table, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 db = SQLAlchemy()
@@ -84,4 +84,26 @@ class Character(db.Model):
             "char_class": self.char_class.serialize() if self.char_class else None,
             "sub_class": self.sub_class.serialize() if self.sub_class else None,
             "skills": [skill.serialize() for skill in self.skills]
+        }
+    
+
+    # Models for inventory
+class Item(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    type: Mapped[str] = mapped_column(String(50), nullable=False)  
+    description: Mapped[str] = mapped_column(String(255), nullable=True)
+    stats: Mapped[dict] = mapped_column(JSON, nullable=True)  
+
+   
+    equipped_by = relationship("EquippedItem", back_populates="item")
+    in_bag_of = relationship("BagItem", back_populates="item")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "type": self.type,
+            "description": self.description,
+            "stats": self.stats,   
         }
