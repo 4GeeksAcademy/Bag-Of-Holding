@@ -10,6 +10,7 @@ export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
     let characterInfo = store.characterInfo
     useEffect(() => {
+        console.log("new list of characters: ", characters)
         getCharacters();
     }, [])
 
@@ -23,7 +24,6 @@ export const Character = () => {
         const resp = await fetch(store.apiURL + "/monsters");
         const data = await resp.json();
         setCharacters(data.results);
-        console.log("new list of characters: ", characters)
     };
 
 
