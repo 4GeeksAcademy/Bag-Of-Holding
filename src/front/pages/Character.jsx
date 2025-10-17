@@ -21,10 +21,11 @@ export const Character = () => {
 
     const getCharacters = async () => {
         const resp = await fetch(store.apiURL + "/monsters");
-        console.log("get all characters - response:", resp.json());
-        setCharacters(resp.results);
+        const data = await resp.json();
+        setCharacters(data.results);
         console.log("new list of characters: ", characters)
     };
+
 
     return (
         <div className="text-white my-5 row">
