@@ -236,6 +236,18 @@ export default function storeReducer(store, action = {}) {
           },
         },
       };
+    case "save_attributes":
+      const { speed, initiative, proficiency} = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          stats: stats,
+          speed: speed,
+          initiative: initiative,
+          proficiency: proficiency
+        },
+      };
     default:
       throw Error("Unknown action.");
   }
