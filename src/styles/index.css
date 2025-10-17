@@ -8,6 +8,7 @@ body {
 .header-secondary {
   background-color: #bfb699;
 }
+
 .accent {
   color: #008080;
 }
@@ -32,3 +33,17 @@ body {
   border-color: #bfb699;
   border-width: 15px;
 }
+
+.navbar-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: #008080;
+  font-weight: bold;
+}
+
+.navbar-button:hover {
+  background-color: #008080;
+  border-color: #8c373e;
+}
+
+/* Another color we might use: #D9D9D9 (gray background on color pallette slide on Figma design) */
