@@ -1,6 +1,6 @@
 import React from "react"
 
-export default ItemBlock = ({item}) => {
+export const ItemBlock = ({item}) => {
     return(
         <div>
             <div>

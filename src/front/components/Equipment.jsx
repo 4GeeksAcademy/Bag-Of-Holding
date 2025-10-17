@@ -1,8 +1,9 @@
 import React from "react"
-import ItemBlock from "./ItemBlock.jsx"
+import { ItemBlock } from "./ItemBlock.jsx"
+import { inventory } from "./item.js"
 
 export const EquipmentDisplay = (props) => {
-    let details = props.details
+    let details = inventory
 
     const weaponAndTool = details.filter(
         (item) => item.type === "weapon" || item.type === "tool"

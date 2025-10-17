@@ -193,12 +193,56 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
+    user: null,
+  inventoryList: [],
+  bagItems: [],
+  selectedCharacter: null,
+  characters: [],
+  loading: false,
+  error: null,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
 
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
+    case "set_races":
+      return {
+        ...store,
+        races: action.payload,
+      };
+
+    case "set_classes":
+      return {
+        ...store,
+        classes: action.payload,
+      };
+
+    case "set_subclasses":
+      return {
+        ...store,
+        subclasses: action.payload,
+      };
+
+    case "set_spells":
+      return {
+        ...store,
+        spells: action.payload,
+      };
+    case "save_character":
+      const { name, race, characterClass, subclass } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          details: {
+            name: name,
+            race: race,
+            characterClass: characterClass,
+            subclass: subclass,
+          },
+        },
+      };
     case "set_inventory":
       return { ...state, inventoryList: action.payload };
 
@@ -224,7 +268,7 @@ export default function storeReducer(store, action = {}) {
         ),
       };
     default:
-      return state;
+      throw Error("unknown action")
   }
 }
 
