@@ -193,6 +193,13 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
+    user: null,
+  inventoryList: [],
+  bagItems: [],
+  selectedCharacter: null,
+  characters: [],
+  loading: false,
+  error: null,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
@@ -236,7 +243,32 @@ export default function storeReducer(store, action = {}) {
           },
         },
       };
+    case "set_inventory":
+      return { ...state, inventoryList: action.payload };
+
+    case "set_bag_items":
+      return { ...state, bagItems: action.payload };
+
+    case "add_bag_item":
+      return { ...state, bagItems: [...state.bagItems, action.payload] };
+
+    case "remove_bag_item":
+      return {
+        ...state,
+        bagItems: state.bagItems.filter(
+          (item) => item.id !== action.payload
+        ),
+      };
+
+    case "update_bag_item":
+      return {
+        ...state,
+        bagItems: state.bagItems.map((item) =>
+          item.id === action.payload.id ? { ...item, ...action.payload } : item
+        ),
+      };
     default:
-      throw Error("Unknown action.");
+      throw Error("unknown action")
   }
 }
+
