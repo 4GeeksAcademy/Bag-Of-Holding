@@ -13,20 +13,17 @@ export const Character = () => {
         getCharacters();
     }, [])
 
-    const getCharacters = () => {
+    const [characters, setCharacters] = useState([{
+        "index": "acolyte",
+        "name": "Acolyte",
+        "url": "/api/2014/monsters/acolyte"
+    }]);
 
-        const [characters, setCharacters] = useState([{name: "Example Character"}])
-
-        fetch(store.apiURL + "/monsters")
-            .then(
-                (resp) => {
-                    console.log("get all characters - response:", resp.json());
-                    return resp.json();
-                }
-            )
-            .then((data) => {
-                console.log("Get all characters - data:", resp);
-            });
+    const getCharacters = async () => {
+        const resp = await fetch(store.apiURL + "/monsters");
+        console.log("get all characters - response:", resp.json());
+        setCharacters(resp.results);
+        console.log("new list of characters: ", characters)
     };
 
     return (
