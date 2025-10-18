@@ -9,23 +9,25 @@ import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
     let characterInfo = store.characterInfo
-    useEffect(() => {
-        console.log("new list of characters: ", characters)
-        getCharacters();
-    }, [])
 
-    const [characters, setCharacters] = useState([{
-        "index": "acolyte",
-        "name": "Loading...",
-        "url": "/api/2014/monsters/acolyte"
-    },
-    ]);
+    const [charactersFromAPI, setCharactersFromAPI] = useState([]);
 
     const getCharacters = async () => {
         const resp = await fetch(store.apiURL + "/monsters");
         const data = await resp.json();
-        setCharacters(data.results);
+        setCharactersFromAPI(data.results);
+        store.characters.length == 0 &&
+            dispatch({
+                type: "set_characters",
+                payload: [charactersFromAPI]
+            })
+        console.log("Characters in store.js:", store.characters)
     };
+
+    useEffect(() => {
+        console.log("characters saved from GET into useState: ", charactersFromAPI)
+        getCharacters();
+    }, [])
 
     return (
         <div className="text-white my-5 row">
@@ -65,13 +67,6 @@ export const Character = () => {
             <div className="col-2 info-box rounded m-4 justify-content-center">
                 <DiceBar></DiceBar>
             </div>
-            {/* Testing that the list of characters were fetched successfully and can interact with the frontend: */}
-            <h2>Testing mapping through characters:</h2>
-            {characters.map((character, index) => {
-                return (
-                    <p key={index + "character"}>{character.name}</p>
-                )
-            })}
         </div>
     );
 }; 

@@ -193,6 +193,7 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
+    characters: [],
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
@@ -221,6 +222,11 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         spells: action.payload,
+      };
+    case "set_characters":
+      return {
+        ...store,
+        characters: action.payload,
       };
     case "save_character":
       const { name, race, characterClass, subclass } = action.payload;
