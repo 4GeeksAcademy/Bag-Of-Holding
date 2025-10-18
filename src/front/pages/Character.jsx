@@ -27,12 +27,6 @@ export const Character = () => {
         setCharacters(data.results);
     };
 
-    const testArray = [{
-        "index": "acolyte",
-        "name": "Acolyte",
-        "url": "/api/2014/monsters/acolyte"
-    }];
-
     return (
         <div className="text-white my-5 row">
             {/* BLOCK CONTAINING ALL CHARACTER DETAILS */}
