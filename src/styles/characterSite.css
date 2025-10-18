@@ -2,42 +2,36 @@
 .character-info-box {
   background-color: whitesmoke;
   color: #008080;
-  border-style: solid;
-  border-color: #bfb699;
-  border-width: 5px;
+  border: 5px solid #008080;
 }
 .character-picture {
-  border-style: solid;
-  border-color: #bfb699;
-  border-width: 5px;
+  border: 5px solid #008080;
   border-radius: 15px 50px;
 }
 /* STAT SPECIFIC */
 .stat-block-box {
   background-color: #bfb699;
-  border-style: solid;
-  border-color: #008080;
-  border-width: 5px;
+  border: 5px solid #008080;
 }
 .stat-block-info {
   background-color: whitesmoke;
   color: #008080;
-}
-input {
-  width: 20%;
-  font-size: large;
-  text-align: center;
   border: 2px solid #008080;
+  width: 90%;
+  text-align: center;
+  margin: 5px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 /* DICE BAR SPECIFIC */
 .dice-block {
   background-color: whitesmoke;
-  border-style: solid;
-  border-color: #008080;
+  border: 5px solid #008080;
   border-radius: 25%;
   color: #008080;
-  border-width: 5px;
   aspect-ratio: 1 / 1;
   width: 75%;
   margin: 5px;

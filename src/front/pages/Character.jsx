@@ -26,9 +26,7 @@ export const Character = () => {
                         speed={characterInfo.speed}
                         initiative={characterInfo.initiative}
                         proficiency={characterInfo.proficiency}
-                        passiveWIS={characterInfo.passiveWIS}
-                    >
-                    </CharacterStatsBlock>
+                    />
                 </div>
                 <div className="d-flex">
                     {/* BLOCK CONTAINING ALL CHARACTER SKILLS */}
@@ -48,7 +46,7 @@ export const Character = () => {
             </div>
             {/* BLOCK CONTAINING ALL DICE */}
             <div className="col-2 info-box rounded m-4 justify-content-center">
-                <DiceBar></DiceBar>
+                <DiceBar/>
             </div>
         </div>
     );

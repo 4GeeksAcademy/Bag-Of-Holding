@@ -6,10 +6,10 @@ export const initialStore = () => {
         race: "Race",
         characterClass: "Class",
         subclass: "Subclass",
-        level: 7,
-        hp: 73,
-        ac: 12,
-        hitDice: "3-D8",
+        level: 1,
+        hp: 0,
+        ac: 0,
+        hitDice: "",
         img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg",
       },
       stats: [
@@ -166,10 +166,9 @@ export const initialStore = () => {
           expert: false,
         },
       ],
-      speed: 34,
-      initiative: 2,
-      proficiency: 3,
-      passiveWIS: 30,
+      speed: 0,
+      initiative: 0,
+      proficiency: 0,
       consumables: [
         {
           name: "Bardic Inspiration",
@@ -237,15 +236,14 @@ export default function storeReducer(store, action = {}) {
         },
       };
     case "save_attributes":
-      const { speed, initiative, proficiency} = action.payload;
+      const { speed, initiative, proficiency } = action.payload;
       return {
         ...store,
         characterInfo: {
           ...store.characterInfo,
-          stats: stats,
           speed: speed,
           initiative: initiative,
-          proficiency: proficiency
+          proficiency: proficiency,
         },
       };
     default:

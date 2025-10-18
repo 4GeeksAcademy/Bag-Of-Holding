@@ -1,12 +1,11 @@
 import { StatBlock } from "./StatBlock";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export const CharacterStatsBlock = (props) => {
     const { store, dispatch } = useGlobalReducer()
     const [speed, setSpeed] = useState(props.speed)
     const [initiative, setInitiative] = useState(props.initiative)
     const [proficiency, setProficiency] = useState(props.proficiency)
-    const [passiveWIS, setPassiveWIS] = useState(props.passiveWIS)
     const updateStats = () => {
         dispatch({
             type: "save_attributes",
@@ -16,8 +15,13 @@ export const CharacterStatsBlock = (props) => {
                 proficiency: proficiency
             },
         });
-        console.log(store.characterInfo)
     }
+    useEffect(() => {
+    }, [])
+    // We calculate passive Perception
+    const wisdomStat = props.stats?.find(stat => stat.name === "WIS");
+    const wisdomMod = wisdomStat ? (Math.floor((wisdomStat.value) - 10) / 2) : 0;
+    const passivePer = 10 + wisdomMod + parseInt(props.proficiency)
     return (
         <div>
             <div className="row m-auto">
@@ -27,7 +31,7 @@ export const CharacterStatsBlock = (props) => {
                         ? props.stats.map((stat, index) => {
                             return (
                                 <div className="col-2" key={index}>
-                                    <StatBlock name={stat.name} value={stat.value} check={stat.check} saving={stat.saving} />
+                                    <StatBlock name={stat.name} value={stat.value} proficiency={proficiency} />
                                 </div>
                             )
                         })
@@ -36,56 +40,60 @@ export const CharacterStatsBlock = (props) => {
             </div>
             <div className="d-flex mt-3">
                 <div className="stat-block-box w-25 m-1">
-                    <h4 className="stat-block-info m-1">SPEED</h4>
-                    <input
-                        type="text"
-                        className="stat-block-info m-1 "
-                        maxLength="3"
-                        onChange={e => setSpeed(e.target.value)}
-                        onKeyDown={e => {
-                            if (e.key == "Enter") {
-                                updateStats();
+                    <h4 className="stat-block-info p-1">SPEED</h4>
+                    <h4>
+                        <input
+                            type="number"
+                            className="stat-block-info"
+                            onChange={e => setSpeed(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key == "Enter") {
+                                    updateStats();
+                                }
                             }
-                        }
-                        }
-                        value={speed}
-                    />
+                            }
+                            value={speed}
+                        />
+                    </h4>
                 </div>
                 <div className="stat-block-box w-25 m-1">
-                    <h4 className="stat-block-info m-1">INITIATIVE</h4>
-                    <input
-                        type="text"
-                        className="stat-block-info m-1 "
-                        maxLength="2"
-                        onChange={e => setInitiative(e.target.value)}
-                        onKeyDown={e => {
-                            if (e.key == "Enter") {
-                                updateStats();
+                    <h4 className="stat-block-info p-1">INITIATIVE</h4>
+                    <h4>
+                        <input
+                            type="number"
+                            className="stat-block-info"
+                            onChange={e => setInitiative(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key == "Enter") {
+                                    updateStats();
+                                }
                             }
-                        }
-                        }
-                        value={initiative}
-                    />
+                            }
+                            value={initiative}
+                        />
+                    </h4>
                 </div>
                 <div className=" stat-block-box w-25 m-1">
-                    <h4 className="stat-block-info m-1">PROFICIENCY</h4>
-                    <input
-                        type="text"
-                        className="stat-block-info m-1 "
-                        maxLength="2"
-                        onChange={e => setProficiency(e.target.value)}
-                        onKeyDown={e => {
-                            if (e.key == "Enter") {
-                                updateStats();
+                    <h4 className="stat-block-info p-1">PROFICIENCY</h4>
+                    <h4>
+                        <input
+                            type="number"
+                            className="stat-block-info"
+                            onChange={e => setProficiency(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key == "Enter") {
+                                    updateStats();
+                                }
                             }
-                        }
-                        }
-                        value={proficiency}
-                    />
+                            }
+                            value={proficiency}
+                        />
+                    </h4>
                 </div>
                 <div className=" stat-block-box w-25 m-1">
-                    <h4 className="stat-block-info m-1">PASSIVE PER</h4>
-                    <input type="text" className="stat-block-info m-1 " maxLength="2" onChange={e => setPassiveWIS(e.target.value)} value={passiveWIS} />
+                    <h4 className="stat-block-info p-1">PASSIVE PER</h4>
+                    <h4 className="stat-block-info p-1">{passivePer}</h4>
+
                 </div>
             </div>
         </div>
