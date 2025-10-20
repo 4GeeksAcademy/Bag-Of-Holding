@@ -242,6 +242,20 @@ export default function storeReducer(store, action = {}) {
           },
         },
       };
+    case "set_skills":
+      const { skillName, ability, proficient, expert } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          skills: {
+            name: skillName,
+            ability: ability,
+            proficient: proficient,
+            expert: expert,
+          },
+        },
+      };
     default:
       throw Error("Unknown action.");
   }

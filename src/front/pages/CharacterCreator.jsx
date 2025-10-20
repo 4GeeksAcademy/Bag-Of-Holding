@@ -24,7 +24,6 @@ export const CharacterCreator = () => {
     const getCharacters = async () => {
         const resp = await fetch(store.apiURL + "/monsters/"+{characterName});
         const data = await resp.json();
-        setCharactersFromAPI(data.results);
         store.characters.length == 0 &&
             dispatch({
                 type: "set_characters",
