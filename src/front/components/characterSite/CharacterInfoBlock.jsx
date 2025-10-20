@@ -1,5 +1,12 @@
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { useState } from "react";
 export const CharacterInfoBlock = (props) => {
-    let details = props.details
+    let details = props.details;
+    const { store, dispatch } = useGlobalReducer();
+    const [level, setLevel] = useState(props.details.level);
+    const [hp, setHp] = useState(props.details.hp);
+    const [ac, setAc] = useState(props.details.ac);
+    const [hitDice, setHitDice] = useState(props.details.hitDice);
     return (
         //  ALL THIS INFORMATION IS SUPPOSED TO BE SELECTED USING THE DND API WITH ALL CHARACTER OPTIONS
         <div>
@@ -8,33 +15,94 @@ export const CharacterInfoBlock = (props) => {
 
             {/* CHARACTER NAME */}
             <div className="character-info-box m-3">
-                <h5>{details.name}</h5>
+                <label for="name">NAME</label>
+                <h5 id="name">{details.name}</h5>
             </div>
 
             {/* CHARACTER RACE */}
             <div className="character-info-box m-3">
-                <h5>{details.race}</h5>
+                <label for="race">RACE</label>
+                <h5 id="race">{details.race}</h5>
             </div>
 
-            {/* CHARACTER LEVEL AND CLASS */}
+            {/* CHARACTER LEVEL */}
             <div className="character-info-box m-3">
-                <h5>LVL {details.level} - {details.characterClass}</h5>
+                <label for="level">LEVEL</label>
+                <input
+                    id="level"
+                    type="number"
+                    className="character-info-input"
+                    onChange={e => setLevel(e.target.value)}
+                    onKeyDown={e => {
+                        if (e.key == "Enter") {
+                            updateStats();
+                        }
+                    }
+                    }
+                    value={level}
+                />
+            </div>
+
+            {/* CHARACTER CLASS */}
+            <div className="character-info-box m-3">
+                <label for="cClass">CLASS</label>
+                <h5 id="cClass">{details.characterClass}</h5>
             </div>
 
             {/* CHARACTER SUBCLASS */}
             <div className="character-info-box m-3">
-                <h5>{details.subclass}</h5>
+                <label for="subClass">SUBCLASS</label>
+                <h5 id="subClass">{details.subclass}</h5>
             </div>
             {/* CHARACTER HP/AC/HITDICE*/}
             <div className="d-flex">
                 <div className="character-info-box mx-3 p-2 w-25">
-                    <h5>HP:</h5><h5>{details.hp}</h5>
+                    <label for="hp">HP</label>
+                    <input
+                        id="hp"
+                        type="number"
+                        className="character-info-input"
+                        onChange={e => setHp(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key == "Enter") {
+                                updateStats();
+                            }
+                        }
+                        }
+                        value={hp}
+                    />
                 </div>
                 <div className="character-info-box mx-3 p-2 w-25">
-                    <h5>AC:</h5><h5>{details.ac}</h5>
+                    <label for="ac">AC</label>
+                    <input
+                        id="ac"
+                        type="number"
+                        className="character-info-input"
+                        onChange={e => setAc(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key == "Enter") {
+                                updateStats();
+                            }
+                        }
+                        }
+                        value={ac}
+                    />
                 </div>
                 <div className="character-info-box mx-3 p-2 w-25">
-                    <h5>HitDice:</h5><h5>{details.hitDice}</h5>
+                    <label for="hitDice">HIT DICE</label>
+                    <input
+                        id="hitDice"
+                        type="number"
+                        className="character-info-input"
+                        onChange={e => setHitDice(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key == "Enter") {
+                                updateStats();
+                            }
+                        }
+                        }
+                        value={hitDice}
+                    />
                 </div>
             </div>
         </div>

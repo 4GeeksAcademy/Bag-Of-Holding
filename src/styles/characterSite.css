@@ -8,6 +8,20 @@
   border: 5px solid #008080;
   border-radius: 15px 50px;
 }
+.character-info-input {
+  background-color: transparent;
+  color: #008080;
+  text-align: center;
+  border: none;
+  width: 100%;
+  font-size: larger;
+}
+label {
+  font-size: medium;
+}
+input:focus {
+  outline: none;
+}
 /* STAT SPECIFIC */
 .stat-block-box {
   background-color: #bfb699;

@@ -7,8 +7,8 @@ export const StatBlock = (props) => {
                 <h4>{props.name}</h4>
             </div>
             <div className="stat-block-info m-1 p-1">
-                <h4>{props.value}
-
+                <h4>
+                    {props.value}
                 </h4>
             </div>
             <div className="d-flex justify-content-center m-1">
@@ -21,7 +21,6 @@ export const StatBlock = (props) => {
                     <h4>{saving}</h4>
                 </div>
             </div>
-
         </div>
     );
 };
