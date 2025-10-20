@@ -14,22 +14,28 @@ export const CharacterCreator = () => {
     const [characterRace, setCharacterRace] = useState("")
     const [characterClass, setCharacterClass] = useState("")
     const [characterSubClass, setCharacterSubClass] = useState("")
+
+    const [skillName, setSkillName] = useState("")
+    const [skillAbility, setSkillAbility] = useState("")
+    const [skillProficiency, setSkillProficiency] = useState("")
+    const [skillExpertise, setSkillExpertise] = useState("")
+
     const navigate = useNavigate();
     const [showAlert, setsShowAlert] = useState(false)
 
-    // If the character's name has already been updated by using the character selection screen, set that name to the local useState variable characterName
-    store.characterInfo.details.name == "Name" && setCharacterName(store.characterInfo.details.name)
-
     // GET character info from API based on current character name in store.characterInfo
-    const getCharacters = async () => {
-        const resp = await fetch(store.apiURL + "/monsters/"+{characterName});
+    const getCharacterInfo = async () => {
+        const resp = await fetch(store.apiURL + "/monsters/" + { characterName });
         const data = await resp.json();
-        store.characters.length == 0 &&
             dispatch({
-                type: "set_characters",
-                payload: [charactersFromAPI]
-            })
-        console.log("Characters in store.js:", store.characters)
+                type: "set_skills",
+                payload: {
+                    name: skillName,
+                    ability: skillAbility,
+                    proficient: skillProficiency,
+                    expert: skillExpertise
+                }
+            });
     };
 
     // Save all character information to store after hitting submit
@@ -40,6 +46,8 @@ export const CharacterCreator = () => {
                 type: "save_character",
                 payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
             });
+            store.characterInfo.details.name !== "Name" && setCharacterName(store.characterInfo.details.name)
+            store.characterInfo.details.name !== "Name" && getCharacterInfo();
             navigate("/character");
         }
         else {
