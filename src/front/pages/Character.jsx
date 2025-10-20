@@ -12,6 +12,7 @@ export const Character = () => {
 
     const [charactersFromAPI, setCharactersFromAPI] = useState([]);
 
+    // GET characters from API and save them to a store.js variable
     const getCharacters = async () => {
         const resp = await fetch(store.apiURL + "/monsters");
         const data = await resp.json();

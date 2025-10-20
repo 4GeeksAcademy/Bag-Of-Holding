@@ -193,7 +193,7 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
-    characters: [],
+    characters: [], // Variable to store list of characters
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
