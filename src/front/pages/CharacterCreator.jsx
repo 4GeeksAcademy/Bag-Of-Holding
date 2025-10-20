@@ -17,6 +17,22 @@ export const CharacterCreator = () => {
     const navigate = useNavigate();
     const [showAlert, setsShowAlert] = useState(false)
 
+    // If the character's name has already been updated by using the character selection screen, set that name to the local useState variable characterName
+    store.characterInfo.details.name == "Name" && setCharacterName(store.characterInfo.details.name)
+
+    // GET character info from API based on current character name in store.characterInfo
+    const getCharacters = async () => {
+        const resp = await fetch(store.apiURL + "/monsters/"+{characterName});
+        const data = await resp.json();
+        setCharactersFromAPI(data.results);
+        store.characters.length == 0 &&
+            dispatch({
+                type: "set_characters",
+                payload: [charactersFromAPI]
+            })
+        console.log("Characters in store.js:", store.characters)
+    };
+
     // Save all character information to store after hitting submit
     function saveCharacter() {
         if (characterName && characterRace && characterClass && characterSubClass) {
