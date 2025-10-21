@@ -193,7 +193,8 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
-    characters: [], // Variable to store list of all characters
+    characters: [], // Array to store list of all characters
+    skillLevels: {str: 0, dex: 0, int: 0, wis: 0, cha: 0}, // Object that stores values for the various skills
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
