@@ -17,75 +17,72 @@ class User(db.Model):
             "list_of_characters": self.list_of_characters
         }
 
-
-class Race(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    characters = relationship("Character", back_populates="race")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name}
-
-
-class charClass(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    characters = relationship("Character", back_populates="char_class")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name}
-
-
-class subClass(db.Model):
-    id:Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    characters = relationship("Character", back_populates="sub_class")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name}
-
+character_skills = Table(
+    "character_skills",
+    db.Model.metadata,
+    db.Column("character_id", db.Integer, db.ForeignKey("character.id"), primary_key=True),
+    db.Column("skill_id", db.Integer, db.ForeignKey("skills.id"), primary_key=True)
+) 
 
 class Skills(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(75), nullable=False)
-    modifier: Mapped[str] = mapped_column(String(5), nullable=False)
+    ability: Mapped[str] = mapped_column(String(15), nullable=False)
+    proficient: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    expert: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
-    characters = relationship("Character", back_populates="skills")
+    characters = relationship(
+        "Character", 
+        secondary="character_skills", 
+        back_populates="skills")
 
     def serialize(self):
         return {
             "id": self.id, 
             "name": self.name, 
-            "modifier": self.modifier}
+            "ability": self.ability,
+            "proficient": self.proficient,
+            "expert": self.expert}
 
 class Character(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(25), nullable=False)
-    race_id: Mapped[int] = mapped_column(ForeignKey("race.id"), nullable=False)
-    char_class_id: Mapped[int] = mapped_column(ForeignKey("char_class.id"), nullable=False)
-    sub_class_id: Mapped[int] = mapped_column(ForeignKey("sub_class.id"), nullable=False)
+    race: Mapped[str] = mapped_column(String(15), nullable=False)
+    char_class: Mapped[str] = mapped_column(String(20), nullable=False)
+    sub_class: Mapped[str] = mapped_column(String(20), nullable=False)
+    level: Mapped[int] = mapped_column(Integer, nullable=False)
+    hp: Mapped[int] = mapped_column(Integer, nullable=False)
+    armor_class: Mapped[int] = mapped_column(Integer, nullable=False)
+    hit_dice: Mapped[str] = mapped_column(String(5), nullable=False)
+    speed: Mapped[int] = mapped_column(Integer, nullable=False)
+    initiative: Mapped[int] = mapped_column(Integer, nullable=False)
+    proficiency_bonus: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    race = relationship("Race", back_populates="characters")
-    char_class = relationship("charClass", back_populates="characters")
-    sub_class = relationship("subClass", back_populates="characters")
-    skills = relationship("Skills", back_populates="characters")
+    skills = relationship(
+        "Skills",
+        secondary="character_skills",
+        back_populates="characters"
+    )
+
 
     def serialize(self):
         return {
             "id": self.id,
             "name": self.name,
-            "race": self.race.serialize() if self.race else None,
-            "char_class": self.char_class.serialize() if self.char_class else None,
-            "sub_class": self.sub_class.serialize() if self.sub_class else None,
+            "race": self.race,
+            "char_class": self.char_class,
+            "sub_class": self.sub_class,
+            "level": self.level,
+            "hp": self.hp,
+            "armor_class": self.armor_class,
+            "hit_dice": self.hit_dice,
+            "speed": self.speed,
+            "initiative": self.initiative,
+            "proficiency_bonus": self.proficiency_bonus,
             "skills": [skill.serialize() for skill in self.skills]
         }
-    
+
+
 
     # Models for inventory
 class Item(db.Model):
