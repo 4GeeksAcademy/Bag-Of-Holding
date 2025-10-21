@@ -20,7 +20,7 @@ export const CharacterStatsBlock = (props) => {
     }, [])
     // We calculate passive Perception
     const wisdomStat = props.stats?.find(stat => stat.name === "WIS");
-    const wisdomMod = wisdomStat ? (Math.floor((wisdomStat.value) - 10) / 2) : 0;
+    const wisdomMod = wisdomStat ? (Math.floor((wisdomStat.value - 10) / 2)) : 0;
     const passivePer = 10 + wisdomMod + parseInt(props.proficiency)
     return (
         <div>
@@ -31,7 +31,7 @@ export const CharacterStatsBlock = (props) => {
                         ? props.stats.map((stat, index) => {
                             return (
                                 <div className="col-2" key={index}>
-                                    <StatBlock name={stat.name} value={stat.value} proficiency={proficiency} />
+                                    <StatBlock name={stat.name} value={stat.value} proficiency={proficiency} stats={props.stats} />
                                 </div>
                             )
                         })
