@@ -7,6 +7,17 @@ export const CharacterInfoBlock = (props) => {
     const [hp, setHp] = useState(props.details.hp);
     const [ac, setAc] = useState(props.details.ac);
     const [hitDice, setHitDice] = useState(props.details.hitDice);
+    const updateInfo = () => {
+        dispatch({
+            type: "update_info",
+            payload: {
+                level: parseInt(level),
+                hp: parseInt(hp),
+                ac: parseInt(ac),
+                hitDice: hitDice
+            },
+        });
+    }
     return (
         //  ALL THIS INFORMATION IS SUPPOSED TO BE SELECTED USING THE DND API WITH ALL CHARACTER OPTIONS
         <div>
@@ -15,19 +26,19 @@ export const CharacterInfoBlock = (props) => {
 
             {/* CHARACTER NAME */}
             <div className="character-info-box m-3">
-                <label for="name">NAME</label>
+                <label htmlFor="name">NAME</label>
                 <h5 id="name">{details.name}</h5>
             </div>
 
             {/* CHARACTER RACE */}
             <div className="character-info-box m-3">
-                <label for="race">RACE</label>
+                <label htmlFor="race">RACE</label>
                 <h5 id="race">{details.race}</h5>
             </div>
 
             {/* CHARACTER LEVEL */}
             <div className="character-info-box m-3">
-                <label for="level">LEVEL</label>
+                <label htmlFor="level">LEVEL</label>
                 <input
                     id="level"
                     type="number"
@@ -35,7 +46,7 @@ export const CharacterInfoBlock = (props) => {
                     onChange={e => setLevel(e.target.value)}
                     onKeyDown={e => {
                         if (e.key == "Enter") {
-                            updateStats();
+                            updateInfo();
                         }
                     }
                     }
@@ -45,19 +56,19 @@ export const CharacterInfoBlock = (props) => {
 
             {/* CHARACTER CLASS */}
             <div className="character-info-box m-3">
-                <label for="cClass">CLASS</label>
+                <label htmlFor="cClass">CLASS</label>
                 <h5 id="cClass">{details.characterClass}</h5>
             </div>
 
             {/* CHARACTER SUBCLASS */}
             <div className="character-info-box m-3">
-                <label for="subClass">SUBCLASS</label>
+                <label htmlFor="subClass">SUBCLASS</label>
                 <h5 id="subClass">{details.subclass}</h5>
             </div>
             {/* CHARACTER HP/AC/HITDICE*/}
             <div className="d-flex">
                 <div className="character-info-box mx-3 p-2 w-25">
-                    <label for="hp">HP</label>
+                    <label htmlFor="hp">HP</label>
                     <input
                         id="hp"
                         type="number"
@@ -65,7 +76,7 @@ export const CharacterInfoBlock = (props) => {
                         onChange={e => setHp(e.target.value)}
                         onKeyDown={e => {
                             if (e.key == "Enter") {
-                                updateStats();
+                                updateInfo();
                             }
                         }
                         }
@@ -73,7 +84,7 @@ export const CharacterInfoBlock = (props) => {
                     />
                 </div>
                 <div className="character-info-box mx-3 p-2 w-25">
-                    <label for="ac">AC</label>
+                    <label htmlFor="ac">AC</label>
                     <input
                         id="ac"
                         type="number"
@@ -81,7 +92,7 @@ export const CharacterInfoBlock = (props) => {
                         onChange={e => setAc(e.target.value)}
                         onKeyDown={e => {
                             if (e.key == "Enter") {
-                                updateStats();
+                                updateInfo();
                             }
                         }
                         }
@@ -89,15 +100,15 @@ export const CharacterInfoBlock = (props) => {
                     />
                 </div>
                 <div className="character-info-box mx-3 p-2 w-25">
-                    <label for="hitDice">HIT DICE</label>
+                    <label htmlFor="hitDice">HIT DICE</label>
                     <input
                         id="hitDice"
-                        type="number"
+                        type="text"
                         className="character-info-input"
                         onChange={e => setHitDice(e.target.value)}
                         onKeyDown={e => {
                             if (e.key == "Enter") {
-                                updateStats();
+                                updateInfo();
                             }
                         }
                         }

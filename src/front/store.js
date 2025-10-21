@@ -235,13 +235,39 @@ export default function storeReducer(store, action = {}) {
           },
         },
       };
-    case "update_stat":
+    case "save_attributes":
+      const { speed, initiative, proficiency } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          speed: speed,
+          initiative: initiative,
+          proficiency: proficiency,
+        },
+      };
+    case "update_stats":
       const { stats } = action.payload;
       return {
         ...store,
         characterInfo: {
           ...store.characterInfo,
           stats: stats,
+        },
+      };
+    case "update_info":
+      const { level, hp, ac, hitDice } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          details: {
+            ...store.characterInfo.details,
+            level: level,
+            hp: hp,
+            ac: ac,
+            hitDice: hitDice,
+          },
         },
       };
     default:

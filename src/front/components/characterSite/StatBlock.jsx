@@ -37,11 +37,11 @@ export const StatBlock = (props) => {
             </div>
             <div className="d-flex justify-content-center m-1">
                 <div className="stat-block-info me-1 text-center">
-                    <label for="check">CHK</label>
+                    <label htmlFor="check">CHK</label>
                     <h4 id="check">{check}</h4>
                 </div>
                 <div className="stat-block-info ms-1 text-center">
-                    <label for="saving">SAV</label>
+                    <label htmlFor="saving">SAV</label>
                     <h4 id="saving">{saving}</h4>
                 </div>
             </div>

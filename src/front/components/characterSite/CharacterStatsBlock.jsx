@@ -10,9 +10,9 @@ export const CharacterStatsBlock = (props) => {
         dispatch({
             type: "save_attributes",
             payload: {
-                speed: speed,
-                initiative: initiative,
-                proficiency: proficiency
+                speed: parseInt(speed),
+                initiative: parseInt(initiative),
+                proficiency: parseInt(proficiency)
             },
         });
     }
@@ -93,7 +93,6 @@ export const CharacterStatsBlock = (props) => {
                 <div className=" stat-block-box w-25 m-1">
                     <h4 className="stat-block-info p-1">PASSIVE PER</h4>
                     <h4 className="stat-block-info p-1">{passivePer}</h4>
-
                 </div>
             </div>
         </div>
