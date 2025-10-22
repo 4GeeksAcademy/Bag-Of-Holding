@@ -1,8 +1,16 @@
-export let skillLevels = {str: 0, dex: 0, con:0, int: 0, wis: 0, cha: 0, loading: true} // Object that stores values for the various skills
-
 export const initialStore = () => {
+  // Object that stores values for the various skills
+  const skillLevels = {
+    str: 533,
+    dex: 745,
+    con: 423,
+    int: 228,
+    wis: 900,
+    cha: 177,
+    loading: true,
+  };
+
   return {
-    strValue: 0,
     characterInfo: {
       details: {
         name: "Name",
@@ -62,109 +70,109 @@ export const initialStore = () => {
       skills: [
         {
           name: "ATHLETICS",
-          ability: skillLevels.str,
+          ability: "STR",
           proficient: false,
           expert: false,
         },
         {
           name: "ACROBATICS",
-          ability: skillLevels.dex,
+          ability: "DEX",
           proficient: false,
           expert: false,
         },
         {
           name: "SLEIGHT OF HAND",
-          ability: skillLevels.dex,
+          ability: "DEX",
           proficient: false,
           expert: false,
         },
         {
           name: "STEALTH",
-          ability: skillLevels.dex,
+          ability: "DEX",
           proficient: false,
           expert: false,
         },
         {
           name: "ARCANA",
-          ability: skillLevels.int,
+          ability: "INT",
           proficient: false,
           expert: false,
         },
         {
           name: "HISTORY",
-          ability: skillLevels.int,
+          ability: "INT",
           proficient: false,
           expert: false,
         },
         {
           name: "INVESTIGATION",
-          ability: skillLevels.int,
+          ability: "INT",
           proficient: false,
           expert: false,
         },
         {
           name: "NATURE",
-          ability: skillLevels.int,
+          ability: "INT",
           proficient: false,
           expert: false,
         },
         {
           name: "RELIGION",
-          ability: skillLevels.int,
+          ability: "INT",
           proficient: false,
           expert: false,
         },
         {
           name: "ANIMAL HANDLING",
-          ability: skillLevels.wis,
+          ability: "WIS",
           proficient: false,
           expert: false,
         },
         {
           name: "INSIGHT",
-          ability: skillLevels.wis,
+          ability: "WIS",
           proficient: false,
           expert: false,
         },
         {
           name: "MEDICINE",
-          ability: skillLevels.wis,
+          ability: "WIS",
           proficient: false,
           expert: false,
         },
         {
           name: "PERCEPTION",
-          ability: skillLevels.wis,
+          ability: "WIS",
           proficient: false,
           expert: false,
         },
         {
           name: "SURVIVAL",
-          ability: skillLevels.wis,
+          ability: "WIS",
           proficient: false,
           expert: false,
         },
         {
           name: "DECEPTION",
-          ability: skillLevels.cha,
+          ability: "CHA",
           proficient: false,
           expert: false,
         },
         {
           name: "INTIMIDATION",
-          ability: skillLevels.cha,
+          ability: "CHA",
           proficient: false,
           expert: false,
         },
         {
           name: "PERFORMANCE",
-          ability: skillLevels.cha,
+          ability: "CHA",
           proficient: false,
           expert: false,
         },
         {
           name: "PERSUASION",
-          ability: skillLevels.cha,
+          ability: "CHA",
           proficient: false,
           expert: false,
         },

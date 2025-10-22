@@ -8,10 +8,10 @@ import { DiceBar } from "../components/characterSite/DiceBar.jsx";
 import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
+    
     let characterInfo = store.characterInfo
 
-    // store.characterInfo.details.name !== "Name" && getCharacterSkills();
-
+    const [characterName, setCharacterName] = useState(store.characterInfo.details.name)
     const [charactersFromAPI, setCharactersFromAPI] = useState([]);
     
     // GET characters from API and save them to a store.js variable
@@ -27,22 +27,24 @@ export const Character = () => {
         console.log("Characters in store.js:", store.characters)
     };
 
-    useEffect(() => {
-        console.log("characters saved from GET into useState: ", charactersFromAPI)
-        getCharacters();
-    }, [])
-
     // GET character skill levels from API based on current character name in store.characterInfo
     const getCharacterSkills = async () => {
         const resp = await fetch(store.apiURL + "/monsters/" + { characterName });
         const data = await resp.json();
-        skillLevels.str = data.strength;
-        skillLevels.dex = data.dexterity;
-        skillLevels.con = data.constitution;
-        skillLevels.int = data.intelligence;
-        skillLevels.wis = data.wisdom;
-        skillLevels.cha = data.charisma;
+        store.skillLevels.str = data.strength;
+        store.skillLevels.dex = data.dexterity;
+        store.skillLevels.con = data.constitution;
+        store.skillLevels.int = data.intelligence;
+        store.skillLevels.wis = data.wisdom;
+        store.skillLevels.cha = data.charisma;
     };
+
+    useEffect(() => {
+        console.log("characters saved from GET into useState: ", charactersFromAPI)
+        getCharacters();
+        setCharacterName(store.characterInfo.details.name);
+        characterName !== "Name" && getCharacterSkills();
+    }, [])
 
     return (
         <div className="text-white my-5 row">

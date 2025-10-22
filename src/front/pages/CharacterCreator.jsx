@@ -5,7 +5,6 @@ import { NameSelector } from "../components/characterCreation/NameSelector.jsx";
 import { RaceSelector } from "../components/characterCreation/RaceSelector.jsx";
 import { ClassSelector } from "../components/characterCreation/ClassSelector.jsx";
 import { SubclassSelector } from "../components/characterCreation/SubclassSelector.jsx";
-import { skillLevels } from "../store.js"
 import "../../styles/characterCreator.css";
 
 export const CharacterCreator = () => {
