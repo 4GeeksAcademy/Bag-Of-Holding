@@ -5,15 +5,16 @@ import { CharacterStatsBlock } from "../components/characterSite/CharacterStatsB
 import { SkillsTable } from "../components/characterSite/SkillsTable.jsx";
 import { ConsumablesTable } from "../components/characterSite/ConsumablesTable.jsx";
 import { DiceBar } from "../components/characterSite/DiceBar.jsx";
+import { skillLevels } from "../store.js"
 import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
-    
-    let characterInfo = store.characterInfo
+
+    const characterInfo = store.characterInfo
 
     const [characterName, setCharacterName] = useState(store.characterInfo.details.name)
     const [charactersFromAPI, setCharactersFromAPI] = useState([]);
-    
+
     // GET characters from API and save them to a store.js variable
     const getCharacters = async () => {
         const resp = await fetch(store.apiURL + "/monsters");
@@ -29,7 +30,7 @@ export const Character = () => {
 
     // GET character skill levels from API based on current character name in store.characterInfo
     const getCharacterSkills = async () => {
-        const resp = await fetch(store.apiURL + "/monsters/" + { characterName });
+        const resp = await fetch(`${store.apiURL}/monsters/${characterName}`);
         const data = await resp.json();
         store.skillLevels.str = data.strength;
         store.skillLevels.dex = data.dexterity;

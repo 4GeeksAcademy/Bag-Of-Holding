@@ -1,19 +1,12 @@
+export let skillLevels = {str: 0, dex: 0, con: 0, int: 0, wis: 0, cha: 0, loading: true};
+
 export const initialStore = () => {
   // Object that stores values for the various skills
-  const skillLevels = {
-    str: 533,
-    dex: 745,
-    con: 423,
-    int: 228,
-    wis: 900,
-    cha: 177,
-    loading: true,
-  };
 
   return {
     characterInfo: {
       details: {
-        name: "Name",
+        name: "badger",
         race: "Race",
         characterClass: "Class",
         subclass: "Subclass",
@@ -205,6 +198,7 @@ export const initialStore = () => {
     subclasses: [],
     spells: [],
     characters: [], // Array to store list of all characters
+    skillLevels: skillLevels,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
