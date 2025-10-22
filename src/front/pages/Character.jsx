@@ -7,28 +7,8 @@ import { ConsumablesTable } from "../components/characterSite/ConsumablesTable.j
 import { DiceBar } from "../components/characterSite/DiceBar.jsx";
 import "../../styles/characterSite.css";
 export const Character = () => {
-    const { store, dispatch } = useGlobalReducer()
+    const { store } = useGlobalReducer()
     let characterInfo = store.characterInfo
-
-    const [charactersFromAPI, setCharactersFromAPI] = useState([]);
-
-    // GET characters from API and save them to a store.js variable
-    const getCharacters = async () => {
-        const resp = await fetch(store.apiURL + "/monsters");
-        const data = await resp.json();
-        setCharactersFromAPI(data.results);
-        store.characters.length == 0 &&
-            dispatch({
-                type: "set_characters",
-                payload: [charactersFromAPI]
-            })
-        console.log("Characters in store.js:", store.characters)
-    };
-
-    useEffect(() => {
-        console.log("characters saved from GET into useState: ", charactersFromAPI)
-        getCharacters();
-    }, [])
 
     return (
         <div className="text-white my-5 row">

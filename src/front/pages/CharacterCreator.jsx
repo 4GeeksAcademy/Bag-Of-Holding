@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { NameSelector } from "../components/characterCreation/NameSelector.jsx";
@@ -17,6 +17,26 @@ export const CharacterCreator = () => {
     const [characterSubClass, setCharacterSubClass] = useState("")
     const navigate = useNavigate();
     const [showAlert, setsShowAlert] = useState(false)
+
+    const [charactersFromAPI, setCharactersFromAPI] = useState([]);
+    
+    // GET characters from API and save them to a store.js variable
+    const getCharacters = async () => {
+        const resp = await fetch(store.apiURL + "/monsters");
+        const data = await resp.json();
+        setCharactersFromAPI(data.results);
+        store.characters.length == 0 &&
+            dispatch({
+                type: "set_characters",
+                payload: [charactersFromAPI]
+            })
+        console.log("Characters in store.js:", store.characters)
+    };
+
+    useEffect(() => {
+        console.log("characters saved from GET into useState: ", charactersFromAPI)
+        getCharacters();
+    }, [])
 
     // GET character skill levels from API based on current character name in store.characterInfo
     const getCharacterSkills = async () => {
