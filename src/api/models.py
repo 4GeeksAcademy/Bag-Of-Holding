@@ -1,103 +1,108 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean, JSON, ForeignKey, Table, Integer
+from sqlalchemy import String, Boolean, JSON, Integer, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 db = SQLAlchemy()
 
+# Tables
+character_skills = Table(
+    "character_skills",
+    db.Model.metadata,
+    db.Column("character_id", Integer, ForeignKey("character.id"), primary_key=True),
+    db.Column("skill_id", Integer, ForeignKey("skills.id"), primary_key=True)
+)
+
+character_consumables = Table(
+    "character_consumables",
+    db.Model.metadata,
+    db.Column("character_id", Integer, ForeignKey("character.id"), primary_key=True),
+    db.Column("consumable_id", Integer, ForeignKey("consumable.id"), primary_key=True)
+)
+
+# Models
 class User(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
-    list_of_characters: Mapped[list] = mapped_column(JSON, nullable=False)
+
+    characters = relationship("Character", back_populates="user")
 
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
-            "list_of_characters": self.list_of_characters
+            "characters": [char.serialize() for char in self.characters]
         }
-
-
-class Race(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    characters = relationship("Character", back_populates="race")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name}
-
-
-class charClass(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    characters = relationship("Character", back_populates="char_class")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name}
-
-
-class subClass(db.Model):
-    id:Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    characters = relationship("Character", back_populates="sub_class")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name}
 
 
 class Skills(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(75), nullable=False)
-    modifier: Mapped[str] = mapped_column(String(5), nullable=False)
+    ability: Mapped[str] = mapped_column(String(15), nullable=False)
+    proficient: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    expert: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
-    characters = relationship("Character", back_populates="skills")
-
-    def serialize(self):
-        return {
-            "id": self.id, 
-            "name": self.name, 
-            "modifier": self.modifier}
-
-class Character(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(25), nullable=False)
-    race_id: Mapped[int] = mapped_column(ForeignKey("race.id"), nullable=False)
-    char_class_id: Mapped[int] = mapped_column(ForeignKey("char_class.id"), nullable=False)
-    sub_class_id: Mapped[int] = mapped_column(ForeignKey("sub_class.id"), nullable=False)
-
-    race = relationship("Race", back_populates="characters")
-    char_class = relationship("charClass", back_populates="characters")
-    sub_class = relationship("subClass", back_populates="characters")
-    skills = relationship("Skills", back_populates="characters")
+    characters = relationship(
+        "Character",
+        secondary="character_skills",
+        back_populates="skills"
+    )
 
     def serialize(self):
         return {
             "id": self.id,
             "name": self.name,
-            "race": self.race.serialize() if self.race else None,
-            "char_class": self.char_class.serialize() if self.char_class else None,
-            "sub_class": self.sub_class.serialize() if self.sub_class else None,
-            "skills": [skill.serialize() for skill in self.skills]
+            "ability": self.ability,
+            "proficient": self.proficient,
+            "expert": self.expert
         }
-    
 
-    # Models for inventory
+
+class Consumable(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(25), nullable=False)
+    amount: Mapped[int] = mapped_column(Integer, nullable=False)
+
+    characters = relationship(
+        "Character",
+        secondary="character_consumables",
+        back_populates="consumables"
+    )
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "amount": self.amount
+        }
+
+
+class Stat(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(25), nullable=False)
+    value: Mapped[int] = mapped_column(Integer, nullable=False)
+    proficient: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
+    character_id: Mapped[int] = mapped_column(ForeignKey("character.id"))
+    character = relationship("Character", back_populates="stats")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "value": self.value,
+            "proficient": self.proficient
+        }
+
+
 class Item(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
-    type: Mapped[str] = mapped_column(String(50), nullable=False)  
+    type: Mapped[str] = mapped_column(String(50), nullable=False)
     description: Mapped[str] = mapped_column(String(255), nullable=True)
-    stats: Mapped[dict] = mapped_column(JSON, nullable=True)  
+    stats: Mapped[dict] = mapped_column(JSON, nullable=True)
 
-   
-    equipped_by = relationship("EquippedItem", back_populates="item")
-    in_bag_of = relationship("BagItem", back_populates="item")
+    inventory_links = relationship("CharacterItem", back_populates="item")
 
     def serialize(self):
         return {
@@ -105,5 +110,80 @@ class Item(db.Model):
             "name": self.name,
             "type": self.type,
             "description": self.description,
-            "stats": self.stats,   
+            "stats": self.stats
+        }
+
+
+
+class CharacterItem(db.Model):
+    __tablename__ = "character_inventory"
+    character_id: Mapped[int] = mapped_column(ForeignKey("character.id"), primary_key=True)
+    item_id: Mapped[int] = mapped_column(ForeignKey("item.id"), primary_key=True)
+    quantity: Mapped[int] = mapped_column(Integer, default=1)
+    equipped: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    character = relationship("Character", back_populates="inventory_links")
+    item = relationship("Item", back_populates="inventory_links")
+
+
+class Character(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
+    name: Mapped[str] = mapped_column(String(25), nullable=False)
+    race: Mapped[str] = mapped_column(String(15), nullable=False)
+    char_class: Mapped[str] = mapped_column(String(20), nullable=False)
+    sub_class: Mapped[str] = mapped_column(String(20), nullable=False)
+    level: Mapped[int] = mapped_column(Integer, nullable=False)
+    hp: Mapped[int] = mapped_column(Integer, nullable=False)
+    armor_class: Mapped[int] = mapped_column(Integer, nullable=False)
+    hit_dice: Mapped[str] = mapped_column(String(5), nullable=False)
+    speed: Mapped[int] = mapped_column(Integer, nullable=False)
+    initiative: Mapped[int] = mapped_column(Integer, nullable=False)
+    proficiency_bonus: Mapped[int] = mapped_column(Integer, nullable=False)
+
+    user = relationship("User", back_populates="characters")
+
+    skills = relationship(
+        "Skill",
+        secondary="character_skills",
+        back_populates="characters"
+    )
+
+    consumables = relationship(
+        "Consumable",
+        secondary="character_consumables",
+        back_populates="characters"
+    )
+
+    stats = relationship("Stat", back_populates="character", cascade="all, delete-orphan")
+    inventory_links = relationship("CharacterItem", back_populates="character", cascade="all, delete-orphan")
+
+    @property
+    def inventory(self):
+        return [link.item for link in self.inventory_links]
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "race": self.race,
+            "char_class": self.char_class,
+            "sub_class": self.sub_class,
+            "level": self.level,
+            "hp": self.hp,
+            "armor_class": self.armor_class,
+            "hit_dice": self.hit_dice,
+            "speed": self.speed,
+            "initiative": self.initiative,
+            "proficiency_bonus": self.proficiency_bonus,
+            "skills": [s.serialize() for s in self.skills],
+            "consumables": [c.serialize() for c in self.consumables],
+            "stats": [s.serialize() for s in self.stats],
+            "inventory": [
+                {
+                    **link.item.serialize(),
+                    "quantity": link.quantity,
+                    "equipped": link.equipped
+                } for link in self.inventory_links
+            ]
         }
