@@ -5,6 +5,7 @@ import { NameSelector } from "../components/characterCreation/NameSelector.jsx";
 import { RaceSelector } from "../components/characterCreation/RaceSelector.jsx";
 import { ClassSelector } from "../components/characterCreation/ClassSelector.jsx";
 import { SubclassSelector } from "../components/characterCreation/SubclassSelector.jsx";
+import { skillLevels } from "../store.js"
 import "../../styles/characterCreator.css";
 
 export const CharacterCreator = () => {
@@ -14,28 +15,19 @@ export const CharacterCreator = () => {
     const [characterRace, setCharacterRace] = useState("")
     const [characterClass, setCharacterClass] = useState("")
     const [characterSubClass, setCharacterSubClass] = useState("")
-
-    const [skillName, setSkillName] = useState("")
-    const [skillAbility, setSkillAbility] = useState("")
-    const [skillProficiency, setSkillProficiency] = useState("")
-    const [skillExpertise, setSkillExpertise] = useState("")
-
     const navigate = useNavigate();
     const [showAlert, setsShowAlert] = useState(false)
 
-    // GET character info from API based on current character name in store.characterInfo
-    const getCharacterInfo = async () => {
+    // GET character skill levels from API based on current character name in store.characterInfo
+    const getCharacterSkills = async () => {
         const resp = await fetch(store.apiURL + "/monsters/" + { characterName });
         const data = await resp.json();
-            dispatch({
-                type: "set_skills",
-                payload: {
-                    name: skillName,
-                    ability: skillAbility,
-                    proficient: skillProficiency,
-                    expert: skillExpertise
-                }
-            });
+        skillLevels.str = data.strength;
+        skillLevels.dex = data.dexterity;
+        skillLevels.con = data.constitution;
+        skillLevels.int = data.intelligence;
+        skillLevels.wis = data.wisdom;
+        skillLevels.cha = data.charisma;
     };
 
     // Save all character information to store after hitting submit
@@ -47,7 +39,7 @@ export const CharacterCreator = () => {
                 payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
             });
             store.characterInfo.details.name !== "Name" && setCharacterName(store.characterInfo.details.name)
-            store.characterInfo.details.name !== "Name" && getCharacterInfo();
+            store.characterInfo.details.name !== "Name" && getCharacterSkills();
             navigate("/character");
         }
         else {

@@ -1,7 +1,8 @@
-let skillLevels = {str: 0, dex: 0, int: 0, wis: 0, cha: 0} // Object that stores values for the various skills
+export let skillLevels = {str: 0, dex: 0, con:0, int: 0, wis: 0, cha: 0, loading: true} // Object that stores values for the various skills
 
 export const initialStore = () => {
   return {
+    strValue: 0,
     characterInfo: {
       details: {
         name: "Name",
