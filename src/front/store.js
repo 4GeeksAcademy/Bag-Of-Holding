@@ -1,3 +1,5 @@
+let skillLevels = {str: 0, dex: 0, int: 0, wis: 0, cha: 0} // Object that stores values for the various skills
+
 export const initialStore = () => {
   return {
     characterInfo: {
@@ -15,42 +17,42 @@ export const initialStore = () => {
       stats: [
         {
           name: "STR",
-          value: 12,
+          value: skillLevels.str,
           check: 1,
           saving: 4,
           proficient: true,
         },
         {
           name: "DEX",
-          value: 14,
+          value: skillLevels.dex,
           check: 2,
           saving: 2,
           proficient: false,
         },
         {
           name: "CON",
-          value: 18,
+          value: skillLevels.con,
           check: 4,
           saving: 7,
           proficient: false,
         },
         {
           name: "INT",
-          value: 10,
+          value: skillLevels.int,
           check: 0,
           saving: 3,
           proficient: false,
         },
         {
           name: "WIS",
-          value: 18,
+          value: skillLevels.wis,
           check: 1,
           saving: 7,
           proficient: false,
         },
         {
           name: "CHA",
-          value: 10,
+          value: skillLevels.cha,
           check: 0,
           saving: 0,
           proficient: false,
@@ -59,109 +61,109 @@ export const initialStore = () => {
       skills: [
         {
           name: "ATHLETICS",
-          ability: "STR",
+          ability: skillLevels.str,
           proficient: false,
           expert: false,
         },
         {
           name: "ACROBATICS",
-          ability: "DEX",
+          ability: skillLevels.dex,
           proficient: false,
           expert: false,
         },
         {
           name: "SLEIGHT OF HAND",
-          ability: "DEX",
+          ability: skillLevels.dex,
           proficient: false,
           expert: false,
         },
         {
           name: "STEALTH",
-          ability: "DEX",
+          ability: skillLevels.dex,
           proficient: false,
           expert: false,
         },
         {
           name: "ARCANA",
-          ability: "INT",
+          ability: skillLevels.int,
           proficient: false,
           expert: false,
         },
         {
           name: "HISTORY",
-          ability: "INT",
+          ability: skillLevels.int,
           proficient: false,
           expert: false,
         },
         {
           name: "INVESTIGATION",
-          ability: "INT",
+          ability: skillLevels.int,
           proficient: false,
           expert: false,
         },
         {
           name: "NATURE",
-          ability: "INT",
+          ability: skillLevels.int,
           proficient: false,
           expert: false,
         },
         {
           name: "RELIGION",
-          ability: "INT",
+          ability: skillLevels.int,
           proficient: false,
           expert: false,
         },
         {
           name: "ANIMAL HANDLING",
-          ability: "WIS",
+          ability: skillLevels.wis,
           proficient: false,
           expert: false,
         },
         {
           name: "INSIGHT",
-          ability: "WIS",
+          ability: skillLevels.wis,
           proficient: false,
           expert: false,
         },
         {
           name: "MEDICINE",
-          ability: "WIS",
+          ability: skillLevels.wis,
           proficient: false,
           expert: false,
         },
         {
           name: "PERCEPTION",
-          ability: "WIS",
+          ability: skillLevels.wis,
           proficient: false,
           expert: false,
         },
         {
           name: "SURVIVAL",
-          ability: "WIS",
+          ability: skillLevels.wis,
           proficient: false,
           expert: false,
         },
         {
           name: "DECEPTION",
-          ability: "CHA",
+          ability: skillLevels.cha,
           proficient: false,
           expert: false,
         },
         {
           name: "INTIMIDATION",
-          ability: "CHA",
+          ability: skillLevels.cha,
           proficient: false,
           expert: false,
         },
         {
           name: "PERFORMANCE",
-          ability: "CHA",
+          ability: skillLevels.cha,
           proficient: false,
           expert: false,
         },
         {
           name: "PERSUASION",
-          ability: "CHA",
+          ability: skillLevels.cha,
           proficient: false,
           expert: false,
         },
@@ -194,7 +196,6 @@ export const initialStore = () => {
     subclasses: [],
     spells: [],
     characters: [], // Array to store list of all characters
-    skillLevels: {str: 0, dex: 0, int: 0, wis: 0, cha: 0}, // Object that stores values for the various skills
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
