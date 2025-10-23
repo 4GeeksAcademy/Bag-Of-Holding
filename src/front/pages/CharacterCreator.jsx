@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { NameSelector } from "../components/characterCreation/NameSelector.jsx";
@@ -25,6 +25,7 @@ export const CharacterCreator = () => {
                 type: "save_character",
                 payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
             });
+            store.characterInfo.details.name !== "Name" && setCharacterName(store.characterInfo.details.name)
             navigate("/character");
         }
         else {

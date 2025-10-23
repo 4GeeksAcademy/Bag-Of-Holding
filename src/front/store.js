@@ -1,4 +1,8 @@
+export let skillLevels = {str: 0, dex: 0, con: 0, int: 0, wis: 0, cha: 0, loading: true};
+
 export const initialStore = () => {
+  // Object that stores values for the various skills
+
   return {
     characterInfo: {
       details: {
@@ -15,42 +19,42 @@ export const initialStore = () => {
       stats: [
         {
           name: "STR",
-          value: 12,
+          value: () => skillLevels.str,
           check: 1,
           saving: 4,
           proficient: true,
         },
         {
           name: "DEX",
-          value: 14,
+          value: () => skillLevels.dex,
           check: 2,
           saving: 2,
           proficient: false,
         },
         {
           name: "CON",
-          value: 18,
+          value: () => skillLevels.con,
           check: 4,
           saving: 7,
           proficient: false,
         },
         {
           name: "INT",
-          value: 10,
+          value: () => skillLevels.int,
           check: 0,
           saving: 3,
           proficient: false,
         },
         {
           name: "WIS",
-          value: 18,
+          value: () => skillLevels.wis,
           check: 1,
           saving: 7,
           proficient: false,
         },
         {
           name: "CHA",
-          value: 10,
+          value: () => skillLevels.cha,
           check: 0,
           saving: 0,
           proficient: false,
@@ -193,6 +197,8 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
+    apiCharacters: [], // Array to store list of all characters
+    skillLevels: skillLevels,
     user: null,
   inventoryList: [],
   bagItems: [],
@@ -228,6 +234,11 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         spells: action.payload,
+      };
+    case "set_characters":
+      return {
+        ...store,
+        apiCharacters: action.payload,
       };
     case "save_character":
       const { name, race, characterClass, subclass } = action.payload;

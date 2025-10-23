@@ -9,7 +9,7 @@ export const CharacterStatsBlock = (props) => {
                         ? props.stats.map((stat, index) => {
                             return (
                                 <div className="col-2" key={index}>
-                                    <StatBlock name={stat.name} value={stat.value} check={stat.check} saving={stat.saving} />
+                                    <StatBlock name={stat.name} value={typeof stat.value === 'function' ? stat.value() : stat.value} check={stat.check} saving={stat.saving} />
                                 </div>
                             )
                         })
