@@ -44,8 +44,9 @@ export const Character = () => {
         console.log("characters saved from GET into useState: ", charactersFromAPI)
         getCharacters();
         setCharacterName(store.characterInfo.details.name);
-        characterName !== "Name" && getCharacterSkills();
-    }, [])
+        // characterName !== "Name" && 
+        getCharacterSkills();
+    }, [characterName, store.apiURL])
 
     return (
         <div className="text-white my-5 row">

@@ -6,7 +6,7 @@ export const initialStore = () => {
   return {
     characterInfo: {
       details: {
-        name: "badger",
+        name: "Name",
         race: "Race",
         characterClass: "Class",
         subclass: "Subclass",
@@ -19,42 +19,42 @@ export const initialStore = () => {
       stats: [
         {
           name: "STR",
-          value: skillLevels.str,
+          value: () => skillLevels.str,
           check: 1,
           saving: 4,
           proficient: true,
         },
         {
           name: "DEX",
-          value: skillLevels.dex,
+          value: () => skillLevels.dex,
           check: 2,
           saving: 2,
           proficient: false,
         },
         {
           name: "CON",
-          value: skillLevels.con,
+          value: () => skillLevels.con,
           check: 4,
           saving: 7,
           proficient: false,
         },
         {
           name: "INT",
-          value: skillLevels.int,
+          value: () => skillLevels.int,
           check: 0,
           saving: 3,
           proficient: false,
         },
         {
           name: "WIS",
-          value: skillLevels.wis,
+          value: () => skillLevels.wis,
           check: 1,
           saving: 7,
           proficient: false,
         },
         {
           name: "CHA",
-          value: skillLevels.cha,
+          value: () => skillLevels.cha,
           check: 0,
           saving: 0,
           proficient: false,
