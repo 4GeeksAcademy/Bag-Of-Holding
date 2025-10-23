@@ -61,7 +61,7 @@ def handle_log_in():
 @api.route('/user', methods=["GET"])
 # @jwt_required()
 def handle_user():
-    # user_email = get_jwt_identity()
+    user_email = get_jwt_identity()
     print("user_email HERE:", user_email)
     user = User.query.filter_by(email = user_email).first()
     resp = {
