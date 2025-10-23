@@ -20,12 +20,12 @@ export const Character = () => {
         const resp = await fetch(store.apiURL + "/monsters");
         const data = await resp.json();
         setCharactersFromAPI(data.results);
-        store.characters.length == 0 &&
+        store.apiCharacters.length == 0 &&
             dispatch({
                 type: "set_characters",
                 payload: [charactersFromAPI]
             })
-        console.log("Characters in store.js:", store.characters)
+        console.log("Characters in store.js:", store.apiCharacters)
     };
 
     // GET character skill levels from API based on current character name in store.characterInfo

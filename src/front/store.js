@@ -197,7 +197,7 @@ export const initialStore = () => {
     classes: [],
     subclasses: [],
     spells: [],
-    characters: [], // Array to store list of all characters
+    apiCharacters: [], // Array to store list of all characters
     skillLevels: skillLevels,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
@@ -231,7 +231,7 @@ export default function storeReducer(store, action = {}) {
     case "set_characters":
       return {
         ...store,
-        characters: action.payload,
+        apiCharacters: action.payload,
       };
     case "save_character":
       const { name, race, characterClass, subclass } = action.payload;
