@@ -1,12 +1,11 @@
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { useState } from "react";
 export const CharacterInfoBlock = (props) => {
-    let details = props.details;
     const { store, dispatch } = useGlobalReducer();
-    const [level, setLevel] = useState(props.details.level);
-    const [hp, setHp] = useState(props.details.hp);
-    const [ac, setAc] = useState(props.details.ac);
-    const [hitDice, setHitDice] = useState(props.details.hitDice);
+    const [level, setLevel] = useState(props.level);
+    const [hp, setHp] = useState(props.hp);
+    const [ac, setAc] = useState(props.ac);
+    const [hitDice, setHitDice] = useState(props.hitDice);
     const updateInfo = () => {
         dispatch({
             type: "update_info",
@@ -27,13 +26,13 @@ export const CharacterInfoBlock = (props) => {
             {/* CHARACTER NAME */}
             <div className="character-info-box m-3">
                 <label htmlFor="name">NAME</label>
-                <h5 id="name">{details.name}</h5>
+                <h5 id="name">{props.name}</h5>
             </div>
 
             {/* CHARACTER RACE */}
             <div className="character-info-box m-3">
                 <label htmlFor="race">RACE</label>
-                <h5 id="race">{details.race}</h5>
+                <h5 id="race">{props.race}</h5>
             </div>
 
             {/* CHARACTER LEVEL */}
@@ -57,13 +56,13 @@ export const CharacterInfoBlock = (props) => {
             {/* CHARACTER CLASS */}
             <div className="character-info-box m-3">
                 <label htmlFor="cClass">CLASS</label>
-                <h5 id="cClass">{details.characterClass}</h5>
+                <h5 id="cClass">{props.characterClass}</h5>
             </div>
 
             {/* CHARACTER SUBCLASS */}
             <div className="character-info-box m-3">
                 <label htmlFor="subClass">SUBCLASS</label>
-                <h5 id="subClass">{details.subclass}</h5>
+                <h5 id="subClass">{props.subclass}</h5>
             </div>
             {/* CHARACTER HP/AC/HITDICE*/}
             <div className="d-flex">

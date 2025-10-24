@@ -1,58 +1,35 @@
 export const initialStore = () => {
   return {
     characterInfo: {
-      details: {
-        name: "Name",
-        race: "Race",
-        characterClass: "Class",
-        subclass: "Subclass",
-        level: 1,
-        hp: 0,
-        ac: 0,
-        hitDice: "",
-        img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg",
-      },
       stats: [
         {
           name: "STR",
           value: 12,
-          check: 1,
-          saving: 4,
           proficient: true,
         },
         {
           name: "DEX",
           value: 14,
-          check: 2,
-          saving: 2,
           proficient: false,
         },
         {
           name: "CON",
           value: 18,
-          check: 4,
-          saving: 7,
           proficient: false,
         },
         {
           name: "INT",
           value: 10,
-          check: 0,
-          saving: 3,
           proficient: false,
         },
         {
           name: "WIS",
           value: 18,
-          check: 1,
-          saving: 7,
           proficient: false,
         },
         {
           name: "CHA",
           value: 10,
-          check: 0,
-          saving: 0,
           proficient: false,
         },
       ],
@@ -67,12 +44,12 @@ export const initialStore = () => {
           name: "ACROBATICS",
           ability: "DEX",
           proficient: false,
-          expert: false,
+          expert: true,
         },
         {
           name: "SLEIGHT OF HAND",
           ability: "DEX",
-          proficient: false,
+          proficient: true,
           expert: false,
         },
         {
@@ -166,9 +143,18 @@ export const initialStore = () => {
           expert: false,
         },
       ],
-      speed: 0,
-      initiative: 0,
-      proficiency: 0,
+      name: "Name",
+      race: "Race",
+      characterClass: "Class",
+      subclass: "Subclass",
+      level: 1,
+      hp: 0,
+      ac: 0,
+      hitDice: "",
+      img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg",
+      speed: 30,
+      initiative: 1,
+      proficiency: 2,
       consumables: [
         {
           name: "Bardic Inspiration",
@@ -227,12 +213,10 @@ export default function storeReducer(store, action = {}) {
         ...store,
         characterInfo: {
           ...store.characterInfo,
-          details: {
-            name: name,
-            race: race,
-            characterClass: characterClass,
-            subclass: subclass,
-          },
+          name: name,
+          race: race,
+          characterClass: characterClass,
+          subclass: subclass,
         },
       };
     case "save_attributes":
@@ -261,13 +245,10 @@ export default function storeReducer(store, action = {}) {
         ...store,
         characterInfo: {
           ...store.characterInfo,
-          details: {
-            ...store.characterInfo.details,
-            level: level,
-            hp: hp,
-            ac: ac,
-            hitDice: hitDice,
-          },
+          level: level,
+          hp: hp,
+          ac: ac,
+          hitDice: hitDice,
         },
       };
     default:

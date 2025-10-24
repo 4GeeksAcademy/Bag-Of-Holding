@@ -16,7 +16,16 @@ export const Character = () => {
         <div className="text-white my-5 row">
             {/* BLOCK CONTAINING ALL CHARACTER DETAILS */}
             <div className="col-3 info-box rounded m-4">
-                <CharacterInfoBlock details={characterInfo.details}></CharacterInfoBlock>
+                <CharacterInfoBlock
+                    name={characterInfo.name}
+                    race={characterInfo.race}
+                    level={characterInfo.level}
+                    characterClass={characterInfo.characterClass}
+                    subclass={characterInfo.subclass}
+                    hp={characterInfo.hp}
+                    ac={characterInfo.ac}
+                    hitDice={characterInfo.hp}
+                />
             </div>
             <div className="col-6">
                 {/* BLOCK CONTAINING ALL CHARACTER STATS */}
@@ -34,7 +43,7 @@ export const Character = () => {
                         <h3>SKILLS</h3>
                         {
                             characterInfo.skills
-                                ? <SkillsTable skillList={characterInfo.skills}></SkillsTable>
+                                ? <SkillsTable skillList={characterInfo.skills} stats={characterInfo.stats} proficiency={characterInfo.proficiency}></SkillsTable>
                                 : ""
                         }
                     </div>
@@ -48,6 +57,7 @@ export const Character = () => {
             <div className="col-2 info-box rounded m-4 justify-content-center">
                 <DiceBar />
             </div>
+            <button onClick={() => console.log(store.characterInfo)}>Check Store</button>
         </div>
     );
 }; 

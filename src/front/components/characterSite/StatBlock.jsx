@@ -9,7 +9,7 @@ export const StatBlock = (props) => {
     const updateStats = () => {
         const updatedStats = props.stats.map(stat => stat.name === props.name ? { ...stat, value: parseInt(statValue) } : stat);
         dispatch({
-            type: "update_stat",
+            type: "update_stats",
             payload: {
                 stats: updatedStats
             }
