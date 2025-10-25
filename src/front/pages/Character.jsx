@@ -54,7 +54,7 @@ export const Character = () => {
                 </div>
             </div>
             {/* BLOCK CONTAINING ALL DICE */}
-            <div className="col-2 info-box rounded m-4 justify-content-center">
+            <div className="col-2 h-75 info-box rounded m-4 justify-content-center">
                 <DiceBar />
             </div>
             <button onClick={() => console.log(store.characterInfo)}>Check Store</button>

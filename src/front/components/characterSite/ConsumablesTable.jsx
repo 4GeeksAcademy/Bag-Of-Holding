@@ -10,14 +10,19 @@ export const ConsumablesTable = (props) => {
         setConsumables(prevConsumables => {
             // create a shallow copy of the array
             const updated = [...prevConsumables];
-            if (index == consumables.length && newConsumable != ""){
+            // If the element being updated is supposed to be the last (Just added)
+            if (index == consumables.length) {
+                // Check if empty return the same array
+                if (newConsumable == "")
+                    return updated;
+                // Else, add new element
                 updated[index] = { name: newConsumable, amount: newAmount };
             }
+            // If the element being updated is already in the list
             else {
-                // create a new object for the updated item
+                // Simply update it
                 updated[index] = { ...updated[index], amount: newAmount };
             }
-
             return updated;
         });
         updateConsumablesList();
@@ -65,6 +70,7 @@ export const ConsumablesTable = (props) => {
                     }
                 </tbody>
             </table>
+            {/* ADD NEW CONSUMABLE BUTTON */}
             <button
                 className="addConsumableButton"
                 data-bs-toggle="modal"
@@ -73,6 +79,7 @@ export const ConsumablesTable = (props) => {
             >
                 Add
             </button>
+            {/* ADD NEW CONSUMABLE MODAL */}
             <div className="modal fade accent" id="addConsumable" tabindex="-1" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -82,6 +89,7 @@ export const ConsumablesTable = (props) => {
                         </div>
                         <div className="modal-body">
                             <label htmlFor="consumableName">Name your consumable</label>
+                            {/* NEW CONSUMABLE NAME INPUT */}
                             <input className="new-consumable-input" type="text" id="consumableName" name="name" onChange={e => setNewConsumable(e.target.value)} value={newConsumable} />
                         </div>
                         <div className="modal-footer">

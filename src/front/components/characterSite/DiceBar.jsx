@@ -41,7 +41,7 @@ export const DiceBar = () => {
                         <div className="modal-header">
                             <h2 className="modal-title" id="diceRollLabel">{roll.dice}</h2>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body border-bottom rounded">
                             <h1 className="bg-white">{roll.roll}</h1>
                         </div>
                     </div>
