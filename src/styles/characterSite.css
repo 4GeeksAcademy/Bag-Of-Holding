@@ -35,9 +35,10 @@ input:focus {
   text-align: center;
   margin: 5px;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  margin: 0; /* optional: removes leftover spacing */
 }
 
 /* DICE BAR SPECIFIC */
@@ -54,6 +55,55 @@ input::-webkit-inner-spin-button {
   margin: auto;
   width: 50%;
 }
+/* CONSMABLE TABLE SPECIFIC */
+.consumableCount {
+  background-color: transparent;
+  text-align: center;
+  color: #008080;
+  border: none;
+  width: 100%;
+  font-size: larger;
+}
+.addConsumableButton {
+  background-color: whitesmoke;
+  border: 5px solid #008080;
+  color: #008080;
+  margin: 5px;
+  width: 25%;
+}
+.modal-header {
+  background-color: #8c373e;
+  color: whitesmoke;
+  padding: 5%;
+}
+.modal-body {
+  background-color: #bfb699;
+  font-size: larger;
+}
+.modal-footer {
+  background-color: #8c373e;
+  color: whitesmoke;
+  padding: 5%;
+}
+.close-modal-btn {
+  background-color: whitesmoke;
+  border: 5px solid #008080;
+  color: #8c373e;
+  margin: 5px;
+  width: 25%;
+}
+
+.new-consumable-input {
+  background-color: whitesmoke;
+  color: #008080;
+  text-align: center;
+  border: none;
+  width: 100%;
+  font-size: larger;
+}
 table {
   text-align: left;
+  background-color: whitesmoke;
+  border: 5px solid #008080;
+  color: #008080;
 }

@@ -24,7 +24,7 @@ export const StatBlock = (props) => {
             <div className="stat-block-info m-1 p-1">
                 <input
                     type="number"
-                    className="character-info-input"
+                    className="character-info-input no-spinner"
                     onChange={e => setStatValue(e.target.value)}
                     onKeyDown={e => {
                         if (e.key == "Enter") {

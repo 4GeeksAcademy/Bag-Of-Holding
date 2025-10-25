@@ -41,7 +41,7 @@ export const CharacterInfoBlock = (props) => {
                 <input
                     id="level"
                     type="number"
-                    className="character-info-input"
+                    className="character-info-input no-spinner"
                     onChange={e => setLevel(e.target.value)}
                     onKeyDown={e => {
                         if (e.key == "Enter") {
@@ -71,7 +71,7 @@ export const CharacterInfoBlock = (props) => {
                     <input
                         id="hp"
                         type="number"
-                        className="character-info-input"
+                        className="character-info-input no-spinner"
                         onChange={e => setHp(e.target.value)}
                         onKeyDown={e => {
                             if (e.key == "Enter") {
@@ -87,7 +87,7 @@ export const CharacterInfoBlock = (props) => {
                     <input
                         id="ac"
                         type="number"
-                        className="character-info-input"
+                        className="character-info-input no-spinner"
                         onChange={e => setAc(e.target.value)}
                         onKeyDown={e => {
                             if (e.key == "Enter") {

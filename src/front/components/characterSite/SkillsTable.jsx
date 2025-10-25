@@ -18,6 +18,7 @@ export const SkillsTable = (props) => {
     for (let i = 0; i < skills.length; i += 2) {
         rows.push(skills.slice(i, i + 2))
     }
+    
     return (
         <table className="">
             <tbody>

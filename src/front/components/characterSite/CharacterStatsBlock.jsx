@@ -44,7 +44,7 @@ export const CharacterStatsBlock = (props) => {
                     <h4>
                         <input
                             type="number"
-                            className="stat-block-info"
+                            className="stat-block-info no-spinner"
                             onChange={e => setSpeed(e.target.value)}
                             onKeyDown={e => {
                                 if (e.key == "Enter") {
@@ -61,7 +61,7 @@ export const CharacterStatsBlock = (props) => {
                     <h4>
                         <input
                             type="number"
-                            className="stat-block-info"
+                            className="stat-block-info no-spinner"
                             onChange={e => setInitiative(e.target.value)}
                             onKeyDown={e => {
                                 if (e.key == "Enter") {
@@ -78,7 +78,7 @@ export const CharacterStatsBlock = (props) => {
                     <h4>
                         <input
                             type="number"
-                            className="stat-block-info"
+                            className="stat-block-info no-spinner"
                             onChange={e => setProficiency(e.target.value)}
                             onKeyDown={e => {
                                 if (e.key == "Enter") {

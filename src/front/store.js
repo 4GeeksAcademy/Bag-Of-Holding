@@ -158,19 +158,19 @@ export const initialStore = () => {
       consumables: [
         {
           name: "Bardic Inspiration",
-          ammount: 3,
+          amount: 3,
         },
         {
           name: "Second Wind",
-          ammount: 1,
+          amount: 1,
         },
         {
           name: "Luck Points",
-          ammount: 3,
+          amount: 3,
         },
         {
           name: "Auto Crit",
-          ammount: 1,
+          amount: 1,
         },
       ],
     },
@@ -179,12 +179,12 @@ export const initialStore = () => {
     subclasses: [],
     spells: [],
     user: null,
-  inventoryList: [],
-  bagItems: [],
-  selectedCharacter: null,
-  characters: [],
-  loading: false,
-  error: null,
+    inventoryList: [],
+    bagItems: [],
+    selectedCharacter: null,
+    characters: [],
+    loading: false,
+    error: null,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
@@ -237,6 +237,15 @@ export default function storeReducer(store, action = {}) {
           proficiency: proficiency,
         },
       };
+    case "update_consumables":
+      const { consumables } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          consumables: consumables,
+        },
+      };
     case "update_stats":
       const { stats } = action.payload;
       return {
@@ -270,9 +279,7 @@ export default function storeReducer(store, action = {}) {
     case "remove_bag_item":
       return {
         ...state,
-        bagItems: state.bagItems.filter(
-          (item) => item.id !== action.payload
-        ),
+        bagItems: state.bagItems.filter((item) => item.id !== action.payload),
       };
 
     case "update_bag_item":
@@ -283,7 +290,6 @@ export default function storeReducer(store, action = {}) {
         ),
       };
     default:
-      throw Error("unknown action")
+      throw Error("unknown action");
   }
 }
-
