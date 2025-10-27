@@ -1,58 +1,35 @@
 export const initialStore = () => {
   return {
     characterInfo: {
-      details: {
-        name: "Name",
-        race: "Race",
-        characterClass: "Class",
-        subclass: "Subclass",
-        level: 7,
-        hp: 73,
-        ac: 12,
-        hitDice: "3-D8",
-        img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg",
-      },
       stats: [
         {
           name: "STR",
-          value: 12,
-          check: 1,
-          saving: 4,
+          value: 10,
           proficient: true,
         },
         {
           name: "DEX",
-          value: 14,
-          check: 2,
-          saving: 2,
+          value: 10,
           proficient: false,
         },
         {
           name: "CON",
-          value: 18,
-          check: 4,
-          saving: 7,
+          value: 10,
           proficient: false,
         },
         {
           name: "INT",
           value: 10,
-          check: 0,
-          saving: 3,
           proficient: false,
         },
         {
           name: "WIS",
-          value: 18,
-          check: 1,
-          saving: 7,
+          value: 10,
           proficient: false,
         },
         {
           name: "CHA",
           value: 10,
-          check: 0,
-          saving: 0,
           proficient: false,
         },
       ],
@@ -166,40 +143,31 @@ export const initialStore = () => {
           expert: false,
         },
       ],
-      speed: 34,
-      initiative: 2,
-      proficiency: 3,
-      passiveWIS: 30,
-      consumables: [
-        {
-          name: "Bardic Inspiration",
-          ammount: 3,
-        },
-        {
-          name: "Second Wind",
-          ammount: 1,
-        },
-        {
-          name: "Luck Points",
-          ammount: 3,
-        },
-        {
-          name: "Auto Crit",
-          ammount: 1,
-        },
-      ],
+      name: "Name",
+      race: "Race",
+      characterClass: "Class",
+      subclass: "Subclass",
+      level: 1,
+      hp: 0,
+      ac: 0,
+      hitDice: "",
+      img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg",
+      speed: 0,
+      initiative: 0,
+      proficiency: 0,
+      consumables: [],
     },
     races: [],
     classes: [],
     subclasses: [],
     spells: [],
     user: null,
-  inventoryList: [],
-  bagItems: [],
-  selectedCharacter: null,
-  characters: [],
-  loading: false,
-  error: null,
+    inventoryList: [],
+    bagItems: [],
+    selectedCharacter: null,
+    characters: [],
+    loading: false,
+    error: null,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
@@ -235,12 +203,51 @@ export default function storeReducer(store, action = {}) {
         ...store,
         characterInfo: {
           ...store.characterInfo,
-          details: {
-            name: name,
-            race: race,
-            characterClass: characterClass,
-            subclass: subclass,
-          },
+          name: name,
+          race: race,
+          characterClass: characterClass,
+          subclass: subclass,
+        },
+      };
+    case "save_attributes":
+      const { speed, initiative, proficiency } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          speed: speed,
+          initiative: initiative,
+          proficiency: proficiency,
+        },
+      };
+    case "update_consumables":
+      const { consumables } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          consumables: consumables,
+        },
+      };
+    case "update_stats":
+      const { stats } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          stats: stats,
+        },
+      };
+    case "update_info":
+      const { level, hp, ac, hitDice } = action.payload;
+      return {
+        ...store,
+        characterInfo: {
+          ...store.characterInfo,
+          level: level,
+          hp: hp,
+          ac: ac,
+          hitDice: hitDice,
         },
       };
     case "set_inventory":
@@ -255,9 +262,7 @@ export default function storeReducer(store, action = {}) {
     case "remove_bag_item":
       return {
         ...state,
-        bagItems: state.bagItems.filter(
-          (item) => item.id !== action.payload
-        ),
+        bagItems: state.bagItems.filter((item) => item.id !== action.payload),
       };
 
     case "update_bag_item":
@@ -268,7 +273,6 @@ export default function storeReducer(store, action = {}) {
         ),
       };
     default:
-      throw Error("unknown action")
+      throw Error("unknown action");
   }
 }
-

@@ -11,6 +11,12 @@ export const Navbar = () => {
 				<Link to="">
 					<button className="accent btn btn-primary navbar-button">Login</button>
 				</Link>
+				<Link to="/charactercreator">
+					<button className="accent btn btn-primary navbar-button">Character Creator</button>
+				</Link>
+				<Link to="/character">
+					<button className="accent btn btn-primary navbar-button">Character Site</button>
+				</Link>
 			</div>
 		</nav>
 	);

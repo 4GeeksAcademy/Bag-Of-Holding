@@ -16,7 +16,16 @@ export const Character = () => {
         <div className="text-white my-5 row">
             {/* BLOCK CONTAINING ALL CHARACTER DETAILS */}
             <div className="col-3 info-box rounded m-4">
-                <CharacterInfoBlock details={characterInfo.details}></CharacterInfoBlock>
+                <CharacterInfoBlock
+                    name={characterInfo.name}
+                    race={characterInfo.race}
+                    level={characterInfo.level}
+                    characterClass={characterInfo.characterClass}
+                    subclass={characterInfo.subclass}
+                    hp={characterInfo.hp}
+                    ac={characterInfo.ac}
+                    hitDice={characterInfo.hp}
+                />
             </div>
             <div className="col-6">
                 {/* BLOCK CONTAINING ALL CHARACTER STATS */}
@@ -26,9 +35,7 @@ export const Character = () => {
                         speed={characterInfo.speed}
                         initiative={characterInfo.initiative}
                         proficiency={characterInfo.proficiency}
-                        passiveWIS={characterInfo.passiveWIS}
-                    >
-                    </CharacterStatsBlock>
+                    />
                 </div>
                 <div className="d-flex">
                     {/* BLOCK CONTAINING ALL CHARACTER SKILLS */}
@@ -36,7 +43,7 @@ export const Character = () => {
                         <h3>SKILLS</h3>
                         {
                             characterInfo.skills
-                                ? <SkillsTable skillList={characterInfo.skills}></SkillsTable>
+                                ? <SkillsTable skillList={characterInfo.skills} stats={characterInfo.stats} proficiency={characterInfo.proficiency}></SkillsTable>
                                 : ""
                         }
                     </div>
@@ -47,8 +54,8 @@ export const Character = () => {
                 </div>
             </div>
             {/* BLOCK CONTAINING ALL DICE */}
-            <div className="col-2 info-box rounded m-4 justify-content-center">
-                <DiceBar></DiceBar>
+            <div className="col-2 h-75 info-box rounded m-4 justify-content-center">
+                <DiceBar />
             </div>
         </div>
     );
