@@ -4,17 +4,17 @@ export const initialStore = () => {
       stats: [
         {
           name: "STR",
-          value: 12,
+          value: 10,
           proficient: true,
         },
         {
           name: "DEX",
-          value: 14,
+          value: 10,
           proficient: false,
         },
         {
           name: "CON",
-          value: 18,
+          value: 10,
           proficient: false,
         },
         {
@@ -24,7 +24,7 @@ export const initialStore = () => {
         },
         {
           name: "WIS",
-          value: 18,
+          value: 10,
           proficient: false,
         },
         {
@@ -44,12 +44,12 @@ export const initialStore = () => {
           name: "ACROBATICS",
           ability: "DEX",
           proficient: false,
-          expert: true,
+          expert: false,
         },
         {
           name: "SLEIGHT OF HAND",
           ability: "DEX",
-          proficient: true,
+          proficient: false,
           expert: false,
         },
         {
@@ -152,27 +152,10 @@ export const initialStore = () => {
       ac: 0,
       hitDice: "",
       img: "https://i.pinimg.com/236x/aa/00/72/aa0072133c6bb0e1d968052509292a89.jpg",
-      speed: 30,
-      initiative: 1,
-      proficiency: 2,
-      consumables: [
-        {
-          name: "Bardic Inspiration",
-          amount: 3,
-        },
-        {
-          name: "Second Wind",
-          amount: 1,
-        },
-        {
-          name: "Luck Points",
-          amount: 3,
-        },
-        {
-          name: "Auto Crit",
-          amount: 1,
-        },
-      ],
+      speed: 0,
+      initiative: 0,
+      proficiency: 0,
+      consumables: [],
     },
     races: [],
     classes: [],

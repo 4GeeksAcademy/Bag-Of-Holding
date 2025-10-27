@@ -57,7 +57,6 @@ export const Character = () => {
             <div className="col-2 h-75 info-box rounded m-4 justify-content-center">
                 <DiceBar />
             </div>
-            <button onClick={() => console.log(store.characterInfo)}>Check Store</button>
         </div>
     );
 }; 
