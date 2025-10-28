@@ -4,22 +4,24 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+black = "*"
+pytest = "*"
 
 [packages]
-flask = "*"
 flask-sqlalchemy = "*"
-flask-migrate = "*"
-flask-swagger = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 flask-cors = "*"
 gunicorn = "*"
 cloudinary = "*"
-flask-admin = "*"
 typing-extensions = "*"
-flask-jwt-extended = "==4.6.0"
 wtforms = "==3.1.2"
 sqlalchemy = "*"
+flask = "*"
+flask-migrate = "*"
+flask-swagger = "*"
+flask-jwt-extended = "*"
+flask-admin = "==1.6.1"
 
 [requires]
 python_version = "3.13"

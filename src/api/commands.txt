@@ -1,0 +1,18 @@
+python3 -m ensurepip --upgrade
+which python3
+pip install --user pipenv
+pip3 install --upgrade pip
+echo 'export PATH="$HOME/Library/Python/3.13/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+pipenv --version
+pipenv, version 2025.0.4
+echo 'export PIPENV_VENV_IN_PROJECT=1' >> ~/.zshrc && source ~/.zshrc
+pipenv --python 3.13
+pipenv install flask requests
+pipenv install --dev black pytest
+pipenv shell
+pipenv uninstall requests
+pipenv lock
+ls -l app.py
+pipenv install flask flask-migrate flask-swagger flask-jwt-extended
+python app.py
