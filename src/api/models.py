@@ -144,7 +144,7 @@ class Character(db.Model):
     user = relationship("User", back_populates="characters")
 
     skills = relationship(
-        "Skill",
+        "Skills",
         secondary="character_skills",
         back_populates="characters"
     )
