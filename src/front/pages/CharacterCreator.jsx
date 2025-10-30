@@ -22,7 +22,7 @@ export const CharacterCreator = () => {
         if (characterName && characterRace && characterClass && characterSubClass) {
             console.log(characterName, characterRace, characterClass, characterSubClass)
             dispatch({
-                type: "save_character",
+                type: "save_character_info",
                 payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
             });
             navigate("/character");

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Character
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -77,3 +77,29 @@ def handle_characters():
         "characters": user.characters
     }
     return jsonify(response_body), 200
+
+
+@api.route('/character', methods=['POST'])
+def add_characters():
+    characterInfo = request.json
+    keys = ["user_id", "name", "race"]
+    if "user_id" in characterInfo:
+        new_character = Character(
+            user_id=characterInfo["user_id"],
+            name=characterInfo["name"],
+            race=characterInfo["race"],
+            characterClass=characterInfo["characterClass"],
+            subClass=characterInfo["subclass"],
+            level=characterInfo["level"],
+            hp=characterInfo["hp"],
+            ac=characterInfo["ac"],
+            hitDice=characterInfo["hitDice"],
+            speed=characterInfo["speed"],
+            initiative=characterInfo["initiative"],
+            proficiency=characterInfo["proficiency"],
+        )
+        db.session.add(new_character)
+        db.session.commit()
+        return {"New Character added": new_character.serialize()}, 201
+    else:
+        return {"Error": "Wrong information submitted"}, 400

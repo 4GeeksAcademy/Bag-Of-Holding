@@ -1,6 +1,7 @@
 export const initialStore = () => {
   return {
     characterInfo: {
+      user_id: 2,
       stats: [
         {
           name: "STR",
@@ -197,7 +198,7 @@ export default function storeReducer(store, action = {}) {
         ...store,
         spells: action.payload,
       };
-    case "save_character":
+    case "save_character_info":
       const { name, race, characterClass, subclass } = action.payload;
       return {
         ...store,

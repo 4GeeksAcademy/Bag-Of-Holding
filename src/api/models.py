@@ -8,21 +8,27 @@ db = SQLAlchemy()
 character_skills = Table(
     "character_skills",
     db.Model.metadata,
-    db.Column("character_id", Integer, ForeignKey("character.id"), primary_key=True),
+    db.Column("character_id", Integer, ForeignKey(
+        "character.id"), primary_key=True),
     db.Column("skill_id", Integer, ForeignKey("skills.id"), primary_key=True)
 )
 
 character_consumables = Table(
     "character_consumables",
     db.Model.metadata,
-    db.Column("character_id", Integer, ForeignKey("character.id"), primary_key=True),
-    db.Column("consumable_id", Integer, ForeignKey("consumable.id"), primary_key=True)
+    db.Column("character_id", Integer, ForeignKey(
+        "character.id"), primary_key=True),
+    db.Column("consumable_id", Integer, ForeignKey(
+        "consumable.id"), primary_key=True)
 )
 
 # Models
+
+
 class User(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
+    email: Mapped[str] = mapped_column(
+        String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
 
     characters = relationship("Character", back_populates="user")
@@ -39,8 +45,10 @@ class Skills(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(75), nullable=False)
     ability: Mapped[str] = mapped_column(String(15), nullable=False)
-    proficient: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    expert: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    proficient: Mapped[bool] = mapped_column(
+        Boolean, default=False, nullable=False)
+    expert: Mapped[bool] = mapped_column(
+        Boolean, default=False, nullable=False)
 
     characters = relationship(
         "Character",
@@ -81,7 +89,8 @@ class Stat(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(25), nullable=False)
     value: Mapped[int] = mapped_column(Integer, nullable=False)
-    proficient: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    proficient: Mapped[bool] = mapped_column(
+        Boolean, default=False, nullable=False)
 
     character_id: Mapped[int] = mapped_column(ForeignKey("character.id"))
     character = relationship("Character", back_populates="stats")
@@ -114,11 +123,12 @@ class Item(db.Model):
         }
 
 
-
 class CharacterItem(db.Model):
     __tablename__ = "character_inventory"
-    character_id: Mapped[int] = mapped_column(ForeignKey("character.id"), primary_key=True)
-    item_id: Mapped[int] = mapped_column(ForeignKey("item.id"), primary_key=True)
+    character_id: Mapped[int] = mapped_column(
+        ForeignKey("character.id"), primary_key=True)
+    item_id: Mapped[int] = mapped_column(
+        ForeignKey("item.id"), primary_key=True)
     quantity: Mapped[int] = mapped_column(Integer, default=1)
     equipped: Mapped[bool] = mapped_column(Boolean, default=False)
 
@@ -131,15 +141,15 @@ class Character(db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     name: Mapped[str] = mapped_column(String(25), nullable=False)
     race: Mapped[str] = mapped_column(String(15), nullable=False)
-    char_class: Mapped[str] = mapped_column(String(20), nullable=False)
-    sub_class: Mapped[str] = mapped_column(String(20), nullable=False)
+    characterClass: Mapped[str] = mapped_column(String(20), nullable=False)
+    subClass: Mapped[str] = mapped_column(String(20), nullable=False)
     level: Mapped[int] = mapped_column(Integer, nullable=False)
     hp: Mapped[int] = mapped_column(Integer, nullable=False)
-    armor_class: Mapped[int] = mapped_column(Integer, nullable=False)
-    hit_dice: Mapped[str] = mapped_column(String(5), nullable=False)
+    ac: Mapped[int] = mapped_column(Integer, nullable=False)
+    hitDice: Mapped[str] = mapped_column(String(5), nullable=False)
     speed: Mapped[int] = mapped_column(Integer, nullable=False)
     initiative: Mapped[int] = mapped_column(Integer, nullable=False)
-    proficiency_bonus: Mapped[int] = mapped_column(Integer, nullable=False)
+    proficiency: Mapped[int] = mapped_column(Integer, nullable=False)
 
     user = relationship("User", back_populates="characters")
 
@@ -155,8 +165,10 @@ class Character(db.Model):
         back_populates="characters"
     )
 
-    stats = relationship("Stat", back_populates="character", cascade="all, delete-orphan")
-    inventory_links = relationship("CharacterItem", back_populates="character", cascade="all, delete-orphan")
+    stats = relationship("Stat", back_populates="character",
+                         cascade="all, delete-orphan")
+    inventory_links = relationship(
+        "CharacterItem", back_populates="character", cascade="all, delete-orphan")
 
     @property
     def inventory(self):
@@ -164,18 +176,18 @@ class Character(db.Model):
 
     def serialize(self):
         return {
-            "id": self.id,
+            "user_id": self.id,
             "name": self.name,
             "race": self.race,
-            "char_class": self.char_class,
-            "sub_class": self.sub_class,
+            "characterClass": self.characterClass,
+            "subClass": self.subClass,
             "level": self.level,
             "hp": self.hp,
-            "armor_class": self.armor_class,
-            "hit_dice": self.hit_dice,
+            "ac": self.ac,
+            "hitDice": self.hitDice,
             "speed": self.speed,
             "initiative": self.initiative,
-            "proficiency_bonus": self.proficiency_bonus,
+            "proficiency": self.proficiency,
             "skills": [s.serialize() for s in self.skills],
             "consumables": [c.serialize() for c in self.consumables],
             "stats": [s.serialize() for s in self.stats],

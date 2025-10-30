@@ -8,7 +8,20 @@ import { DiceBar } from "../components/characterSite/DiceBar.jsx";
 import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     let characterInfo = store.characterInfo
+
+    const saveCharacter = async (e) => {
+        console.log(characterInfo)
+        const response = await fetch(backendUrl + "api/character", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(characterInfo),
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+    };
     useEffect(() => {
     }, [])
 
@@ -57,6 +70,7 @@ export const Character = () => {
             <div className="col-2 h-75 info-box rounded m-4 justify-content-center">
                 <DiceBar />
             </div>
+            <button onClick={saveCharacter}>Save Character</button>
         </div>
     );
 }; 
