@@ -143,13 +143,13 @@ class Character(db.Model):
     race: Mapped[str] = mapped_column(String(15), nullable=False)
     characterClass: Mapped[str] = mapped_column(String(20), nullable=False)
     subClass: Mapped[str] = mapped_column(String(20), nullable=False)
-    level: Mapped[int] = mapped_column(Integer, nullable=False)
-    hp: Mapped[int] = mapped_column(Integer, nullable=False)
-    ac: Mapped[int] = mapped_column(Integer, nullable=False)
-    hitDice: Mapped[str] = mapped_column(String(5), nullable=False)
-    speed: Mapped[int] = mapped_column(Integer, nullable=False)
-    initiative: Mapped[int] = mapped_column(Integer, nullable=False)
-    proficiency: Mapped[int] = mapped_column(Integer, nullable=False)
+    level: Mapped[int] = mapped_column(Integer, nullable=True)
+    hp: Mapped[int] = mapped_column(Integer, nullable=True)
+    ac: Mapped[int] = mapped_column(Integer, nullable=True)
+    hitDice: Mapped[str] = mapped_column(String(5), nullable=True)
+    speed: Mapped[int] = mapped_column(Integer, nullable=True)
+    initiative: Mapped[int] = mapped_column(Integer, nullable=True)
+    proficiency: Mapped[int] = mapped_column(Integer, nullable=True)
 
     user = relationship("User", back_populates="characters")
 
@@ -176,7 +176,7 @@ class Character(db.Model):
 
     def serialize(self):
         return {
-            "user_id": self.id,
+            "id": self.id,
             "name": self.name,
             "race": self.race,
             "characterClass": self.characterClass,
@@ -197,5 +197,6 @@ class Character(db.Model):
                     "quantity": link.quantity,
                     "equipped": link.equipped
                 } for link in self.inventory_links
-            ]
+            ],
+            "user_id": self.user_id
         }
