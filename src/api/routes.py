@@ -14,7 +14,7 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-###### LOG IN / SIGN UP ENDPOINTS ######
+###### LOG IN ENDPOINT ######
 
 @api.route('/log_in', methods=['POST'])
 def handle_log_in():
@@ -38,6 +38,9 @@ def handle_log_in():
     }
 
     return jsonify(response_body), 200
+
+
+###### SIGN UP ENDPOINT ######
 
 @api.route('/sign_up', methods=['POST'])
 def handle_sign_up():
@@ -81,19 +84,35 @@ def handle_characters():
     }
     return jsonify(response_body), 200
 
+
 ###### CHARACTER ENDPOINTS ######
 
-@api.route('/character', methods=['POST'])
-def add_characters():
+@api.route('/character', methods=['GET'])
+def get_character():
     characterInfo = request.json
-    keys = ["user_id", "name", "race", "characterClass", "subclass"]
+    keys = ["user_id", "id"]
+    if all(key in characterInfo for key in keys):
+        character = db.session.query(Character).filter_by(
+            id=characterInfo["id"], user_id=characterInfo["user_id"]).first()
+        if character:
+            return {"Character found": character.serialize()}, 201
+        else:
+            return {"Error": "Character not found"}, 404
+    else:
+        return {"Error": "Wrong information submitted"}, 400
+
+
+@api.route('/character', methods=['POST'])
+def add_character():
+    characterInfo = request.json
+    keys = ["user_id", "name", "race", "characterClass", "subClass"]
     if all(key in characterInfo for key in keys):
         new_character = Character(
             user_id=characterInfo["user_id"],
             name=characterInfo["name"],
             race=characterInfo["race"],
             characterClass=characterInfo["characterClass"],
-            subClass=characterInfo["subclass"]
+            subClass=characterInfo["subClass"]
         )
         db.session.add(new_character)
         db.session.commit()
@@ -101,23 +120,55 @@ def add_characters():
     else:
         return {"Error": "Wrong information submitted"}, 400
 
+
 @api.route('/character', methods=['PUT'])
-def update_characters():
+def update_character():
     characterInfo = request.json
     keys = ["user_id", "id"]
     if all(key in characterInfo for key in keys):
         character = db.session.query(Character).filter_by(
             id=characterInfo["id"], user_id=characterInfo["user_id"]).first()
         if character:
-            character.level = characterInfo["level"] if characterInfo["level"] else character.level
-            character.hp = characterInfo["hp"] if characterInfo["hp"] else character.hp
-            character.ac = characterInfo["ac"] if characterInfo["ac"] else character.ac
-            character.hitDice = characterInfo["hitDice"] if characterInfo["hitDice"] else character.hitDice
-            character.speed = characterInfo["speed"] if characterInfo["speed"] else character.speed
-            character.initiative = characterInfo["initiative"] if characterInfo["initiative"] else character.initiative
-            character.proficiency = characterInfo["proficiency"] if characterInfo[
-                "proficiency"] else character.proficiency
+            if "level" in characterInfo:
+                character.level = characterInfo["level"]
+
+            if "hp" in characterInfo:
+                character.hp = characterInfo["hp"]
+
+            if "ac" in characterInfo:
+                character.ac = characterInfo["ac"]
+
+            if "hitDice" in characterInfo:
+                character.hitDice = characterInfo["hitDice"]
+
+            if "speed" in characterInfo:
+                character.speed = characterInfo["speed"]
+
+            if "initiative" in characterInfo:
+                character.initiative = characterInfo["initiative"]
+
+            if "proficiency" in characterInfo:
+                character.proficiency = characterInfo["proficiency"]
             db.session.commit()
             return {"Character updated": character.serialize()}, 201
+        else:
+            return {"Error": "Character not found"}, 404
+    else:
+        return {"Error": "Wrong information submitted "}, 400
+
+
+@api.route('/character', methods=['DELETE'])
+def delete_character():
+    characterInfo = request.json
+    keys = ["user_id", "id"]
+    if all(key in characterInfo for key in keys):
+        character = db.session.query(Character).filter_by(
+            id=characterInfo["id"], user_id=characterInfo["user_id"]).first()
+        if character:
+            db.session.delete(character)
+            db.session.commit()
+            return {"Character deleted": character.serialize()}, 200
+        else:
+            return {"Error": "Character not found"}, 404
     else:
         return {"Error": "Wrong information submitted "}, 400

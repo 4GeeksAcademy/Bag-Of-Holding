@@ -9,7 +9,9 @@ import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
     const backendUrl = import.meta.env.VITE_BACKEND_URL
+
     let characterInfo = store.characterInfo
+
 
     const saveCharacter = async (e) => {
         console.log(characterInfo)
@@ -24,6 +26,7 @@ export const Character = () => {
     };
     useEffect(() => {
     }, [])
+
 
     return (
         <div className="text-white my-5 row">

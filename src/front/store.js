@@ -1,7 +1,7 @@
 export const initialStore = () => {
   return {
+    user_id: 2,
     characterInfo: {
-      user_id: 2,
       stats: [
         {
           name: "STR",
