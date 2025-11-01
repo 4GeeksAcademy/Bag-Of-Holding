@@ -1,0 +1,113 @@
+/* GENERAL SITE */
+body {
+  background-color: #40202c;
+}
+.header-primary {
+  background-color: #8c373e;
+}
+.header-secondary {
+  background-color: #bfb699;
+  margin-bottom: 40px;
+}
+
+.accent {
+  color: #008080;
+}
+.col {
+  text-align: center;
+  justify-content: center;
+}
+.row {
+  text-align: center;
+  justify-content: center;
+}
+.info-box {
+  background-color: #8c373e;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 15px;
+}
+/* Login/Signup specific */
+.form-container {
+  position: relative;               
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;  
+  background-color: #bfb699;
+  border-style: solid;
+  border-color: #bfb699;
+  border-width: 20px;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.login-label {
+  position: absolute;
+  top: 10px;              
+  left: 50%;              
+  transform: translateX(-50%); 
+  color: #008080;         
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    width: 80%;
+}
+
+.form-row h2 {
+    width: 100px;
+    margin-right: 10px;
+    text-align: right;
+    background-color: #8c373e;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+
+
+.form-row input {
+    flex: 1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.submit-button {
+    display: block;              
+    margin: 20px auto 0 auto;    
+    background-color: #8c373e;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.navbar-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: #008080;
+  font-weight: bold;
+}
+
+.navbar-button:hover {
+  background-color: #008080;
+  border-color: #8c373e;
+
+}
+
+.box {
+    font-size: large;
+}
+/* Another color we might use: #D9D9D9 (gray background on color pallette slide on Figma design) */
