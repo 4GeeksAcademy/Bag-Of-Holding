@@ -12,6 +12,7 @@ import { SpellList } from "./pages/SpellList";
 import InputForm from "./components/signUpLogIn/SignUpLogInInterface.jsx";
 import { CharacterCreator } from "./pages/CharacterCreator";
 import { EquipmentDisplay } from "./components/Equipment.jsx";
+import { CharacterSelection } from "./pages/CharacterSelection.jsx";
 
 
 export const router = createBrowserRouter(
@@ -29,9 +30,10 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/character" element={<Character />} />
       <Route path="/spells" element={<SpellList />} />
-      <Route path="/login" element={<InputForm />} /> 
+      <Route path="/login" element={<InputForm />} />
       <Route path="/charactercreator" element={<CharacterCreator />} />
       <Route path="/equipment" element={<EquipmentDisplay />} />
+      <Route path="/characterselection" element={<CharacterSelection />} />
     </Route>
   )
 );

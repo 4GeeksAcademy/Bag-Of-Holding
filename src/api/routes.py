@@ -74,13 +74,11 @@ def handle_users():
     return jsonify(response_body), 200
 
 
-@api.route('/user/characters', methods=['GET'])
-def handle_characters():
-    body = request.json
-    user_email = body["id"]
-    user = db.session.get(User, user_email)
+@api.route('/user/<int:user_id>/characters', methods=['GET'])
+def handle_characters(user_id):
+    user = db.session.get(User, user_id)
     response_body = {
-        "characters": user.characters
+        "characters": [character.serialize() for character in user.characters]
     }
     return jsonify(response_body), 200
 
