@@ -5,13 +5,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 db = SQLAlchemy()
 
 # Tables
-character_skills = Table(
-    "character_skills",
-    db.Model.metadata,
-    db.Column("character_id", Integer, ForeignKey(
-        "character.id"), primary_key=True),
-    db.Column("skill_id", Integer, ForeignKey("skills.id"), primary_key=True)
-)
 
 character_consumables = Table(
     "character_consumables",
@@ -41,20 +34,15 @@ class User(db.Model):
         }
 
 
-class Skills(db.Model):
+class Skill(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(75), nullable=False)
     ability: Mapped[str] = mapped_column(String(15), nullable=False)
-    proficient: Mapped[bool] = mapped_column(
-        Boolean, default=False, nullable=False)
-    expert: Mapped[bool] = mapped_column(
-        Boolean, default=False, nullable=False)
+    proficient: Mapped[bool] = mapped_column(Boolean, default=False)
+    expert: Mapped[bool] = mapped_column(Boolean, default=False)
 
-    characters = relationship(
-        "Character",
-        secondary="character_skills",
-        back_populates="skills"
-    )
+    character_id: Mapped[int] = mapped_column(ForeignKey("character.id"))
+    character = relationship("Character", back_populates="skills")
 
     def serialize(self):
         return {
@@ -88,9 +76,8 @@ class Consumable(db.Model):
 class Stat(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(25), nullable=False)
-    value: Mapped[int] = mapped_column(Integer, nullable=False)
-    proficient: Mapped[bool] = mapped_column(
-        Boolean, default=False, nullable=False)
+    value: Mapped[int] = mapped_column(Integer, default=10)
+    proficient: Mapped[bool] = mapped_column(Boolean, default=False)
 
     character_id: Mapped[int] = mapped_column(ForeignKey("character.id"))
     character = relationship("Character", back_populates="stats")
@@ -154,9 +141,9 @@ class Character(db.Model):
     user = relationship("User", back_populates="characters")
 
     skills = relationship(
-        "Skills",
-        secondary="character_skills",
-        back_populates="characters"
+        "Skill",
+        back_populates="character",
+        cascade="all, delete-orphan"
     )
 
     consumables = relationship(
@@ -165,10 +152,16 @@ class Character(db.Model):
         back_populates="characters"
     )
 
-    stats = relationship("Stat", back_populates="character",
-                         cascade="all, delete-orphan")
+    stats = relationship(
+        "Stat",
+        back_populates="character",
+        cascade="all, delete-orphan"
+    )
     inventory_links = relationship(
-        "CharacterItem", back_populates="character", cascade="all, delete-orphan")
+        "CharacterItem",
+        back_populates="character",
+        cascade="all, delete-orphan"
+    )
 
     @property
     def inventory(self):

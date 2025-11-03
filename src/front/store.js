@@ -198,6 +198,13 @@ export default function storeReducer(store, action = {}) {
         ...store,
         spells: action.payload,
       };
+
+    case "select_character":
+      return {
+        ...store,
+        characterInfo: action.payload,
+      };
+
     case "save_character_info":
       const { name, race, characterClass, subclass } = action.payload;
       return {
@@ -210,6 +217,7 @@ export default function storeReducer(store, action = {}) {
           subclass: subclass,
         },
       };
+
     case "save_attributes":
       const { speed, initiative, proficiency } = action.payload;
       return {
@@ -221,6 +229,7 @@ export default function storeReducer(store, action = {}) {
           proficiency: proficiency,
         },
       };
+
     case "update_consumables":
       const { consumables } = action.payload;
       return {
@@ -230,6 +239,7 @@ export default function storeReducer(store, action = {}) {
           consumables: consumables,
         },
       };
+
     case "update_stats":
       const { stats } = action.payload;
       return {
@@ -239,6 +249,7 @@ export default function storeReducer(store, action = {}) {
           stats: stats,
         },
       };
+
     case "update_info":
       const { level, hp, ac, hitDice } = action.payload;
       return {
@@ -251,6 +262,7 @@ export default function storeReducer(store, action = {}) {
           hitDice: hitDice,
         },
       };
+
     case "set_inventory":
       return { ...state, inventoryList: action.payload };
 

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Character
+from api.models import db, User, Character, Stat, Skill
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -110,9 +110,50 @@ def add_character():
             name=characterInfo["name"],
             race=characterInfo["race"],
             characterClass=characterInfo["characterClass"],
-            subClass=characterInfo["subClass"]
+            subClass=characterInfo["subClass"],
         )
         db.session.add(new_character)
+        db.session.commit()
+
+        #  INITIALIZE CHARACTER STATS
+        allStats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
+        for i in range(len(allStats)):
+            new_stat = Stat(
+                name=allStats[i],
+                character_id=new_character.id
+            )
+            db.session.add(new_stat)
+
+        #  INITIALIZE CHARACTER STATS
+        allSkills = [
+            {"name": "ATHLETICS", "ability": "STR"},
+            {"name": "ACROBATICS", "ability": "DEX"},
+            {"name": "SLEIGHT OF HAND", "ability": "DEX"},
+            {"name": "STEALTH", "ability": "DEX"},
+            {"name": "ARCANA", "ability": "INT"},
+            {"name": "HISTORY", "ability": "INT"},
+            {"name": "INVESTIGATION", "ability": "INT"},
+            {"name": "NATURE", "ability": "INT"},
+            {"name": "RELIGION", "ability": "INT"},
+            {"name": "ANIMAL HANDLING", "ability": "WIS"},
+            {"name": "INSIGHT", "ability": "WIS"},
+            {"name": "MEDICINE", "ability": "WIS"},
+            {"name": "PERCEPTION", "ability": "WIS"},
+            {"name": "SURVIVAL", "ability": "WIS"},
+            {"name": "DECEPTION", "ability": "CHA"},
+            {"name": "INTIMIDATION", "ability": "CHA"},
+            {"name": "PERFORMANCE", "ability": "CHA"},
+            {"name": "PERSUASION", "ability": "CHA"}
+        ]
+
+        for skill in allSkills:
+            new_skill = Skill(
+                name=skill["name"],
+                ability=skill["ability"],
+                character_id=new_character.id
+            )
+            db.session.add(new_skill)
+
         db.session.commit()
         return {"New Character added": new_character.serialize()}, 201
     else:

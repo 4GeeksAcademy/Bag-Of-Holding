@@ -21,6 +21,10 @@ export const CharacterCreator = () => {
 
     const saveCharacter = async (e) => {
         if (characterName && characterRace && characterClass && characterSubClass) {
+            dispatch({
+                type: "save_character_info",
+                payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
+            });
             const response = await fetch(backendUrl + "api/character", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

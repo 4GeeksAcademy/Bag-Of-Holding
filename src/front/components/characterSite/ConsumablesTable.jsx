@@ -80,7 +80,7 @@ export const ConsumablesTable = (props) => {
                 Add
             </button>
             {/* ADD NEW CONSUMABLE MODAL */}
-            <div className="modal fade accent" id="addConsumable" tabindex="-1" aria-hidden="true">
+            <div className="modal fade accent" id="addConsumable" tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">

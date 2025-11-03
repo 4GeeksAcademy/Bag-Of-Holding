@@ -16,7 +16,7 @@ export const Character = () => {
     const saveCharacter = async (e) => {
         console.log(characterInfo)
         const response = await fetch(backendUrl + "api/character", {
-            method: "POST",
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(characterInfo),
         });
