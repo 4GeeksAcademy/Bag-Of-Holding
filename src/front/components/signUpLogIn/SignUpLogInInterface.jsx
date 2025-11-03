@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
+import useGlobalReducer from "../../hooks/useGlobalReducer.jsx"
+import "../../styles/login.css"
+
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -29,18 +31,18 @@ export default function InputForm() {
 
   return (
     <div className="form-container">
-      <h2>{isLogin ? "LOG IN" : "SIGN UP"}</h2>
+      <h2 className="login-label">{isLogin ? "LOG IN" : "SIGN UP"}</h2>
       <form onSubmit={handleSubmit}>
 
         <input
-          type="email" name="email" placeholder="Enter your email..." onChange={handleInput} value={formInput.email} required
+          className="form-row" type="email" name="email" placeholder="Enter your email..." onChange={handleInput} value={formInput.email} required
         />
 
         <input
-          type="password" name="password" placeholder="Enter your password..." onChange={handleInput} value={formInput.password} required
+          className="form-row" type="password" name="password" placeholder="Enter your password..." onChange={handleInput} value={formInput.password} required
         />
 
-        <button type="submit">SUBMIT</button>
+        <button className="submit-button" type="submit">SUBMIT</button>
 
       </form>
       {/* <LogInButton /> this will need to be properly routed and linked to the top right of the NavBar but it will need to be present here to switch. */}
