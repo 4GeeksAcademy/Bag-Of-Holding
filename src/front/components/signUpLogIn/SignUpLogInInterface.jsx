@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import useGlobalReducer from "../../hooks/useGlobalReducer.jsx"
-import "../../styles/login.css"
-
+import "../../../styles/login.css"
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -33,14 +32,19 @@ export default function InputForm() {
     <div className="form-container">
       <h2 className="login-label">{isLogin ? "LOG IN" : "SIGN UP"}</h2>
       <form onSubmit={handleSubmit}>
+        <div className="form-row">
+          <h2>Email: </h2>
+          <input
+            type="email" name="email" placeholder="Enter your email..." onChange={handleInput} value={formInput.email} required
+          />
+        </div>
 
-        <input
-          className="form-row" type="email" name="email" placeholder="Enter your email..." onChange={handleInput} value={formInput.email} required
-        />
-
-        <input
-          className="form-row" type="password" name="password" placeholder="Enter your password..." onChange={handleInput} value={formInput.password} required
-        />
+        <div className="form-row">
+          <h2>PW:   </h2>
+          <input
+            type="password" name="password" placeholder="Enter your password..." onChange={handleInput} value={formInput.password} required
+          />
+        </div>
 
         <button className="submit-button" type="submit">SUBMIT</button>
 
