@@ -16,7 +16,7 @@ export default function InputForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isLogin ? "api/login" : "api/signup";
+    const endpoint = isLogin ? "api/log_in" : "api/sign_up";
     const response = await fetch(backendUrl + endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,7 +41,8 @@ export default function InputForm() {
         />
 
         <button type="submit" onSubmit={handleSubmit}>SUBMIT</button>
-
+        <button onClick={() => setIsLogin(true)}>Login</button>
+        <button onClick={() => setIsLogin(false)}>Sign up</button>
       </form>
       {/* <LogInButton /> this will need to be properly routed and linked to the top right of the NavBar but it will need to be present here to switch. */}
     </div>
