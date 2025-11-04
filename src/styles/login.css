@@ -31,6 +31,7 @@ body {
 .form-container {
   position: relative;               
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;  
@@ -51,7 +52,7 @@ body {
   transform: translateX(-50%); 
   color: #008080;         
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -63,7 +64,7 @@ body {
     width: 80%;
 }
 
-.form-row h2 {
+.form-row label {
     width: 100px;
     margin-right: 10px;
     text-align: right;
@@ -71,6 +72,7 @@ body {
     font-weight: bold;
     border-radius: 15px;
     padding: 5px;
+    font-size: larger;
 }
 
 
@@ -94,6 +96,28 @@ body {
     cursor: pointer;
     font-weight: bold;
     font-size: x-large;
+}
+
+.mode-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.mode-switch button {
+  background-color: #bfb699;
+  color: #008080;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mode-switch button:hover {
+  background-color: burlywood;
 }
 
 .navbar-button {
