@@ -2,6 +2,7 @@ export const initialStore = () => {
   return {
     user_id: 2,
     characterInfo: {
+      id:0,
       stats: [
         {
           name: "STR",

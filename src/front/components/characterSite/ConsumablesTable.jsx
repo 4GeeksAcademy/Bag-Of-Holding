@@ -29,6 +29,7 @@ export const ConsumablesTable = (props) => {
     }
 
     const updateConsumablesList = () => {
+        
         dispatch({
             type: "update_consumables",
             payload: {
@@ -40,6 +41,11 @@ export const ConsumablesTable = (props) => {
     return (
         <div className="d-flex">
             <table className="m-2">
+                <thead>
+                    <th>Consumable</th>
+                    <th>Ammount</th>
+                    <th> </th>
+                </thead>
                 <tbody>
                     {
                         // Simply maps through an array of Consumables and lists the name and ammount left

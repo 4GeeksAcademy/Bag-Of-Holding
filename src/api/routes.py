@@ -211,3 +211,22 @@ def delete_character():
             return {"Error": "Character not found"}, 404
     else:
         return {"Error": "Wrong information submitted "}, 400
+
+
+###### STAT ENDPOINTS ######
+
+
+@api.route('/stat', methods=['PUT'])
+def update_stat():
+    statInfo = request.json
+    keys = ["id", "value"]
+    if all(key in statInfo for key in keys):
+        updated_stat = db.session.get(Stat, statInfo["id"])
+        if updated_stat:
+            updated_stat.value = statInfo["value"]
+            db.session.commit()
+            return {"Stat Changed": updated_stat.serialize()}, 200
+        else:
+            return {"Error": "Stat not found"}, 404
+    else:
+        return {"Error": "Wrong information submitted "}, 400

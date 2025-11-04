@@ -62,7 +62,7 @@ export const CharacterInfoBlock = (props) => {
             {/* CHARACTER SUBCLASS */}
             <div className="character-info-box m-3">
                 <label htmlFor="subClass">SUBCLASS</label>
-                <h5 id="subClass">{props.subclass}</h5>
+                <h5 id="subClass">{props.subClass}</h5>
             </div>
             {/* CHARACTER HP/AC/HITDICE*/}
             <div className="d-flex">

@@ -14,7 +14,6 @@ export const Character = () => {
 
 
     const saveCharacter = async (e) => {
-        console.log(characterInfo)
         const response = await fetch(backendUrl + "api/character", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -24,6 +23,7 @@ export const Character = () => {
         const data = await response.json();
         console.log(data);
     };
+
     useEffect(() => {
     }, [])
 
@@ -37,7 +37,7 @@ export const Character = () => {
                     race={characterInfo.race}
                     level={characterInfo.level}
                     characterClass={characterInfo.characterClass}
-                    subclass={characterInfo.subclass}
+                    subClass={characterInfo.subClass}
                     hp={characterInfo.hp}
                     ac={characterInfo.ac}
                     hitDice={characterInfo.hp}
@@ -51,6 +51,8 @@ export const Character = () => {
                         speed={characterInfo.speed}
                         initiative={characterInfo.initiative}
                         proficiency={characterInfo.proficiency}
+                        user_id={characterInfo.user_id}
+                        id={characterInfo.id}
                     />
                 </div>
                 <div className="d-flex">

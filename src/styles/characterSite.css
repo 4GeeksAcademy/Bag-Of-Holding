@@ -107,3 +107,6 @@ table {
   border: 5px solid #008080;
   color: #008080;
 }
+th {
+  border: 5px solid #008080;
+}
