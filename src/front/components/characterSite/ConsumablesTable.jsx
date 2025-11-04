@@ -3,10 +3,11 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { useState } from "react";
 export const ConsumablesTable = (props) => {
     const { store, dispatch } = useGlobalReducer();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [consumables, setConsumables] = useState(props.consumables)
     const [newConsumable, setNewConsumable] = useState("")
 
-    const updateConsumable = (index, newAmount) => {
+    const updateConsumable = (index, newAmount, id) => {
         setConsumables(prevConsumables => {
             // create a shallow copy of the array
             const updated = [...prevConsumables];
@@ -17,19 +18,48 @@ export const ConsumablesTable = (props) => {
                     return updated;
                 // Else, add new element
                 updated[index] = { name: newConsumable, amount: newAmount };
+                saveConsumable(newConsumable);
             }
             // If the element being updated is already in the list
             else {
                 // Simply update it
                 updated[index] = { ...updated[index], amount: newAmount };
+                updateBackend(newAmount, id)
             }
             return updated;
         });
         updateConsumablesList();
     }
 
+    const saveConsumable = async (name) => {
+        const response = await fetch(backendUrl + "api/consumable", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "name": name,
+                "character_id": props.character_id
+            }),
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+    };
+
+    const updateBackend = async (amount, id) => {
+        const response = await fetch(backendUrl + "api/consumable", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "id": id,
+                "amount": amount
+            }),
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+    };
+
     const updateConsumablesList = () => {
-        
         dispatch({
             type: "update_consumables",
             payload: {
@@ -44,7 +74,6 @@ export const ConsumablesTable = (props) => {
                 <thead>
                     <th>Consumable</th>
                     <th>Ammount</th>
-                    <th> </th>
                 </thead>
                 <tbody>
                     {
@@ -62,13 +91,8 @@ export const ConsumablesTable = (props) => {
                                             type="number"
                                             className="consumableCount"
                                             value={consumable.amount}
-                                            onChange={(e) => updateConsumable(index, parseInt(e.target.value))}
+                                            onChange={(e) => updateConsumable(index, parseInt(e.target.value), consumable.id,)}
                                         />
-                                    </td>
-                                    <td>
-                                        <h5 className="float-end mx-2">
-                                            X
-                                        </h5>
                                     </td>
                                 </tr>
                             ))

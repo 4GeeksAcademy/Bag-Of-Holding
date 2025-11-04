@@ -67,15 +67,19 @@ export const Character = () => {
                     </div>
                     {/* BLOCK CONTAINING ALL CONSUMABLES */}
                     <div className="col-5 info-box rounded">
-                        <ConsumablesTable consumables={characterInfo.consumables} ></ConsumablesTable>
+                        <ConsumablesTable consumables={characterInfo.consumables} character_id={characterInfo.id}></ConsumablesTable>
                     </div>
                 </div>
             </div>
             {/* BLOCK CONTAINING ALL DICE */}
-            <div className="col-2 h-75 info-box rounded m-4 justify-content-center">
-                <DiceBar />
+            <div className="col-2">
+                <div className="info-box rounded m-4 p-1">
+                    <DiceBar />
+                </div>
+                <div className="info-box rounded m-4 p-1">
+                    <button className="character-info-box" onClick={saveCharacter}>Save Character</button>
+                </div>
             </div>
-            <button onClick={saveCharacter}>Save Character</button>
         </div>
     );
 }; 

@@ -4,17 +4,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 db = SQLAlchemy()
 
-# Tables
-
-character_consumables = Table(
-    "character_consumables",
-    db.Model.metadata,
-    db.Column("character_id", Integer, ForeignKey(
-        "character.id"), primary_key=True),
-    db.Column("consumable_id", Integer, ForeignKey(
-        "consumable.id"), primary_key=True)
-)
-
 # Models
 
 
@@ -57,13 +46,10 @@ class Skill(db.Model):
 class Consumable(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(25), nullable=False)
-    amount: Mapped[int] = mapped_column(Integer, nullable=False)
+    amount: Mapped[int] = mapped_column(Integer, default=0)
 
-    characters = relationship(
-        "Character",
-        secondary="character_consumables",
-        back_populates="consumables"
-    )
+    character_id: Mapped[int] = mapped_column(ForeignKey("character.id"))
+    character = relationship("Character", back_populates="consumables")
 
     def serialize(self):
         return {
@@ -148,8 +134,8 @@ class Character(db.Model):
 
     consumables = relationship(
         "Consumable",
-        secondary="character_consumables",
-        back_populates="characters"
+        back_populates="character",
+        cascade="all, delete-orphan"
     )
 
     stats = relationship(

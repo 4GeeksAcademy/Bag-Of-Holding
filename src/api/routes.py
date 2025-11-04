@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Character, Stat, Skill
+from api.models import db, User, Character, Stat, Skill, Consumable
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -228,5 +228,54 @@ def update_stat():
             return {"Stat Changed": updated_stat.serialize()}, 200
         else:
             return {"Error": "Stat not found"}, 404
+    else:
+        return {"Error": "Wrong information submitted "}, 400
+
+
+###### CONSUMABLES ENDPOINTS ######
+
+@api.route('/consumable', methods=['POST'])
+def add_consumable():
+    consumableInfo = request.json
+    keys = ["character_id", "name"]
+    if all(key in consumableInfo for key in keys):
+        new_consumable = Consumable(
+            character_id=consumableInfo["character_id"],
+            name=consumableInfo["name"]
+        )
+        db.session.add(new_consumable)
+        db.session.commit()
+        return {"Consumable Created": new_consumable.serialize()}, 200
+    else:
+        return {"Error": "Wrong information submitted "}, 400
+
+
+@api.route('/consumable', methods=['PUT'])
+def update_consumable():
+    consumableInfo = request.json
+    keys = ["id", "amount"]
+    if all(key in consumableInfo for key in keys):
+        updated_consumable = db.session.get(Consumable, consumableInfo["id"])
+        if updated_consumable:
+            updated_consumable.amount = consumableInfo["amount"]
+            db.session.commit()
+            return {"Consumable Changed": updated_consumable.serialize()}, 200
+        else:
+            return {"Error": "Consumable not found"}, 404
+    else:
+        return {"Error": "Wrong information submitted "}, 400
+
+
+@api.route('/consumable', methods=['DELETE'])
+def delete_consumable():
+    consumableInfo = request.json
+    if "id" in consumableInfo:
+        consumable_to_delete = db.session.get(Consumable, consumableInfo["id"])
+        if consumable_to_delete:
+            db.session.delete(consumable_to_delete)
+            db.session.commit()
+            return {"Consumable Deleted": consumable_to_delete.serialize()}, 200
+        else:
+            return {"Error": "Consumable not found"}, 404
     else:
         return {"Error": "Wrong information submitted "}, 400
