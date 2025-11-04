@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useGlobalReducer from "../../hooks/useGlobalReducer.jsx"
 import "../../../styles/login.css"
 
@@ -16,7 +16,7 @@ export default function InputForm() {
     new_password: "",
     current_password: ""
   });
-
+  const navigate = useNavigate();
   const handleInput = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
   };
@@ -25,7 +25,7 @@ export default function InputForm() {
     e.preventDefault();
 
     const endpoint = mode == "login" ? "api/log_in" : "api/sign_up";
-    const response = await fetch(backendUrl+endpoint, {
+    const response = await fetch(backendUrl + endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formInput),
@@ -36,7 +36,8 @@ export default function InputForm() {
 
     if (response.ok) {
       if (mode === "login") {
-        dispatch({ type: "SET_TOKEN", payload: data.access_token });
+        dispatch({ type: "SET_TOKEN", payload: data.token });
+        navigate("/charactercreator");
       }
       alert(data.message || "Success");
     } else {
