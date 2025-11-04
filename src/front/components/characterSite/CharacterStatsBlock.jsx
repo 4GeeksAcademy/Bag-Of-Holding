@@ -6,6 +6,7 @@ export const CharacterStatsBlock = (props) => {
     const [speed, setSpeed] = useState(props.speed)
     const [initiative, setInitiative] = useState(props.initiative)
     const [proficiency, setProficiency] = useState(props.proficiency)
+
     const updateStats = () => {
         dispatch({
             type: "save_attributes",
@@ -16,22 +17,32 @@ export const CharacterStatsBlock = (props) => {
             },
         });
     }
+    
+
     useEffect(() => {
     }, [])
     // We calculate passive Perception
     const wisdomStat = props.stats?.find(stat => stat.name === "WIS");
     const wisdomMod = wisdomStat ? (Math.floor((wisdomStat.value - 10) / 2)) : 0;
     const passivePer = 10 + wisdomMod + parseInt(props.proficiency)
+    const sortedStats = [...props.stats].sort((a, b) => a.id - b.id);
     return (
         <div>
             <div className="row m-auto">
                 {
                     /* MAP OF A LIST CONTAINING THE INFORMATION ON ALL STATS*/
                     props.stats
-                        ? props.stats.map((stat, index) => {
+                        ? sortedStats.map((stat, index) => {
                             return (
                                 <div className="col-2" key={index}>
-                                    <StatBlock name={stat.name} value={stat.value} proficiency={proficiency} stats={props.stats} />
+                                    <StatBlock
+                                        name={stat.name}
+                                        value={stat.value}
+                                        id={stat.id}
+                                        proficient={stat.proficient}
+                                        proficiency={proficiency}
+                                        stats={props.stats}
+                                    />
                                 </div>
                             )
                         })

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Character, Stat, Skill, Consumable
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,7 +14,6 @@ api = Blueprint('api', __name__)
 
 CORS(api)
 
-
 @api.route('/sign_up', methods=['POST'])
 def handle_sign_up():
     body = request.get_json()
@@ -28,9 +27,9 @@ def handle_sign_up():
         return jsonify({"error": "User already exists"}), 400
 
     new_user = User(
-        email=email,
-        password=generate_password_hash(password)
-    )
+        email = new_email, 
+        password = generate_password_hash(new_password)
+        )
 
     db.session.add(new_user)
     db.session.commit()
@@ -41,38 +40,38 @@ def handle_sign_up():
     }), 201
 
 
-@api.route("/login", methods=["POST"])
-def handle_login():
-    data = request.get_json()
-    email = data.get("email")
-    password = data.get("password")
+@api.route('/log_in', methods=['POST'])
+def handle_log_in():
 
-    if not email or not password:
-        return jsonify({"error": "Missing email or password"}), 400
+    body = request.json
+    new_email = body["email"]
+    new_password = body["password"]
+    user = User.query.filter_by(email = new_email).first()
+    if not user:
+        return jsonify("Matching e-mail not found"), 401
+    
+    if not check_password_hash(user.password, new_password):
+        return jsonify("Incorrect password"), 401
+    
+    token = create_access_token(identity = new_email)
 
-    user = User.query.filter_by(email=email).first()
-    if not user or not check_password_hash(user.password, password):
-        return jsonify({"error": "Invalid email or password"}), 401
-
-    access_token = create_access_token(identity=str(user.id))
-    refresh_token = create_refresh_token(identity=str(user.id))
-
-    return jsonify({
+    response_body = {
+        "message": "Welcome back, adventurer!",
         "user": user.serialize(),
-        "access_token": access_token,
-        "refresh_token": refresh_token
-    }), 200
+        "token": token
+    }
+   
 
+    return jsonify(response_body), 200
 
 @api.route('/user', methods=["GET"])
-@jwt_required()
+# @jwt_required()
 def handle_user():
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-
-    return jsonify({
-        "data": user.serialize_public(),
+    user_email = get_jwt_identity()
+    print("user_email HERE:", user_email)
+    user = User.query.filter_by(email = user_email).first()
+    resp = {
+        "data": user.serialize(),
         "message": "User found"
-    }), 200
+    }
+    return jsonify(resp), 200

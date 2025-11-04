@@ -9,6 +9,7 @@ import "../../styles/characterCreator.css";
 
 export const CharacterCreator = () => {
     const { store, dispatch } = useGlobalReducer()
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [selectedInput, setSelectedInput] = useState("NAME")
     const [characterName, setCharacterName] = useState("")
     const [characterRace, setCharacterRace] = useState("")
@@ -17,20 +18,36 @@ export const CharacterCreator = () => {
     const navigate = useNavigate();
     const [showAlert, setsShowAlert] = useState(false)
 
-    // Save all character information to store after hitting submit
-    function saveCharacter() {
+
+    const saveCharacter = async (e) => {
         if (characterName && characterRace && characterClass && characterSubClass) {
-            console.log(characterName, characterRace, characterClass, characterSubClass)
             dispatch({
-                type: "save_character",
+                type: "save_character_info",
                 payload: { name: characterName, race: characterRace, characterClass: characterClass, subclass: characterSubClass }
             });
+            const response = await fetch(backendUrl + "api/character", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(
+                    {
+                        "user_id": store.user_id,
+                        "name": characterName,
+                        "race": characterRace,
+                        "characterClass": characterClass,
+                        "subClass": characterSubClass
+                    }
+                )
+            });
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
             navigate("/character");
         }
         else {
             setsShowAlert(true);
         }
-    }
+    };
+
     //Toggles between sections for character creation
     const inputSelection = () => {
         switch (selectedInput) {
@@ -63,9 +80,10 @@ export const CharacterCreator = () => {
         <div className="text-center mt-5">
             <div className="info-box m-5">
                 {
-                    showAlert
+                    showAlert && (!characterName || !characterRace || !characterClass || !characterSubClass)
                         ? <div className="alert alert-danger" role="alert">
-                            PLEASE ENTER ALL INFORMATION
+                            PLEASE ENTER ALL INFORMATION:<br />
+                            <strong>{characterName ? "" : "| NAME |"}{characterRace ? "" : "| RACE |"}{characterClass ? "" : "| CLASS |"}{characterSubClass ? "" : "| SUBCLASS |"}</strong>
                         </div>
                         : ""
                 }

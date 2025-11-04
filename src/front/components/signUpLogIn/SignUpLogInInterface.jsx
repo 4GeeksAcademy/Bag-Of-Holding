@@ -22,34 +22,13 @@ export default function AuthForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let endpoint = "";
-    let payload = {};
-
-    if (mode === "login") {
-      endpoint = `${backendUrl}/api/login`;
-      payload = { email: formInput.email, password: formInput.password };
-    } else if (mode === "signup") {
-      endpoint = `${backendUrl}/api/sign_up`;
-      payload = { email: formInput.email, password: formInput.password };
-    } else if (mode === "changePassword") {
-      endpoint = `${backendUrl}/api/change_password`;
-      payload = {
-        current_password: formInput.current_password,
-        new_password: formInput.new_password,
-      };
-    }
-
+    const endpoint = isLogin ? "/api/login" : "/api/signup";
     const response = await fetch(endpoint, {
-      method: mode === "changePassword" ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(mode === "changePassword" && store.token
-          ? { Authorization: `Bearer ${store.token}` }
-          : {}),
-      },
-      body: JSON.stringify(payload),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formInput),
     });
-
+    console.log(response);
     const data = await response.json();
     console.log(data);
 

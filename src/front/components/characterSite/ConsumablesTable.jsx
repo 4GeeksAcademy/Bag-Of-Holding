@@ -3,10 +3,11 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { useState } from "react";
 export const ConsumablesTable = (props) => {
     const { store, dispatch } = useGlobalReducer();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [consumables, setConsumables] = useState(props.consumables)
     const [newConsumable, setNewConsumable] = useState("")
 
-    const updateConsumable = (index, newAmount) => {
+    const updateConsumable = (index, newAmount, id) => {
         setConsumables(prevConsumables => {
             // create a shallow copy of the array
             const updated = [...prevConsumables];
@@ -17,16 +18,46 @@ export const ConsumablesTable = (props) => {
                     return updated;
                 // Else, add new element
                 updated[index] = { name: newConsumable, amount: newAmount };
+                saveConsumable(newConsumable);
             }
             // If the element being updated is already in the list
             else {
                 // Simply update it
                 updated[index] = { ...updated[index], amount: newAmount };
+                updateBackend(newAmount, id)
             }
             return updated;
         });
         updateConsumablesList();
     }
+
+    const saveConsumable = async (name) => {
+        const response = await fetch(backendUrl + "api/consumable", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "name": name,
+                "character_id": props.character_id
+            }),
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+    };
+
+    const updateBackend = async (amount, id) => {
+        const response = await fetch(backendUrl + "api/consumable", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "id": id,
+                "amount": amount
+            }),
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+    };
 
     const updateConsumablesList = () => {
         dispatch({
@@ -40,6 +71,10 @@ export const ConsumablesTable = (props) => {
     return (
         <div className="d-flex">
             <table className="m-2">
+                <thead>
+                    <th>Consumable</th>
+                    <th>Ammount</th>
+                </thead>
                 <tbody>
                     {
                         // Simply maps through an array of Consumables and lists the name and ammount left
@@ -56,13 +91,8 @@ export const ConsumablesTable = (props) => {
                                             type="number"
                                             className="consumableCount"
                                             value={consumable.amount}
-                                            onChange={(e) => updateConsumable(index, parseInt(e.target.value))}
+                                            onChange={(e) => updateConsumable(index, parseInt(e.target.value), consumable.id,)}
                                         />
-                                    </td>
-                                    <td>
-                                        <h5 className="float-end mx-2">
-                                            X
-                                        </h5>
                                     </td>
                                 </tr>
                             ))
@@ -80,7 +110,7 @@ export const ConsumablesTable = (props) => {
                 Add
             </button>
             {/* ADD NEW CONSUMABLE MODAL */}
-            <div className="modal fade accent" id="addConsumable" tabindex="-1" aria-hidden="true">
+            <div className="modal fade accent" id="addConsumable" tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
