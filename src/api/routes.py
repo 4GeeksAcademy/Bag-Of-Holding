@@ -44,16 +44,16 @@ def handle_sign_up():
 def handle_log_in():
 
     body = request.json
-    new_email = body["email"]
-    new_password = body["password"]
-    user = User.query.filter_by(email = new_email).first()
+    email = body["email"]
+    password = body["password"]
+    user = User.query.filter_by(email = email).first()
     if not user:
         return jsonify("Matching e-mail not found"), 401
     
-    if not check_password_hash(user.password, new_password):
+    if not check_password_hash(user.password, password):
         return jsonify("Incorrect password"), 401
     
-    token = create_access_token(identity = new_email)
+    token = create_access_token(identity = email)
 
     response_body = {
         "message": "Welcome back, adventurer!",
