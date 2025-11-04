@@ -18,8 +18,7 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            "characters": [char.serialize() for char in self.characters]
+            "email": self.email
         }
 
 
