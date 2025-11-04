@@ -27,8 +27,8 @@ def handle_sign_up():
         return jsonify({"error": "User already exists"}), 400
 
     new_user = User(
-        email = new_email, 
-        password = generate_password_hash(new_password)
+        email = email, 
+        password = generate_password_hash(password)
         )
 
     db.session.add(new_user)
