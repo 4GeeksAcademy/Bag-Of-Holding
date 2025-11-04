@@ -17,13 +17,13 @@ export default function InputForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isLogin ? "/api/login" : "/api/signup";
-    const response = await fetch(endpoint, {
+    const endpoint = isLogin ? "api/login" : "api/signup";
+    const response = await fetch(backendUrl + endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formInput),
     });
-
+    console.log(response);
     const data = await response.json();
     console.log(data);
   };

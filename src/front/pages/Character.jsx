@@ -8,9 +8,25 @@ import { DiceBar } from "../components/characterSite/DiceBar.jsx";
 import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+
     let characterInfo = store.characterInfo
+
+
+    const saveCharacter = async (e) => {
+        const response = await fetch(backendUrl + "api/character", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(characterInfo),
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+    };
+
     useEffect(() => {
     }, [])
+
 
     return (
         <div className="text-white my-5 row">
@@ -21,7 +37,7 @@ export const Character = () => {
                     race={characterInfo.race}
                     level={characterInfo.level}
                     characterClass={characterInfo.characterClass}
-                    subclass={characterInfo.subclass}
+                    subClass={characterInfo.subClass}
                     hp={characterInfo.hp}
                     ac={characterInfo.ac}
                     hitDice={characterInfo.hp}
@@ -35,6 +51,8 @@ export const Character = () => {
                         speed={characterInfo.speed}
                         initiative={characterInfo.initiative}
                         proficiency={characterInfo.proficiency}
+                        user_id={characterInfo.user_id}
+                        id={characterInfo.id}
                     />
                 </div>
                 <div className="d-flex">
@@ -49,13 +67,18 @@ export const Character = () => {
                     </div>
                     {/* BLOCK CONTAINING ALL CONSUMABLES */}
                     <div className="col-5 info-box rounded">
-                        <ConsumablesTable consumables={characterInfo.consumables} ></ConsumablesTable>
+                        <ConsumablesTable consumables={characterInfo.consumables} character_id={characterInfo.id}></ConsumablesTable>
                     </div>
                 </div>
             </div>
             {/* BLOCK CONTAINING ALL DICE */}
-            <div className="col-2 h-75 info-box rounded m-4 justify-content-center">
-                <DiceBar />
+            <div className="col-2">
+                <div className="info-box rounded m-4 p-1">
+                    <DiceBar />
+                </div>
+                <div className="info-box rounded m-4 p-1">
+                    <button className="character-info-box" onClick={saveCharacter}>Save Character</button>
+                </div>
             </div>
         </div>
     );
