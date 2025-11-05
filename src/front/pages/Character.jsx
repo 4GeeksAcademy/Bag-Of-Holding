@@ -32,28 +32,36 @@ export const Character = () => {
         <div className="text-white my-5 row">
             {/* BLOCK CONTAINING ALL CHARACTER DETAILS */}
             <div className="col-3 info-box rounded m-4">
-                <CharacterInfoBlock
-                    name={characterInfo.name}
-                    race={characterInfo.race}
-                    level={characterInfo.level}
-                    characterClass={characterInfo.characterClass}
-                    subClass={characterInfo.subClass}
-                    hp={characterInfo.hp}
-                    ac={characterInfo.ac}
-                    hitDice={characterInfo.hp}
-                />
+                {
+                    characterInfo
+                        ? <CharacterInfoBlock
+                            name={characterInfo.name}
+                            race={characterInfo.race}
+                            level={characterInfo.level}
+                            characterClass={characterInfo.characterClass}
+                            subClass={characterInfo.subClass}
+                            hp={characterInfo.hp}
+                            ac={characterInfo.ac}
+                            hitDice={characterInfo.hp}
+                        />
+                        : "Loading..."
+                }
             </div>
             <div className="col-6">
                 {/* BLOCK CONTAINING ALL CHARACTER STATS */}
                 <div className="row info-box rounded py-3 mb-4">
-                    <CharacterStatsBlock
-                        stats={characterInfo.stats}
-                        speed={characterInfo.speed}
-                        initiative={characterInfo.initiative}
-                        proficiency={characterInfo.proficiency}
-                        user_id={characterInfo.user_id}
-                        id={characterInfo.id}
-                    />
+                    {
+                        characterInfo.stats
+                            ? <CharacterStatsBlock
+                                stats={characterInfo.stats}
+                                speed={characterInfo.speed}
+                                initiative={characterInfo.initiative}
+                                proficiency={characterInfo.proficiency}
+                                user_id={characterInfo.user_id}
+                                id={characterInfo.id}
+                            />
+                            : "Loading..."
+                    }
                 </div>
                 <div className="d-flex">
                     {/* BLOCK CONTAINING ALL CHARACTER SKILLS */}
@@ -62,7 +70,7 @@ export const Character = () => {
                         {
                             characterInfo.skills
                                 ? <SkillsTable skillList={characterInfo.skills} stats={characterInfo.stats} proficiency={characterInfo.proficiency}></SkillsTable>
-                                : ""
+                                : "Loading..."
                         }
                     </div>
                     {/* BLOCK CONTAINING ALL CONSUMABLES */}

@@ -36,8 +36,16 @@ export default function InputForm() {
 
     if (response.ok) {
       if (mode === "login") {
-        dispatch({ type: "SET_TOKEN", payload: data.token });
-        navigate("/charactercreator");
+        dispatch({
+          type: "SET_TOKEN",
+          payload: {
+            token: data.token,
+            user_id: data.user.id
+          }
+        });
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("user_id", data.user.id)
+        navigate("/characterselection");
       }
       alert(data.message || "Success");
     } else {
