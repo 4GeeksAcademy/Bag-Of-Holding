@@ -1,7 +1,7 @@
 export const initialStore = () => {
   return {
-    user_id: 2,
-    characterInfo:{},
+    user_id: null,
+    characterInfo: {},
     races: [],
     classes: [],
     subclasses: [],
@@ -13,13 +13,12 @@ export const initialStore = () => {
     characters: [],
     loading: false,
     error: null,
-    toke:null,
+    token: null,
     apiURL: "https://www.dnd5eapi.co/api/2014",
   };
 };
 
 export default function storeReducer(store, action = {}) {
-  
   switch (action.type) {
     case "set_races":
       return {
@@ -45,9 +44,11 @@ export default function storeReducer(store, action = {}) {
         spells: action.payload,
       };
     case "SET_TOKEN":
+      const { token, user_id } = action.payload;
       return {
         ...store,
-        token: action.payload,
+        token: token,
+        user_id: user_id,
       };
 
     case "select_character":

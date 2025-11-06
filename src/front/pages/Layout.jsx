@@ -1,15 +1,17 @@
-import { Outlet } from "react-router-dom/dist"
+import { Navigate, Outlet } from "react-router-dom/dist"
 import ScrollToTop from "../components/ScrollToTop"
 import { Navbar } from "../components/Navbar"
 import { Footer } from "../components/Footer"
 import { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useNavigate } from "react-router-dom"
 
 // Base component that maintains the navbar and footer throughout the page and the scroll to top functionality.
 //FETCH REQUEST FOR CLASS AND RUN THROUGH A USEEFFECT UPON MOUNT
 
 export const Layout = () => {
     const { store, dispatch } = useGlobalReducer();
+    const navigate = useNavigate();
 
     // Fecth all Races and save them to store.js
     const getRaces = (url) => {

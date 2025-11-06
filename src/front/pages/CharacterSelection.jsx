@@ -9,8 +9,20 @@ export const CharacterSelection = () => {
     const [characterList, setCharacterList] = useState([]);
     const navigate = useNavigate();
 
-    const getCharacters = async () => {
-        const response = await fetch(backendUrl + "api/user/" + store.user_id + "/characters");
+    const checkToken = () => {
+        let token = localStorage.getItem("token");
+        let user_id = localStorage.getItem("user_id");
+        if (token && user_id) {
+            getCharacters(user_id);
+        }
+        else {
+            navigate("/");
+        }
+
+    }
+
+    const getCharacters = async (user_id) => {
+        const response = await fetch(backendUrl + "api/user/" + user_id + "/characters");
         const data = await response.json();
         setCharacterList(data.characters);
     };
@@ -20,11 +32,12 @@ export const CharacterSelection = () => {
             payload: character
         });
         console.log(character)
+        localStorage.setItem("character_id", character.id)
         navigate("/character");
     }
 
     useEffect(() => {
-        getCharacters()
+        checkToken();
     }, [])
 
     return (
