@@ -5,13 +5,20 @@ import { CharacterStatsBlock } from "../components/characterSite/CharacterStatsB
 import { SkillsTable } from "../components/characterSite/SkillsTable.jsx";
 import { ConsumablesTable } from "../components/characterSite/ConsumablesTable.jsx";
 import { DiceBar } from "../components/characterSite/DiceBar.jsx";
+import { useNavigate } from "react-router-dom";
 import "../../styles/characterSite.css";
 export const Character = () => {
     const { store, dispatch } = useGlobalReducer()
     const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const navigate = useNavigate();
 
     let characterInfo = store.characterInfo
 
+    const checkInfo = () => {
+        if (!characterInfo) {
+            navigate("/");
+        }
+    }
 
     const saveCharacter = async (e) => {
         const response = await fetch(backendUrl + "api/character", {
@@ -25,6 +32,7 @@ export const Character = () => {
     };
 
     useEffect(() => {
+        checkInfo();
     }, [])
 
 

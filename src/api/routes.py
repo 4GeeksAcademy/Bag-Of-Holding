@@ -41,7 +41,7 @@ def handle_log_in():
 
 @api.route('/verify_token', methods=['POST'])
 def verify_token():
-    
+
     return jsonify(response_body), 200
 
 
@@ -157,7 +157,7 @@ def add_character():
             db.session.add(new_skill)
 
         db.session.commit()
-        return {"New Character added": new_character.serialize()}, 201
+        return {"character": new_character.serialize()}, 201
     else:
         return {"Error": "Wrong information submitted"}, 400
 

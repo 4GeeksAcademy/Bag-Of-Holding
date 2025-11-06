@@ -5,22 +5,21 @@ export const Navbar = () => {
 	const logOut = () => {
 		localStorage.removeItem("token")
 		localStorage.removeItem("user_id")
+		localStorage.removeItem("character_id")
 	}
 	return (
 		<nav className="navbar header-secondary">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1 accent">BAG OF HOLDING</span>
-			</Link>
+			{
+				token
+					? <Link to="/characterselection">
+						<span className="navbar-brand mb-0 h1 accent">BAG OF HOLDING</span>
+					</Link>
+					: <Link to="/">
+						<span className="navbar-brand mb-0 h1 accent">BAG OF HOLDING</span>
+					</Link>
+			}
+
 			<div className="ml-auto">
-				{
-					!token
-						? <span>
-							<Link to="">
-								<button className="accent btn btn-primary navbar-button">Login</button>
-							</Link>
-						</span>
-						: ""
-				}
 				{
 					token
 						? <span>

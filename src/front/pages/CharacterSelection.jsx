@@ -32,6 +32,7 @@ export const CharacterSelection = () => {
             payload: character
         });
         console.log(character)
+        localStorage.setItem("character_id", character.id)
         navigate("/character");
     }
 

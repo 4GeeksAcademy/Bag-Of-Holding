@@ -47,7 +47,7 @@ export default function InputForm() {
         localStorage.setItem("user_id", data.user.id)
         navigate("/characterselection");
       }
-      alert(data.message || "Success");
+      setMode("login");
     } else {
       alert(data.error || "Error");
     }
